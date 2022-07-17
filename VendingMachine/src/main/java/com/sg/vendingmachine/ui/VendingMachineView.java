@@ -11,4 +11,17 @@ package com.sg.vendingmachine.ui;
  */
 public class VendingMachineView {
     
+    private UserIO io = new UserIOConsoleImpl();
+    
+    public int printMenuAndGetSelection() {
+        io.print("=== Candy Machine ===");
+        io.print("1. Tolberone: $2.00");
+        io.print("2. Reese's: $1.75");
+        io.print("3. Kit-Kat: $1.50");
+        io.print("4. Peach Rings: $1.25");
+        io.print("5. Jelly Beans: $1.00");
+        io.print("6. Exit");
+
+        return io.readInt("Please select from the above choices.", 1, 6);
+    }
 }
