@@ -7,6 +7,7 @@ package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
+import com.sg.vendingmachine.ui.VendingMachineView;
 
 /**
  *
@@ -14,6 +15,7 @@ import com.sg.vendingmachine.ui.UserIOConsoleImpl;
  */
 public class VendingMachineController {
     
+    private VendingMachineView view = new VendingMachineView();
     private UserIO io = new UserIOConsoleImpl();
     
     // The user must put in some amount of money before an item can be selected.
@@ -24,15 +26,8 @@ public class VendingMachineController {
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing){
-            io.print("=== Candy Machine ===");
-            io.print("1. Tolberone: $2.00");
-            io.print("2. Reese's: $1.75");
-            io.print("3. Kit-Kat: $1.50");
-            io.print("4. Peach Rings: $1.25");
-            io.print("5. Jelly Beans: $1.00");
-            io.print("6. Exit");
             
-            menuSelection = io.readInt("Please select from the" + " above choices.", 1, 6 );
+            menuSelection = getMenuSelection();
             
             switch (menuSelection) {
                 case 1: 
@@ -57,7 +52,11 @@ public class VendingMachineController {
                     io.print("UNKNOWN COMMAND");
             }
         }
-         io.print("GOOD BYE");
+        io.print("GOOD BYE");
+    }
+    
+    private int getMenuSelection() {
+        return view.printMenuAndGetSelection();
     }
    
 }
