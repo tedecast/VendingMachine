@@ -30,6 +30,30 @@ public class VendingMachineController {
             io.print("6. Exit");
             
             menuSelection = io.readInt("Please select from the" + " above choices.", 1, 6 );
+            
+            switch (menuSelection) {
+                case 1: 
+                    io.print("Tolberone: $2.00");
+                    break;
+                case 2:
+                    io.print("Reese's: $1.75");
+                    break;
+                case 3:
+                    io.print("Kit-Kat: $1.50");
+                    break;
+                case 4:
+                    io.print("Peach Rings: $1.25");
+                    break;
+                case 5:
+                    io.print("Jelly Beans: $1.00");
+                    break;
+                case 6:
+                    keepGoing = false;
+                    break;
+                default:
+                    io.print("UNKNOWN COMMAND");
+            }
         }
     }
+    io.print("GOOD BYE");
 }
