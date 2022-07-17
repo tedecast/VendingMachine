@@ -18,7 +18,7 @@ public class VendingMachineView {
        return io.readString("How much money do you have to spend?");
     }
     
-    public int printMenuAndGetSelection() {
+    public static int printMenuAndGetSelection() {
         io.print("=== Candy Machine ===");
         io.print("1. Tolberone: $2.00");
         io.print("2. Reese's: $1.75");
