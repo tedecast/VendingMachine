@@ -18,14 +18,13 @@ public class VendingMachineController {
     private VendingMachineView view = new VendingMachineView();
     private UserIO io = new UserIOConsoleImpl();
     
-    // The user must put in some amount of money before an item can be selected.
-   
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing){
+            view.getUserMoney();
             
             menuSelection = getMenuSelection();
             

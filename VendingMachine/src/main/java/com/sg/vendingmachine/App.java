@@ -6,6 +6,7 @@
 package com.sg.vendingmachine;
 
 import com.sg.vendingmachine.controller.VendingMachineController;
+import java.util.Scanner;
 
 /**
  *
@@ -14,6 +15,15 @@ import com.sg.vendingmachine.controller.VendingMachineController;
 public class App {
     
     public static void main (String[] args) {
+        // The user must put in some amount of money before an item can be selected.
+        Scanner userInput = new Scanner(System.in);
+        
+        // Should be in double
+        System.out.println("How much money do you have to spend?");
+        double moneyInserted = Double.parseDouble(userInput.nextLine());
+        // Output results after money is inserted
+        System.out.println(moneyInserted);
+        
         VendingMachineController controller = new VendingMachineController();
         controller.run();
     }

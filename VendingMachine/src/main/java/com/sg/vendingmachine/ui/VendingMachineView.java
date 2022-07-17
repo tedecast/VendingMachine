@@ -13,6 +13,11 @@ public class VendingMachineView {
     
     private UserIO io = new UserIOConsoleImpl();
     
+   // The user must put in some amount of money before an item can be selected.
+    public String getUserMoney() {
+       return io.readString("How much money do you have to spend?");
+    }
+    
     public int printMenuAndGetSelection() {
         io.print("=== Candy Machine ===");
         io.print("1. Tolberone: $2.00");
