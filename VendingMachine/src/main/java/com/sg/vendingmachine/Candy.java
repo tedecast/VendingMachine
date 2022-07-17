@@ -10,5 +10,14 @@ package com.sg.vendingmachine;
  * @author Teresa
  */
 public enum Candy {
+    TOLBERONE, REESES, KITKAT, PEACHRINGS, JELLYBEANS;
     
+//    private double id;
+//    private double price;
+//    
+//    Candy(int id, int price){
+//        this.id = id;
+//        this.price = price;
+//    }
+//    
 }
