@@ -5,9 +5,13 @@
  */
 package com.sg.vendingmachine.controller;
 
+import com.sg.vendingmachine.dao.VendingMachineDao;
+import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
+import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
+import java.util.List;
 
 /**
  *
@@ -16,13 +20,16 @@ import com.sg.vendingmachine.ui.VendingMachineView;
 public class VendingMachineController {
     
     private VendingMachineView view = new VendingMachineView();
+    private VendingMachineDao dao = new VendingMachineDaoFileImpl();
     private UserIO io = new UserIOConsoleImpl();
     
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public void run() {
+        
         boolean keepGoing = true;
         int menuSelection = 0;
+        
         while (keepGoing){
             view.getUserMoney();
             
@@ -30,10 +37,10 @@ public class VendingMachineController {
             
             switch (menuSelection) {
                 case 1: 
-                    io.print("Tolberone: $2.00");
+                   displayCandySelection();
                     break;
                 case 2:
-                    io.print("Reese's: $1.75");
+                    io.print("Buy Candy");
                     break;
                 case 3:
                     keepGoing = false;
@@ -49,4 +56,9 @@ public class VendingMachineController {
         return view.printMenuAndGetSelection();
     }
    
+    private void displayCandySelection() {
+        view.displayAllCandyBanner();
+        List<Candy> candyList = dao.getAllCandy();
+        view.displayCandyList(candyList);
+    }
 }

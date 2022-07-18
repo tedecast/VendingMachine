@@ -68,7 +68,7 @@ public class VendingMachineView {
         return stringChoice;
     }
     
-    public void displayAllBanner() {
+    public void displayAllCandyBanner() {
         io.print("=== All Candy ===");
     }
     

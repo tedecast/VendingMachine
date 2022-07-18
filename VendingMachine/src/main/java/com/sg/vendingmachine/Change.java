@@ -14,16 +14,7 @@ import java.math.RoundingMode;
  */
 public class Change {
 
-    BigDecimal quarter_value = new BigDecimal("0.25").setScale(2, RoundingMode.HALF_UP);
-    BigDecimal dime_value = new BigDecimal("0.10").setScale(2, RoundingMode.HALF_UP);
-    BigDecimal nickel_value = new BigDecimal("0.05").setScale(2, RoundingMode.HALF_UP);
-    BigDecimal penny_value = new BigDecimal("0.01").setScale(2, RoundingMode.HALF_UP);
     
-    int quarters;
-    int dimes;
-    int nickels;
-    int pennies;
     
-    public void makeChange(Candy candy, BigDecimal cashDeposited) {
-        
-    }}
+    
+}
