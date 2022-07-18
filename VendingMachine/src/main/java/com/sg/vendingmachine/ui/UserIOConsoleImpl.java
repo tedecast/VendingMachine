@@ -5,6 +5,7 @@
  */
 package com.sg.vendingmachine.ui;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -92,5 +93,15 @@ public class UserIOConsoleImpl implements UserIO {
             userLong = Long.parseLong(userInput.nextLine());
         }
         return userLong;
+    }
+
+    @Override
+    public void printInt(int num) {
+        System.out.println(num);
+    }
+
+    @Override
+    public void printBigDecimal(BigDecimal num) {
+        System.out.println(num);
     }
 }

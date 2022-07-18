@@ -5,6 +5,8 @@
  */
 package com.sg.vendingmachine.ui;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Teresa
@@ -30,5 +32,9 @@ public interface UserIO {
     long readLong(String prompt, long min, long max);
 
     String readString(String prompt);
+    
+    public void printInt(int num);
+    
+    public void printBigDecimal(BigDecimal num);
 
 }
