@@ -12,11 +12,11 @@ import java.math.BigDecimal;
  * @author Teresa
  */
 public enum Coins {
-    
     QUARTER(new BigDecimal(".25")),
     DIME(new BigDecimal(".10")),
     NICKEL(new BigDecimal(".05")),
     PENNY(new BigDecimal(".01"));
+    
     public final BigDecimal value;
     private Coins(BigDecimal value) {
         this.value = value;
