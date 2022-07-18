@@ -36,15 +36,6 @@ public class VendingMachineController {
                     io.print("Reese's: $1.75");
                     break;
                 case 3:
-                    io.print("Kit-Kat: $1.50");
-                    break;
-                case 4:
-                    io.print("Peach Rings: $1.25");
-                    break;
-                case 5:
-                    io.print("Jelly Beans: $1.00");
-                    break;
-                case 6:
                     keepGoing = false;
                     break;
                 default:

@@ -14,19 +14,29 @@ public class VendingMachineView {
     private UserIO io = new UserIOConsoleImpl();
     
    // The user must put in some amount of money before an item can be selected.
+   
     public String getUserMoney() {
        return io.readString("How much money do you have to spend?");
     }
     
-    public static int printMenuAndGetSelection() {
-        io.print("=== Candy Machine ===");
-        io.print("1. Tolberone: $2.00");
-        io.print("2. Reese's: $1.75");
-        io.print("3. Kit-Kat: $1.50");
-        io.print("4. Peach Rings: $1.25");
-        io.print("5. Jelly Beans: $1.00");
-        io.print("6. Exit");
+    public int printMenuAndGetSelection() {
+        io.print("=== Main Menu ===");
+        io.print("1. Dispplay Candy Selection");
+        io.print("2. Buy Candy");
+        io.print("3. Exit");
+        
+        return io.readInt("Please select from the above choices.", 1, 3);
+    }
+    public int printCandyMenuAndGetSelection() {
+        io.print("=== Candy Selection ===");
 
-        return io.readInt("Please select from the above choices.", 1, 6);
+//        io.print("1. Tolberone: $2.00");
+//        io.print("2. Reese's: $1.75");
+//        io.print("3. Kit-Kat: $1.50");
+//        io.print("4. Peach Rings: $1.25");
+//        io.print("5. Jelly Beans: $1.00");
+//        io.print("6. Exit");
+
+        return io.readInt("Please select from the above choices.", 1, 3);
     }
 }
