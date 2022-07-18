@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.Candy;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -38,6 +39,56 @@ public class VendingMachineView {
             + currentCandy.getCandyPrice() + " " 
             + currentCandy.getCandyQuantity());
         }
+    }
+    
+    public void displayCandy(Candy candy) {
+        if (candy != null) {
+            io.print(candy.getCandyNumber());
+            io.print(candy.getCandyName());
+            io.printBigDecimal(candy.getCandyPrice());
+            io.printInt(candy.getCandyQuantity());
+            io.print("");
+        } else {
+            io.print("No such candy exists.");
+        }
+        io.readString("Please hit enter to continue.");
+    }
+    
+    public void displayCandyBanner() {
+        io.print("=== Candy === ");
+    }
+    
+    public void displayCandyPurchaseBanner() {
+        io.print("=== Purchase Candy ===");
+    }
+    
+    public String getCandyNumberChoice() {
+        int choice = io.readInt("Please enter the Candy Number.", 1, 5);
+        String stringChoice = String.valueOf(choice);
+        return stringChoice;
+    }
+    
+    public void displayAllBanner() {
+        io.print("=== All Candy ===");
+    }
+    
+    public void displayUnknownCommandBanner() {
+        io.print("Unknown Command!");
+    }
+    
+    public BigDecimal displayRequestDeposit() {
+        Double cash = io.readDouble("Please deposit money.");
+        BigDecimal bigDecimal = new BigDecimal(cash);
+        return bigDecimal;
+    }
+    
+    public void displayChange(String change){
+        io.print("Your chainge is " + change);
+    }
+    
+    public void displayErrorMessage(String errorMsg){
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
     }
     
 //    public int printCandyMenuAndGetSelection() {
