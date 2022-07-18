@@ -11,6 +11,7 @@ import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -66,10 +67,37 @@ public class VendingMachineController {
         view.displayCandyList(candyList);
     }
     
+    // listing single candy information
     private void viewCandy() {
         view.displayCandyBanner();
         String candyNumber = view.getCandyNumberChoice();
         Candy candy = dao.getCandy(candyNumber);
         view.displayCandy(candy);
+    }
+    
+    private BigDecimal requestDeposit() {
+        BigDecimal deposit = view.displayRequestDeposit();
+        view.displayDepositSuccessful();
+        return deposit;
+    }
+    
+    private void purchaseCandy() {
+        BigDecimal deposit = requestDeposit();
+        
+        boolean hasErrors = false;
+        
+        do{
+            String candyNumber = view.getCandyNumberChoice();
+            try {
+                String purchasedCandy = dao.purchaseCandy(candyNumber, deposit);
+                view.displayChange(purchasedCandy);
+                view.displayThankYou();
+                
+            }
+        }
+    }
+    private void buyCandy() {
+        BigDecimal deposit = requestDeposit();
+        
     }
 }

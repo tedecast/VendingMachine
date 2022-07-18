@@ -26,8 +26,8 @@ public class VendingMachineView {
     public int printMenuAndGetSelection() {
         io.print("=== Main Menu ===");
         io.print("1. Display Candy Selection");
-        io.print("2. Buy Candy");
-        io.print("3. View Candy Inventory");
+        io.print("2. View Candy Inventory");
+        io.print("3. Buy Candy");
         io.print("4. Exit");
         
         return io.readInt("Please select from the above choices.", 1, 4);
@@ -72,25 +72,37 @@ public class VendingMachineView {
     public void displayAllCandyBanner() {
         io.print("=== All Candy ===");
     }
-    
-    public void displayUnknownCommandBanner() {
-        io.print("Unknown Command!");
-    }
-    
     public BigDecimal displayRequestDeposit() {
         Double cash = io.readDouble("Please deposit money.");
         BigDecimal bigDecimal = new BigDecimal(cash);
         return bigDecimal;
     }
     
-    public void displayChange(String change){
-        io.print("Your chainge is " + change);
+    public void displayDepositSuccessful() {
+        io.print("Deposit successful");
     }
     
+    public void displayChange(String change){
+        io.print("Your change is " + change);
+    }
+    
+    public String displayThankYou() {
+        return io.readString("Thank you for your purchase!");
+    }
+   
     public void displayErrorMessage(String errorMsg){
         io.print("=== ERROR ===");
         io.print(errorMsg);
     }
+    
+    public void displayUnknownCommandBanner() {
+        io.print("Unknown Command!");
+    }
+    
+    public void displayExitBanner() {
+        io.print("Goodbye!");
+    }
+    
     
 //    public int printCandyMenuAndGetSelection() {
 //        io.print("=== Candy Selection ===");
