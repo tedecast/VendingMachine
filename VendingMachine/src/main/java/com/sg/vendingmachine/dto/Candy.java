@@ -16,7 +16,7 @@ public class Candy {
     private String candyNumber;
     private String candyName;
     private BigDecimal candyPrice;
-    private int itemQuantity;
+    private int candyQuantity;
     
     public Candy(String candyNumber) {
         this.candyNumber = candyNumber;
@@ -46,16 +46,16 @@ public class Candy {
         this.candyPrice = candyPrice;
     }
 
-    public int getItemQuantity() {
-        return itemQuantity;
+    public int getCandyQuantity() {
+        return candyQuantity;
     }
 
-    public void setItemQuantity(int itemQuantity) {
-        this.itemQuantity = itemQuantity;
+    public void setCandyQuantity(int candyQuantity) {
+        this.candyQuantity = candyQuantity;
     }
     
     public int purchaseItem() {
-        return itemQuantity--;
+        return candyQuantity--;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Candy {
         hash = 29 * hash + Objects.hashCode(this.candyNumber);
         hash = 29 * hash + Objects.hashCode(this.candyName);
         hash = 29 * hash + Objects.hashCode(this.candyPrice);
-        hash = 29 * hash + this.itemQuantity;
+        hash = 29 * hash + this.candyQuantity;
         return hash;
     }
 
@@ -80,7 +80,7 @@ public class Candy {
             return false;
         }
         final Candy other = (Candy) obj;
-        if (this.itemQuantity != other.itemQuantity) {
+        if (this.candyQuantity != other.candyQuantity) {
             return false;
         }
         if (!Objects.equals(this.candyNumber, other.candyNumber)) {

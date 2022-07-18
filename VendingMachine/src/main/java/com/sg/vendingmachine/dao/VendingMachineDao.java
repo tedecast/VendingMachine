@@ -5,10 +5,18 @@
  */
 package com.sg.vendingmachine.dao;
 
+import com.sg.vendingmachine.dto.Candy;
+import java.util.List;
+
 /**
  *
  * @author Teresa
  */
 public interface VendingMachineDao {
     
+    List<Candy> getAllCandy();
+    
+    Candy getCandy(String candyNumber);
+    
+    void purchaseCandy(String candyNumber);
 }

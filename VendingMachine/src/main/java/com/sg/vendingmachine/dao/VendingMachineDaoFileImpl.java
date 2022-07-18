@@ -5,10 +5,33 @@
  */
 package com.sg.vendingmachine.dao;
 
+import com.sg.vendingmachine.dto.Candy;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author Teresa
  */
-public class VendingMachineDaoFileImpl {
+public class VendingMachineDaoFileImpl implements VendingMachineDao {
+    
+    private Map<String, Candy> candies = new HashMap<>();
+
+    @Override
+    public List<Candy> getAllCandy() {
+        return new ArrayList<>(candies.values());
+    }
+
+    @Override
+    public Candy getCandy(String candyNumber) {
+        return candies.get(candyNumber);
+    }
+
+    @Override
+    public void purchaseCandy(String candyNumber) {
+       Candy candy = getCandy(candyNumber);
+    }
     
 }

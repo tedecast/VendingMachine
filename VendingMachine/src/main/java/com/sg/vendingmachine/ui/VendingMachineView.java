@@ -5,6 +5,9 @@
  */
 package com.sg.vendingmachine.ui;
 
+import com.sg.vendingmachine.dto.Candy;
+import java.util.List;
+
 /**
  *
  * @author Teresa
@@ -21,22 +24,32 @@ public class VendingMachineView {
     
     public int printMenuAndGetSelection() {
         io.print("=== Main Menu ===");
-        io.print("1. Dispplay Candy Selection");
+        io.print("1. Display Candy Selection");
         io.print("2. Buy Candy");
         io.print("3. Exit");
         
         return io.readInt("Please select from the above choices.", 1, 3);
     }
-    public int printCandyMenuAndGetSelection() {
-        io.print("=== Candy Selection ===");
-
-//        io.print("1. Tolberone: $2.00");
-//        io.print("2. Reese's: $1.75");
-//        io.print("3. Kit-Kat: $1.50");
-//        io.print("4. Peach Rings: $1.25");
-//        io.print("5. Jelly Beans: $1.00");
-//        io.print("6. Exit");
-
-        return io.readInt("Please select from the above choices.", 1, 3);
+    
+    public void displayCandyList(List<Candy> candyList) {
+        for (Candy currentCandy : candyList) {
+            io.print(currentCandy.getCandyNumber() + ": "
+            + currentCandy.getCandyName() + " "
+            + currentCandy.getCandyPrice() + " " 
+            + currentCandy.getCandyQuantity());
+        }
     }
+    
+//    public int printCandyMenuAndGetSelection() {
+//        io.print("=== Candy Selection ===");
+//
+////        io.print("1. Tolberone: $2.00");
+////        io.print("2. Reese's: $1.75");
+////        io.print("3. Kit-Kat: $1.50");
+////        io.print("4. Peach Rings: $1.25");
+////        io.print("5. Jelly Beans: $1.00");
+////        io.print("6. Exit");
+//
+//        //return io.readInt("Please select from the above choices.", 1, 3);
+//    }
 }

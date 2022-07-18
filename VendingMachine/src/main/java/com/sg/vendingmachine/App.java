@@ -36,7 +36,7 @@ public class App {
         System.out.println("");
         System.out.println("Which candy would you like to purchase?");
         String candy = userInput.nextLine();
-        Change candyChoice = Change.valueOf(candy.toUpperCase());
+//        Change candyChoice = Change.valueOf(candy.toUpperCase());
        
         
         // Output results after money is inserted
