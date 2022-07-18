@@ -31,7 +31,7 @@ public class VendingMachineController {
         int menuSelection = 0;
         
         while (keepGoing){
-            view.getUserMoney();
+            //view.getUserMoney();
             
             menuSelection = getMenuSelection();
             
@@ -43,6 +43,9 @@ public class VendingMachineController {
                     io.print("Buy Candy");
                     break;
                 case 3:
+                    viewCandy();
+                    break;
+                case 4:
                     keepGoing = false;
                     break;
                 default:
@@ -55,10 +58,18 @@ public class VendingMachineController {
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
-   
+    
+    // try { list items
     private void displayCandySelection() {
         view.displayAllCandyBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
+    }
+    
+    private void viewCandy() {
+        view.displayCandyBanner();
+        String candyNumber = view.getCandyNumberChoice();
+        Candy candy = dao.getCandy(candyNumber);
+        view.displayCandy(candy);
     }
 }
