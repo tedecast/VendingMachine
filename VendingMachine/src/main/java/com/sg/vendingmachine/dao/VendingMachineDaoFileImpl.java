@@ -25,13 +25,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     }
 
     @Override
-    public Candy getCandy(String candyNumber) {
+    public Candy getOneCandy(String candyNumber) {
         return candies.get(candyNumber);
     }
 
     @Override
-    public void purchaseCandy(String candyNumber) {
-       Candy candy = getCandy(candyNumber);
+    public Candy purchaseCandy(String candyNumber) {
+       Candy purchasedCandy = getOneCandy(candyNumber);
+       return purchasedCandy;
     }
     
 }

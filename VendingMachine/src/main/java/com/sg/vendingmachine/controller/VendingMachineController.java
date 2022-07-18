@@ -43,9 +43,9 @@ public class VendingMachineController {
                 case 2:
                     io.print("Buy Candy");
                     break;
-                case 3:
-                    viewCandy();
-                    break;
+//                case 3:
+//                    viewCandy();
+//                    break;
                 case 4:
                     keepGoing = false;
                     break;
@@ -68,12 +68,12 @@ public class VendingMachineController {
     }
     
     // listing single candy information
-    private void viewCandy() {
-        view.displayCandyBanner();
-        String candyNumber = view.getCandyNumberChoice();
-        Candy candy = dao.getCandy(candyNumber);
-        view.displayCandy(candy);
-    }
+//    private void viewCandy() {
+//        view.displayCandyBanner();
+//        String candyNumber = view.getCandyNumberChoice();
+//        Candy candy = dao.getCandy(candyNumber);
+//        view.displayCandy(candy);
+//    }
     
     private BigDecimal requestDeposit() {
         BigDecimal deposit = view.displayRequestDeposit();
