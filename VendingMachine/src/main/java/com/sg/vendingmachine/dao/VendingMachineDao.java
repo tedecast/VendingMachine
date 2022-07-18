@@ -16,7 +16,8 @@ public interface VendingMachineDao {
     
     List<Candy> getAllCandy();
     
-    Candy getCandy(String candyNumber);
+    // id
+    Candy getOneCandy(String candyNumber);
     
-    void purchaseCandy(String candyNumber);
+    Candy purchaseCandy(String candyNumber);
 }

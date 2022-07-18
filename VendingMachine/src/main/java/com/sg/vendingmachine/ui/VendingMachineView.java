@@ -26,7 +26,8 @@ public class VendingMachineView {
     public int printMenuAndGetSelection() {
         io.print("=== Main Menu ===");
         io.print("1. Display Candy Selection");
-        io.print("2. View Candy Inventory");
+        //io.print("2. View Candy Inventory");
+        // similar to edit dvd
         io.print("3. Buy Candy");
         io.print("4. Exit");
         
@@ -106,8 +107,8 @@ public class VendingMachineView {
     
 //    public int printCandyMenuAndGetSelection() {
 //        io.print("=== Candy Selection ===");
-//
-////        io.print("1. Tolberone: $2.00");
+//name, 
+////        io.print("1. Tolberone: $2.00 quantity");
 ////        io.print("2. Reese's: $1.75");
 ////        io.print("3. Kit-Kat: $1.50");
 ////        io.print("4. Peach Rings: $1.25");
