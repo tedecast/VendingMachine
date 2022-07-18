@@ -81,23 +81,4 @@ public class VendingMachineController {
         return deposit;
     }
     
-    private void purchaseCandy() {
-        BigDecimal deposit = requestDeposit();
-        
-        boolean hasErrors = false;
-        
-        do{
-            String candyNumber = view.getCandyNumberChoice();
-            try {
-                String purchasedCandy = dao.purchaseCandy(candyNumber, deposit);
-                view.displayChange(purchasedCandy);
-                view.displayThankYou();
-                
-            }
-        }
-    }
-    private void buyCandy() {
-        BigDecimal deposit = requestDeposit();
-        
-    }
 }
