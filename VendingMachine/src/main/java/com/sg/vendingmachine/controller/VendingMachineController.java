@@ -71,11 +71,14 @@ public class VendingMachineController {
 //        Candy candy = dao.getCandy(candyNumber);
 //        view.displayCandy(candy);
 //    }
+//    
     
-    private BigDecimal requestDeposit() {
-        BigDecimal deposit = view.displayRequestDeposit();
-        view.displayDepositSuccessful();
-        return deposit;
-    }
+    
+    
+//    private BigDecimal requestDeposit() {
+//        BigDecimal deposit = view.displayRequestDeposit();
+//        view.displayDepositSuccessful();
+//        return deposit;
+//    }
     
 }
