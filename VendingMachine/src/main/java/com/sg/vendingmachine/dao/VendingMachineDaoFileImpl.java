@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Candy;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class VendingMachineDaoFileImpl implements VendingMachineDao {
     
     private Map<String, Candy> candies = new HashMap<>();
+    public static final String INVENTORY_FILE = "inventory.txt";
+    public static final String DELIMITER = "::";
 
     @Override
     public List<Candy> getAllCandy() {
@@ -33,6 +36,25 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     public Candy purchaseCandy(String candyNumber) {
        Candy purchasedCandy = getOneCandy(candyNumber);
        return purchasedCandy;
+    }
+    
+    private Candy unmarshallCandy(String candyAsText){
+        
+        String[] candyTokens = candyAsText.split(DELIMITER);
+        
+        String candyNumber = candyTokens[0];
+        
+        Candy candyFromFile = new Candy(candyNumber);
+        
+        candyFromFile.setCandyName(candyTokens[1]);
+        
+        candyFromFile.setCandyPrice(new BigDecimal(candyTokens[2]));
+        
+        candyFromFile.setCandyQuantity(new int (candyTokens[3]));
+        
+        return candyFromFile;
+        
+        
     }
     
 }
