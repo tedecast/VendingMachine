@@ -32,6 +32,12 @@ public class VendingMachineView {
         return io.readInt("Please select from the above choices.", 1, 3);
     }
     
+    
+    
+    public void displayCandyBanner() {
+        io.print("=== Candy === ");
+    }
+    
     public void displayCandyList(List<Candy> candyList) {
         for (Candy currentCandy : candyList) {
             io.print(currentCandy.getCandyNumber() + ": "
@@ -40,23 +46,19 @@ public class VendingMachineView {
             + currentCandy.getCandyQuantity());
         }
     }
-    
-    public void displayCandy(Candy candy) {
-        if (candy != null) {
-            io.print(candy.getCandyNumber());
-            io.print(candy.getCandyName());
-            io.printBigDecimal(candy.getCandyPrice());
-            io.printInt(candy.getCandyQuantity());
-            io.print("");
-        } else {
-            io.print("No such candy exists.");
-        }
-        io.readString("Please hit enter to continue.");
-    }
-    
-    public void displayCandyBanner() {
-        io.print("=== Candy === ");
-    }
+//    
+//    public void displayCandy(Candy candy) {
+//        if (candy != null) {
+//            io.print(candy.getCandyNumber());
+//            io.print(candy.getCandyName());
+//            io.printBigDecimal(candy.getCandyPrice());
+//            io.printInt(candy.getCandyQuantity());
+//            io.print("");
+//        } else {
+//            io.print("No such candy exists.");
+//        }
+//        io.readString("Please hit enter to continue.");
+//    }
     
     public void displayCandyPurchaseBanner() {
         io.print("=== Purchase Candy ===");
