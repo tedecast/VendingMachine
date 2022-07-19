@@ -7,6 +7,7 @@ package com.sg.vendingmachine.dto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 /**
  *
@@ -34,10 +35,20 @@ public class Change {
         this.pennies = penniesArr[numCoins].intValue();
     }
     
-    while(balance > 0){
-        if(BigDecimal balance >= Coins.QUARTER){
+    public makeChange(float change) {
+        while(change > 0){
+            if (change >= 0.25) {
+                change -= 0.25;
+                quarters++;
+                
+            }
+            
+                ){
             balance -= Coins.QUARTER;
-            quarters++;
+                quarters++;
+            }
+            return List quarters, dimes, nickels, pennies;
         }
+
     }
 }
