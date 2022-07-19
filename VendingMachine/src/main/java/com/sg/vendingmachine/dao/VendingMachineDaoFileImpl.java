@@ -50,7 +50,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         
         candyFromFile.setCandyPrice(new BigDecimal(candyTokens[2]));
         
-        candyFromFile.setCandyQuantity(new int (candyTokens[3]));
+        candyFromFile.setCandyQuantity(Integer.parseInt((candyTokens[3])));
         
         return candyFromFile;
         
