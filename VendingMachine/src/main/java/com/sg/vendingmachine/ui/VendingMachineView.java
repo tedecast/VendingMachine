@@ -17,11 +17,6 @@ public class VendingMachineView {
     
     private UserIO io = new UserIOConsoleImpl();
     
-   // The user must put in some amount of money before an item can be selected.
-   
-    public String getUserMoney() {
-       return io.readString("How much money do you have to spend?");
-    }
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public int printMenuAndGetSelection() {
@@ -46,12 +41,22 @@ public class VendingMachineView {
         }
     }
     
+      // The user must put in some amount of money before an item can be selected.
+   
+//    public String getUserMoney() {
+//       return io.readString();
+//    }
+    
+    public void getHitEnter() {
+        io.readString("Please hit enter to continue.");
+    }
+    
     public void displayCandyPurchaseBanner() {
         io.print("=== Purchase Candy ===");
     }
     
     public BigDecimal displayRequestMoney() {
-        Float money = io.readFloat("How much money do you want to put in for purchase?");
+        Float money = io.readFloat("How much money do you have to spend?");
         BigDecimal moneyBD = new BigDecimal(money);
         return moneyBD;
     }
