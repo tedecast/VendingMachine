@@ -31,7 +31,8 @@ public class VendingMachineView {
     }
     
     public void displayCandyBanner() {
-        io.print("=== Candy === ");
+        io.print("* * * * Candy ⋆⋇⋆⋇⋇⋆✦(◕‿◕✿)✦⋆⋇⋆⋇⋆⋇");
+        io.print(" Num. |   Name  | $ | QTY");
     }
     
     public void displayCandyList(List<Candy> candyList) {

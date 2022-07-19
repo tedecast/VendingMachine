@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface VendingMachineDao {
     
-    List<Candy> getAllCandy();
+    List<Candy> getAllCandy() throws VendingMachineDaoException;
     
     // id
-    Candy getOneCandy(String candyNumber);
+    Candy getOneCandy(String candyNumber) throws VendingMachineDaoException;
     
-    Candy purchaseCandy(String candyNumber);
+    Candy purchaseCandy(String candyNumber) throws VendingMachineDaoException;
 }
