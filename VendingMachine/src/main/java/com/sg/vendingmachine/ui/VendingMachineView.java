@@ -15,8 +15,10 @@ import java.util.List;
  */
 public class VendingMachineView {
     
-    private UserIO io = new UserIOConsoleImpl();
-    
+    private UserIO io; //= new UserIOConsoleImpl();
+    public VendingMachineView(UserIO io) {
+        this.io = io;
+    }
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public int printMenuAndGetSelection() {

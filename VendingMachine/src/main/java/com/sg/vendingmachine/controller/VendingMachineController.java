@@ -20,9 +20,13 @@ import java.util.List;
  */
 public class VendingMachineController {
     
-    private VendingMachineView view = new VendingMachineView();
-    private VendingMachineDao dao = new VendingMachineDaoFileImpl();
-    private UserIO io = new UserIOConsoleImpl();
+    private VendingMachineView view; // = new VendingMachineView();
+    private VendingMachineDao dao; //= new VendingMachineDaoFileImpl();
+    public VendingMachineController(VendingMachineDao dao, VendingMachineView view) {
+        this.dao = dao;
+        this.view = view;
+    }
+    // private UserIO io = new UserIOConsoleImpl();
     
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
