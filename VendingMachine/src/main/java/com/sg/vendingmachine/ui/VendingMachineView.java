@@ -23,6 +23,7 @@ public class VendingMachineView {
        return io.readString("How much money do you have to spend?");
     }
     
+    // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public int printMenuAndGetSelection() {
         io.print("=== Main Menu ===");
         io.print("1. Display Candy Selection");
@@ -31,8 +32,6 @@ public class VendingMachineView {
         
         return io.readInt("Please select from the above choices.", 1, 3);
     }
-    
-    
     
     public void displayCandyBanner() {
         io.print("=== Candy === ");
@@ -46,37 +45,21 @@ public class VendingMachineView {
             + currentCandy.getCandyQuantity());
         }
     }
-//    
-//    public void displayCandy(Candy candy) {
-//        if (candy != null) {
-//            io.print(candy.getCandyNumber());
-//            io.print(candy.getCandyName());
-//            io.printBigDecimal(candy.getCandyPrice());
-//            io.printInt(candy.getCandyQuantity());
-//            io.print("");
-//        } else {
-//            io.print("No such candy exists.");
-//        }
-//        io.readString("Please hit enter to continue.");
-//    }
     
     public void displayCandyPurchaseBanner() {
         io.print("=== Purchase Candy ===");
     }
     
-    public String getCandyNumberChoice() {
-        int choice = io.readInt("Please enter the Candy Number.", 1, 5);
-        String stringChoice = String.valueOf(choice);
-        return stringChoice;
+    public BigDecimal displayRequestMoney() {
+        Float money = io.readFloat("How much money do you want to put in for purchase?");
+        BigDecimal moneyBD = new BigDecimal(money);
+        return moneyBD;
     }
     
-    public void displayAllCandyBanner() {
-        io.print("=== All Candy ===");
-    }
-    public BigDecimal displayRequestDeposit() {
-        Double cash = io.readDouble("Please deposit money.");
-        BigDecimal bigDecimal = new BigDecimal(cash);
-        return bigDecimal;
+    public String getCandyNumberChoice() {
+        int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
+        String stringChoice = String.valueOf(choice);
+        return stringChoice;
     }
     
     public void displayDepositSuccessful() {
@@ -103,6 +86,28 @@ public class VendingMachineView {
     public void displayExitBanner() {
         io.print("Goodbye!");
     }
+    
+
+//    public BigDecimal displayRequestDeposit() {
+//        Double cash = io.readDouble("Please deposit money.");
+//        BigDecimal bigDecimal = new BigDecimal(cash);
+//        return bigDecimal;
+//    }
+    
+    
+//    
+//    public void displayCandy(Candy candy) {
+//        if (candy != null) {
+//            io.print(candy.getCandyNumber());
+//            io.print(candy.getCandyName());
+//            io.printBigDecimal(candy.getCandyPrice());
+//            io.printInt(candy.getCandyQuantity());
+//            io.print("");
+//        } else {
+//            io.print("No such candy exists.");
+//        }
+//        io.readString("Please hit enter to continue.");
+//    }
     
     
 //    public int printCandyMenuAndGetSelection() {

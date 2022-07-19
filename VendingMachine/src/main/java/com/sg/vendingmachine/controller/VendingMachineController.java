@@ -59,7 +59,7 @@ public class VendingMachineController {
     
     // try { list items
     private void displayCandySelection() {
-        view.displayAllCandyBanner();
+        view.displayCandyBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
     }
