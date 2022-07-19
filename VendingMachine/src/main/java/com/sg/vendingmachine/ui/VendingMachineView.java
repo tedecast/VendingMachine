@@ -26,12 +26,10 @@ public class VendingMachineView {
     public int printMenuAndGetSelection() {
         io.print("=== Main Menu ===");
         io.print("1. Display Candy Selection");
-        //io.print("2. View Candy Inventory");
-        // similar to edit dvd
-        io.print("3. Buy Candy");
-        io.print("4. Exit");
+        io.print("2. Buy Candy");
+        io.print("3. Exit");
         
-        return io.readInt("Please select from the above choices.", 1, 4);
+        return io.readInt("Please select from the above choices.", 1, 3);
     }
     
     public void displayCandyList(List<Candy> candyList) {

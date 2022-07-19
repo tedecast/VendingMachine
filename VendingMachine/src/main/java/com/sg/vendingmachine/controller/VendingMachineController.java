@@ -43,10 +43,7 @@ public class VendingMachineController {
                 case 2:
                     io.print("Buy Candy");
                     break;
-//                case 3:
-//                    viewCandy();
-//                    break;
-                case 4:
+                case 3:
                     keepGoing = false;
                     break;
                 default:
