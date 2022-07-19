@@ -39,13 +39,8 @@ public class VendingMachineView {
             + currentCandy.getCandyPrice() + " " 
             + currentCandy.getCandyQuantity());
         }
+        getHitEnter();
     }
-    
-      // The user must put in some amount of money before an item can be selected.
-   
-//    public String getUserMoney() {
-//       return io.readString();
-//    }
     
     public void getHitEnter() {
         io.readString("Please hit enter to continue.");
@@ -55,7 +50,8 @@ public class VendingMachineView {
         io.print("=== Purchase Candy ===");
     }
     
-    public BigDecimal displayRequestMoney() {
+    // The user must put in some amount of money before an item can be selected.
+    public BigDecimal displayRequestUserMoney() {
         Float money = io.readFloat("How much money do you have to spend?");
         BigDecimal moneyBD = new BigDecimal(money);
         return moneyBD;
@@ -89,7 +85,7 @@ public class VendingMachineView {
     }
     
     public void displayExitBanner() {
-        io.print("Goodbye!");
+        io.print("Goodbye!!!");
     }
     
 

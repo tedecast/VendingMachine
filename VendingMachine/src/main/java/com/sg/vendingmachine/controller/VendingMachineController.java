@@ -41,16 +41,16 @@ public class VendingMachineController {
                    displayCandySelection();
                     break;
                 case 2:
-                    io.print("Buy Candy");
+                    buyCandy();
                     break;
                 case 3:
                     keepGoing = false;
                     break;
                 default:
-                    io.print("UNKNOWN COMMAND");
+                   unknownCommand();
             }
         }
-        io.print("GOOD BYE");
+        exitMessage();
     }
     
     private int getMenuSelection() {
@@ -62,6 +62,19 @@ public class VendingMachineController {
         view.displayCandyBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
+    }
+    
+    private void buyCandy() {
+        view.displayRequestUserMoney();
+        view.displayCandyPurchaseBanner();
+    }
+    
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+    
+    private void exitMessage() {
+        view.displayExitBanner();
     }
     
     // listing single candy information
