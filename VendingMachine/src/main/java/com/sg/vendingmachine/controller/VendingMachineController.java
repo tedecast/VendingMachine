@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendingMachineDao;
+import com.sg.vendingmachine.dao.VendingMachineDaoException;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.ui.UserIO;
@@ -35,26 +36,30 @@ public class VendingMachineController {
         boolean keepGoing = true;
         int menuSelection = 0;
         
-        while (keepGoing){
-            //view.getUserMoney();
-            
-            menuSelection = getMenuSelection();
-            
-            switch (menuSelection) {
-                case 1: 
-                   displayCandySelection();
-                    break;
-                case 2:
-                    buyCandy();
-                    break;
-                case 3:
-                    keepGoing = false;
-                    break;
-                default:
-                   unknownCommand();
+        try {
+            while (keepGoing){
+                //view.getUserMoney();
+
+                menuSelection = getMenuSelection();
+
+                switch (menuSelection) {
+                    case 1: 
+                       displayCandySelection();
+                        break;
+                    case 2:
+                        buyCandy();
+                        break;
+                    case 3:
+                        keepGoing = false;
+                        break;
+                    default:
+                       unknownCommand();
+                }
             }
-        }
         exitMessage();
+        } catch (VendingMachineDaoException e) {
+            view.displayErrorMessage(e.getMessage());
+        }
     }
     
     private int getMenuSelection() {
@@ -62,13 +67,13 @@ public class VendingMachineController {
     }
     
     // try { list items
-    private void displayCandySelection() {
+    private void displayCandySelection() throws VendingMachineDaoException {
         view.displayCandyBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
     }
     
-    private void buyCandy() {
+    private void buyCandy() throws VendingMachineDaoException {
         view.displayRequestUserMoney();
         view.displayCandyPurchaseBanner();
     }

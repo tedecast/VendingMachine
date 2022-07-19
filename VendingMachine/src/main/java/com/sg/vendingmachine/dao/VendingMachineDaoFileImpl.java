@@ -30,19 +30,23 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     public static final String DELIMITER = "::";
 
     @Override
-    public List<Candy> getAllCandy() {
+    public List<Candy> getAllCandy() throws VendingMachineDaoException {
+        loadInventory();
         return new ArrayList<>(candies.values());
     }
 
     @Override
-    public Candy getOneCandy(String candyNumber) {
+    public Candy getOneCandy(String candyNumber) throws VendingMachineDaoException {
         return candies.get(candyNumber);
     }
 
     @Override
-    public Candy purchaseCandy(String candyNumber) {
+    public Candy purchaseCandy(String candyNumber) throws VendingMachineDaoException {
        Candy purchasedCandy = getOneCandy(candyNumber);
+       // added this? 
+       purchasedCandy.purchaseCandy();
        return purchasedCandy;
+       //return purchasedCandy;
     }
     
     private Candy unmarshallCandy(String candyAsText){
@@ -88,7 +92,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         scanner.close();
     }
     
-    private String marshallCandy(Candy aCandy){
+    private String marshallCandy(Candy aCandy) {
         
         String candyAsText = aCandy.getCandyNumber() + DELIMITER;
         

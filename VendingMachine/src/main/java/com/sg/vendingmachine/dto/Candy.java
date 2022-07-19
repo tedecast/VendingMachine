@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Teresa
  */
 public class Candy {
-    private String candyNumber;
+    private String candyNumber; // id
     private String candyName;
     private BigDecimal candyPrice;
     private int candyQuantity;
@@ -54,7 +54,7 @@ public class Candy {
         this.candyQuantity = candyQuantity;
     }
     
-    public int purchaseItem() {
+    public int purchaseCandy() {
         return candyQuantity--;
     }
 
