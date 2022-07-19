@@ -6,11 +6,18 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Candy;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  *
@@ -53,8 +60,71 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         candyFromFile.setCandyQuantity(Integer.parseInt((candyTokens[3])));
         
         return candyFromFile;
+    }
+    
+    private void loadInventory() throws VendingMachineDaoException {
         
+        Scanner scanner;
         
+        try {
+            // Create Scanner for reading the file
+            scanner = new Scanner(
+                    new BufferedReader(
+                            new FileReader(INVENTORY_FILE)));
+        } catch (FileNotFoundException e) {
+            throw new VendingMachineDaoException(
+                    "-_- Could not load inventory into memory.", e);
+        }
+        
+        String currentLine;
+        Candy currentCandy;
+        
+        while (scanner.hasNextLine()) {
+            currentLine = scanner.nextLine();
+            currentCandy = unmarshallCandy(currentLine);
+            
+            candies.put(currentCandy.getCandyNumber(), currentCandy);
+        }
+        scanner.close();
+    }
+    
+    private String marshallCandy(Candy aCandy){
+        
+        String candyAsText = aCandy.getCandyNumber() + DELIMITER;
+        
+        candyAsText += aCandy.getCandyName() + DELIMITER;
+        
+        candyAsText += aCandy.getCandyPrice() + DELIMITER;
+        
+        candyAsText += aCandy.getCandyQuantity() + DELIMITER;
+        
+        return candyAsText;
+    }
+    
+    private void writeInventory() throws VendingMachineDaoException {
+        
+        PrintWriter out;
+        
+        try {
+            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+        } catch (IOException e) {
+            throw new VendingMachineDaoException (
+                    "Could not save candy data.", e);
+        }
+        
+        String candyAsText;
+        List<Candy> candyList = this.getAllCandy();
+        
+        for (Candy currentCandy : candyList) {
+            // turn a Candy into String
+            candyAsText = marshallCandy(currentCandy);
+            // write the Candy object to the file
+            out.println(candyAsText);
+            // for PrintWriter to write line to the file
+            out.flush();
+        }
+        // Clean up
+        out.close();
     }
     
 }
