@@ -52,6 +52,7 @@ public class Change {
                 change -= 0.01;
                 pennies++;
             } else {
+                pennies++;
                 break;
             }
             
