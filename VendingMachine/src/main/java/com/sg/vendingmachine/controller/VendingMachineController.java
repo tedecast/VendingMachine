@@ -70,6 +70,7 @@ public class VendingMachineController {
         view.displayCandyBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
+        view.getHitEnter();
     }
     
     private void buyCandy() throws VendingMachineDaoException {

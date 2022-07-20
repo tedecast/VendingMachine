@@ -43,8 +43,12 @@ public class VendingMachineView {
             + currentCandy.getCandyPrice() + " " 
             + currentCandy.getCandyQuantity());
         }
+        emptyLine();
+//        getHitEnter();
+    }
+    
+    public void emptyLine() {
         io.print("");
-        getHitEnter();
     }
     
     public void getHitEnter() {
