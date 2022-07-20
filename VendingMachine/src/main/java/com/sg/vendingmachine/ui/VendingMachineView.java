@@ -42,13 +42,13 @@ public class VendingMachineView {
     }
     
     public void displaySelectionBanner() {
-        io.print("|Number|    Name   |   Cost   |  QTY  |");
+        io.print("|Number|     Name    |  Cost  |  QTY  |");
     }
     
     public void displayCandyList(List<Candy> candyList) {
         for (Candy currentCandy : candyList) {
-            io.print("|  " + currentCandy.getCandyNumber() + "  "
-            + currentCandy.getCandyName() + " "
+            io.print("|  " + currentCandy.getCandyNumber() + "   |"
+            + currentCandy.getCandyName() + "| $"
             + currentCandy.getCandyPrice() + "  |   " 
             + currentCandy.getCandyQuantity() + "   |");
         }
@@ -89,13 +89,14 @@ public class VendingMachineView {
     }
     // here's your change?
     public void returnMoney(BigDecimal money) {
-        io.print("Here's your money back.");
+        io.print("Insufficent funds. Here's your $" + money + " back.");
+        emptyLine();
         getHitEnter();
     }
     
     public void displayCandySuccess(Candy candy) {
         io.print("Thank you for your purchase " + candy.getCandyName() + "!");
-        io.print("Here's your change: ");
+        io.print("Here's your change: " + Change.class);
         getHitEnter();
     }
     

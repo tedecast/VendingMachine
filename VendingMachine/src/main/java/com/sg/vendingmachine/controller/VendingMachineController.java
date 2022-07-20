@@ -93,19 +93,14 @@ public class VendingMachineController {
             candy = dao.buyCandy(userChoice);
             candyQuantity = candy.getCandyQuantity();
             //comparing less than
-            
         } if (money.compareTo(candy.getCandyPrice()) == -1) {
             MathContext roundingUp = new MathContext(2);
             money = money.round(roundingUp);
-//            money = money.setScale(2, RoundingMode.FLOOR);
-            // put in view\
-            System.out.println("Insufficent funds. Here's your $" + money + " back.");
-            view.emptyLine();
-            view.getHitEnter();
+            view.returnMoney(money);
             
         } else {
             candy.buyCandy();
-            
+            view.displayCandySuccess(candy);
         }
     }
     
