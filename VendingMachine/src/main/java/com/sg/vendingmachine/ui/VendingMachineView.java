@@ -51,15 +51,15 @@ public class VendingMachineView {
         io.readString("Please hit enter to continue.");
     }
     
-    public void displayCandyPurchaseBanner() {
-        io.print("=== Purchase Candy ===");
-    }
-    
     // The user must put in some amount of money before an item can be selected.
     public BigDecimal displayRequestUserMoney() {
         Float money = io.readFloat("How much money do you have to spend?");
         BigDecimal moneyBD = new BigDecimal(money);
         return moneyBD;
+    }
+    
+    public void displayCandyPurchaseBanner() {
+        io.print("=== Purchase Candy ===");
     }
     
     public String getCandyNumberChoice() {
