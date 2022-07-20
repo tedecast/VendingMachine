@@ -80,7 +80,10 @@ public class VendingMachineController {
         view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
-        view.getCandyNumberChoice();
+        
+        String candyNumber = view.getCandyNumberChoice();
+        Candy candy = dao.buyCandy(candyNumber);
+        
     }
     
     private void unknownCommand() {

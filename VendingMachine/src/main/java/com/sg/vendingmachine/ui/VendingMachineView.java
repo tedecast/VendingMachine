@@ -34,6 +34,10 @@ public class VendingMachineView {
         io.print("* . * . *  Candy  . * . * . * . *");
     }
     
+    public void displayBuyCandyBanner() {
+        io.print(". * . * Buy Candy * . * . * . * .");
+    }
+    
     public void displaySelectionBanner() {
         io.print("Number|    Name   |   Cost  |QTY");
     }
@@ -63,10 +67,6 @@ public class VendingMachineView {
         Float money = io.readFloat("How much money do you have to spend?");
         BigDecimal moneyBD = new BigDecimal(money);
         return moneyBD;
-    }
-    
-    public void displayBuyCandyBanner() {
-        io.print(". * . * Buy Candy * . * . * . * .");
     }
     
     public String getCandyNumberChoice() {
