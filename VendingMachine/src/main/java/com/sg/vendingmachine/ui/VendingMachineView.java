@@ -31,8 +31,8 @@ public class VendingMachineView {
     }
     
     public void displayCandyBanner() {
-        io.print("* . * . *  Candy  * . * . * . *");
-        io.print("Num.  |    Name   |   $   |QTY");
+        io.print("* . * . *  Candy  . * . * . * . *");
+        io.print("Number|    Name   |   Cost  |QTY");
         
     }
     
