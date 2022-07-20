@@ -54,24 +54,6 @@ public class VendingMachineView {
         emptyLine();
     }
     
-//    public int displayBuyCandyOptions(Candy candy, List<Candy> candyList) {
-//        
-//        Float money = io.readFloat("How much money do you have to spend?");
-//        BigDecimal userMoney = new BigDecimal(money);
-//        
-//        while(candy.getCandyQuantity() == 0) {
-//            io.print("Sorry we're out of stock of " + candy.getCandyName());
-//            displayCandyList(candyList);
-//            getCandyNumberChoice();
-//            
-//        } if (candy.getCandyQuantity() > 0) { //&& moneyBD < candy.getCandyPrice()) {
-//            io.print("Insufficient funds. You only put in " + userMoney + 
-//                    " and the cost is " + candy.getCandyPrice());
-//            io.print("Here's your $" + userMoney + " back");
-//            getHitEnter();
-//        } else if (candy.getCandyQuantity() > 0 && u)
-//    }
-    
     public void emptyLine() {
         io.print("");
     }
@@ -87,6 +69,9 @@ public class VendingMachineView {
         return moneyBD;
     }
     
+    public void displayOutOfStock(Candy candy) {
+        io.print("Sorry, we're out of stock of " + candy.getCandyName() + ".");
+    }
     public String getCandyNumberChoice() {
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
         String stringChoice = String.valueOf(choice);

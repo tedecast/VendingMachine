@@ -80,14 +80,16 @@ public class VendingMachineController {
         view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
+        String userChoice = view.getCandyNumberChoice();
+        Candy candy = dao.buyCandy(userChoice);
+        int candyQuantity = candy.getCandyQuantity();
         
-        String candyNumber = view.getCandyNumberChoice();
-        Candy candy = dao.buyCandy(candyNumber);
-//        BigDecimal candyCost = view.displayCandyList(candyList);
-//        Candy price = dao.candyPrice();
-        
-        while (candyQuantity)
-            
+        while (candyQuantity == 0) {
+            view.displayOutOfStock(candy);
+            view.displayCandyList(candyList);
+            userChoice = view.getCandyNumberChoice();
+            candy = dao.buyCandy(userChoice);
+            candyQuantity = candy.getCandyQuantity();
         }
     }
     
