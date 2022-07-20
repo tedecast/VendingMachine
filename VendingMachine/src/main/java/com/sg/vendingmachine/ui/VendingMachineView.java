@@ -31,7 +31,8 @@ public class VendingMachineView {
     }
     
     public void displayCandyBanner() {
-        io.print("* . * . *  Candy  . * . * . * . *");
+        io.print(". * . * . * .  Candy  . * . * . * . * .");
+       io.print("- - - - - - - - - - - - - - - - - - - - ");
     }
     
     public void displayBuyCandyBanner() {
@@ -39,17 +40,18 @@ public class VendingMachineView {
     }
     
     public void displaySelectionBanner() {
-        io.print("Number|    Name   |   Cost  |QTY");
+        io.print("|Number|    Name   |   Cost   |  QTY  |");
     }
-    
     
     public void displayCandyList(List<Candy> candyList) {
         for (Candy currentCandy : candyList) {
-            io.print(currentCandy.getCandyNumber() + ": "
+            io.print("|  " + currentCandy.getCandyNumber() + "  "
             + currentCandy.getCandyName() + " "
-            + currentCandy.getCandyPrice() + " " 
-            + currentCandy.getCandyQuantity());
+            + currentCandy.getCandyPrice() + "  |   " 
+            + currentCandy.getCandyQuantity() + "   |");
         }
+        //io.print("* * * * * * * * * * * * * * * * *");
+        //io.print("- - - - - - - - - - - - - - - - -");
         emptyLine();
 //        getHitEnter();
     }
