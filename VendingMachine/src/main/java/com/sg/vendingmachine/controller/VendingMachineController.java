@@ -83,9 +83,10 @@ public class VendingMachineController {
         
         String candyNumber = view.getCandyNumberChoice();
         Candy candy = dao.buyCandy(candyNumber);
-        Candy price = dao.candyPrice(money);
+//        BigDecimal candyCost = view.displayCandyList(candyList);
+//        Candy price = dao.candyPrice();
         
-        if (candy != null && money >= ){
+        while (candyQuantity)
             
         }
     }
