@@ -38,7 +38,6 @@ public class VendingMachineController {
         
         try {
             while (keepGoing){
-                //view.getUserMoney();
 
                 menuSelection = getMenuSelection();
 
@@ -80,6 +79,7 @@ public class VendingMachineController {
         view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
+        
         String userChoice = view.getCandyNumberChoice();
         Candy candy = dao.buyCandy(userChoice);
         int candyQuantity = candy.getCandyQuantity();
@@ -90,6 +90,16 @@ public class VendingMachineController {
             userChoice = view.getCandyNumberChoice();
             candy = dao.buyCandy(userChoice);
             candyQuantity = candy.getCandyQuantity();
+            //comparing less than
+            
+        } if (money.compareTo(candy.getCandyPrice()) == -1) {
+            view.displayNoFunds();
+            view.returnMoney(); 
+            System.out.println("$" + money);
+            
+        } else {
+            candy.buyCandy();
+            
         }
     }
     

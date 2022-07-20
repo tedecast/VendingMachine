@@ -72,15 +72,27 @@ public class VendingMachineView {
     public void displayOutOfStock(Candy candy) {
         io.print("Sorry, we're out of stock of " + candy.getCandyName() + ".");
     }
+    
+    public void displayNoFunds() {
+        io.print ("Insufficient funds.");
+ 
+    }
+    
+    public void candyCost(Candy candy) {
+        io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
+    }
+    
+    public void returnMoney() {
+        io.print("Here's your money back.");
+        getHitEnter();
+    }
+    
     public String getCandyNumberChoice() {
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
         String stringChoice = String.valueOf(choice);
         return stringChoice;
     }
     
-    public void displayDepositSuccessful() {
-        io.print("Deposit successful");
-    }
     
     public void displayChange(String change){
         io.print("Your change is " + change);
