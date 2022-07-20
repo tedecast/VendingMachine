@@ -51,10 +51,7 @@ public class VendingMachineView {
             + currentCandy.getCandyPrice() + "  |   " 
             + currentCandy.getCandyQuantity() + "   |");
         }
-        //io.print("* * * * * * * * * * * * * * * * *");
-        //io.print("- - - - - - - - - - - - - - - - -");
         emptyLine();
-//        getHitEnter();
     }
     
     public void emptyLine() {

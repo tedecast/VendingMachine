@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Candy;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -20,4 +21,6 @@ public interface VendingMachineDao {
     Candy getOneCandy(String candyNumber) throws VendingMachineDaoException;
     
     Candy buyCandy(String candyNumber) throws VendingMachineDaoException;
+    
+    //Candy candyPrice(BigDecimal candyPrice) throws VendingMachineDaoException;
 }
