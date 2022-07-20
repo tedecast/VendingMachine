@@ -41,12 +41,12 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     }
 
     @Override
-    public Candy purchaseCandy(String candyNumber) throws VendingMachineDaoException {
-       Candy purchasedCandy = getOneCandy(candyNumber);
+    public Candy buyCandy(String candyNumber) throws VendingMachineDaoException {
+       Candy boughtCandy = getOneCandy(candyNumber);
        // added this? 
-       purchasedCandy.purchaseCandy();
-       return purchasedCandy;
-       //return purchasedCandy;
+       boughtCandy.buyCandy();
+       return boughtCandy;
+       //return boughtCandy;
     }
     
     private Candy unmarshallCandy(String candyAsText){

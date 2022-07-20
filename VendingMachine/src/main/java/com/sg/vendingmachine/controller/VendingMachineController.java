@@ -68,6 +68,7 @@ public class VendingMachineController {
     
     private void displayCandySelection() throws VendingMachineDaoException {
         view.displayCandyBanner();
+        view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
         view.getHitEnter();
@@ -75,9 +76,11 @@ public class VendingMachineController {
     
     private void buyCandy() throws VendingMachineDaoException {
         BigDecimal money = view.displayRequestUserMoney();
-        view.displayCandyPurchaseBanner();
+        view.displayBuyCandyBanner();
+        view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
+        view.getCandyNumberChoice();
     }
     
     private void unknownCommand() {

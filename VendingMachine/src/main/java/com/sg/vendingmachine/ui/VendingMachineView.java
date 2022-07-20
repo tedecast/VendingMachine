@@ -32,9 +32,12 @@ public class VendingMachineView {
     
     public void displayCandyBanner() {
         io.print("* . * . *  Candy  . * . * . * . *");
-        io.print("Number|    Name   |   Cost  |QTY");
-        
     }
+    
+    public void displaySelectionBanner() {
+        io.print("Number|    Name   |   Cost  |QTY");
+    }
+    
     
     public void displayCandyList(List<Candy> candyList) {
         for (Candy currentCandy : candyList) {
@@ -62,8 +65,8 @@ public class VendingMachineView {
         return moneyBD;
     }
     
-    public void displayCandyPurchaseBanner() {
-        io.print("=== Purchase Candy ===");
+    public void displayBuyCandyBanner() {
+        io.print(". * . * Buy Candy * . * . * . * .");
     }
     
     public String getCandyNumberChoice() {

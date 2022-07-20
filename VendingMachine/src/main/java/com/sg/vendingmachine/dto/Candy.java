@@ -54,7 +54,7 @@ public class Candy {
         this.candyQuantity = candyQuantity;
     }
     
-    public int purchaseCandy() {
+    public int buyCandy() {
         return candyQuantity--;
     }
 

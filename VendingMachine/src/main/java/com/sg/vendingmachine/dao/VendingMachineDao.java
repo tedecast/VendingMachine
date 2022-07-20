@@ -19,5 +19,5 @@ public interface VendingMachineDao {
     // id
     Candy getOneCandy(String candyNumber) throws VendingMachineDaoException;
     
-    Candy purchaseCandy(String candyNumber) throws VendingMachineDaoException;
+    Candy buyCandy(String candyNumber) throws VendingMachineDaoException;
 }
