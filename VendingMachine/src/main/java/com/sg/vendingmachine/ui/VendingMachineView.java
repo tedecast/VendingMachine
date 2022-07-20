@@ -102,7 +102,7 @@ public class VendingMachineView {
     }
 //    public void displayUserChange
 //                   io.print("Here's your change: " + change);
-    public void displayChange(Change change){
+    public void displayChange(String change){
         io.print("Your change is " + change);
     }
 //    

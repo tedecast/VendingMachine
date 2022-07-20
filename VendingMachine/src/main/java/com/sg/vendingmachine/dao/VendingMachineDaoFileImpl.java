@@ -37,14 +37,17 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
 
     @Override
     public Candy getOneCandy(String candyNumber) throws VendingMachineDaoException {
+        loadInventory();
         return candies.get(candyNumber);
     }
 
     @Override
     public Candy buyCandy(String candyNumber) throws VendingMachineDaoException {
+       loadInventory();
        Candy boughtCandy = getOneCandy(candyNumber);
        // added this? 
        boughtCandy.buyCandy();
+       writeInventory();
        return boughtCandy;
        //return boughtCandy;
     }

@@ -54,8 +54,8 @@ public class Candy {
         this.candyQuantity = candyQuantity;
     }
     
-    public int buyCandy() {
-        return candyQuantity--;
+    public void buyCandy() {
+        this.setCandyQuantity(this.candyQuantity -1);
     }
 
     @Override

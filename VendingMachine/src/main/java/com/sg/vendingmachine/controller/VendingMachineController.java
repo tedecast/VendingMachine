@@ -26,6 +26,8 @@ public class VendingMachineController {
     
     private VendingMachineView view; // = new VendingMachineView();
     private VendingMachineDao dao; //= new VendingMachineDaoFileImpl();
+    private BigDecimal balance = new BigDecimal(0);
+    private Change change = new Change(balance);
     public VendingMachineController(VendingMachineDao dao, VendingMachineView view) {
         this.dao = dao;
         this.view = view;
@@ -84,7 +86,7 @@ public class VendingMachineController {
         view.displayCandyList(candyList);
         
         String userChoice = view.getCandyNumberChoice();
-        Candy candy = dao.buyCandy(userChoice);
+        Candy candy = dao.getOneCandy(userChoice);
         int candyQuantity = candy.getCandyQuantity();
   
                 
@@ -92,7 +94,7 @@ public class VendingMachineController {
             view.displayOutOfStock(candy);
             view.displayCandyList(candyList);
             userChoice = view.getCandyNumberChoice();
-            candy = dao.buyCandy(userChoice);
+            candy = dao.getOneCandy(userChoice);
             candyQuantity = candy.getCandyQuantity();
             //comparing less than
         } if (money.compareTo(candy.getCandyPrice()) == -1) {
@@ -101,9 +103,16 @@ public class VendingMachineController {
             view.returnMoney(money);
             
         } else {
-            candyQuantity--;
-            candy.buyCandy();
+            //candyQuantity--;
+            System.out.println(candy.getCandyQuantity());
+            dao.buyCandy(userChoice);
+            System.out.println(candy.getCandyQuantity());
             view.displayCandySuccess(candy);
+            int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
+            String[] coinsArr = {"quarters", "dimes", "nickels", "pennies"};
+            for(int i = 0 ; i < coinsArr.length ; i++){
+                System.out.println(coinsArr[i] + " :" + changeArr[i]);
+            }
             //view.displayChange(change);
         }
     }

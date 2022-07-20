@@ -51,7 +51,9 @@ public class Change {
             } else if (change >= 0.01) {
                 change -= 0.01;
                 pennies++;
-            } 
+            } else {
+                break;
+            }
             
         }
         int[] changeArr = {quarters, dimes, nickels, pennies};
