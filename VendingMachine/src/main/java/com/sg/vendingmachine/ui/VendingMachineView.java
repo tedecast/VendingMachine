@@ -88,7 +88,7 @@ public class VendingMachineView {
     public void candyCost(Candy candy) {
         io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
     }
-    // here's your change?
+
     public void returnMoney(BigDecimal money) {
         io.print("Insufficent funds. Here's your $" + money + " back.");
         emptyLine();
@@ -97,18 +97,17 @@ public class VendingMachineView {
     
     public void displayCandySuccess(Candy candy) {
         io.print("Thank you for your purchase of" + candy.getCandyName());
- 
-        getHitEnter();
     }
-//    public void displayUserChange
-//                   io.print("Here's your change: " + change);
-    public void displayChange(String change){
-        io.print("Your change is " + change);
+    
+    public void displayChange(Change change, BigDecimal money, Candy candy){
+        io.print("Your change is :" + change);
+        int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
+        String[] coinsArr = {"quarters", "dimes", "nickels", "pennies"};
+        for (int i = 0; i < coinsArr.length; i++) {
+            System.out.println(coinsArr[i] + " :" + changeArr[i]);
+        }
+
     }
-//    
-//    public String displayThankYou() {
-//        return io.readString("Thank you for your purchase!");
-//    }
    
     public void displayErrorMessage(String errorMsg){
         io.print("=== ERROR ===");

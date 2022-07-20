@@ -103,16 +103,14 @@ public class VendingMachineController {
             view.returnMoney(money);
             
         } else {
-            //candyQuantity--;
-            System.out.println(candy.getCandyQuantity());
             dao.buyCandy(userChoice);
-            System.out.println(candy.getCandyQuantity());
             view.displayCandySuccess(candy);
-            int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
-            String[] coinsArr = {"quarters", "dimes", "nickels", "pennies"};
-            for(int i = 0 ; i < coinsArr.length ; i++){
-                System.out.println(coinsArr[i] + " :" + changeArr[i]);
-            }
+            view.displayChange(change, money, candy);
+//            int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
+//            String[] coinsArr = {"quarters", "dimes", "nickels", "pennies"};
+//            for(int i = 0 ; i < coinsArr.length ; i++){
+//                System.out.println(coinsArr[i] + " :" + changeArr[i]);
+//            }
             //view.displayChange(change);
         }
     }
