@@ -88,13 +88,13 @@ public class VendingMachineView {
         io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
     }
     // here's your change?
-    public void returnMoney() {
+    public void returnMoney(BigDecimal money) {
         io.print("Here's your money back.");
         getHitEnter();
     }
     
     public void displayCandySuccess(Candy candy) {
-        io.print("Thank you for your purchase of " + candy.getCandyName() + "!");
+        io.print("Thank you for your purchase " + candy.getCandyName() + "!");
         io.print("Here's your change: ");
         getHitEnter();
     }
@@ -102,6 +102,10 @@ public class VendingMachineView {
     public void displayChange(String change){
         io.print("Your change is " + change);
     }
+//    
+//    public String displayThankYou() {
+//        return io.readString("Thank you for your purchase!");
+//    }
    
     public void displayErrorMessage(String errorMsg){
         io.print("=== ERROR ===");

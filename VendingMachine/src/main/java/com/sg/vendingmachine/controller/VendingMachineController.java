@@ -13,6 +13,8 @@ import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -93,9 +95,13 @@ public class VendingMachineController {
             //comparing less than
             
         } if (money.compareTo(candy.getCandyPrice()) == -1) {
-            view.displayNoFunds();
-            view.returnMoney(); 
-            System.out.println("$" + money);
+            MathContext roundingUp = new MathContext(2);
+            money = money.round(roundingUp);
+//            money = money.setScale(2, RoundingMode.FLOOR);
+            // put in view\
+            System.out.println("Insufficent funds. Here's your $" + money + " back.");
+            view.emptyLine();
+            view.getHitEnter();
             
         } else {
             candy.buyCandy();
