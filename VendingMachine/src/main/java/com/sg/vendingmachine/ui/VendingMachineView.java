@@ -32,11 +32,12 @@ public class VendingMachineView {
     
     public void displayCandyBanner() {
         io.print(". * . * . * .  Candy  . * . * . * . * .");
-       io.print("- - - - - - - - - - - - - - - - - - - - ");
+        io.print("- - - - - - - - - - - - - - - - - - - - ");
     }
     
     public void displayBuyCandyBanner() {
-        io.print(". * . * Buy Candy * . * . * . * .");
+        io.print(". * . * . *  Buy Candy  * . * . * . * . ");
+        io.print("- - - - - - - - - - - - - - - - - - - - ");
     }
     
     public void displaySelectionBanner() {
