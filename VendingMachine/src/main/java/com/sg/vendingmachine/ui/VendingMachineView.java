@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.Candy;
+import com.sg.vendingmachine.dto.Change;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -69,37 +70,37 @@ public class VendingMachineView {
         return moneyBD;
     }
     
-    public void displayOutOfStock(Candy candy) {
-        io.print("Sorry, we're out of stock of " + candy.getCandyName() + ".");
-    }
-    
-    public void displayNoFunds() {
-        io.print ("Insufficient funds.");
- 
-    }
-    
-    public void candyCost(Candy candy) {
-        io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
-    }
-    
-    public void returnMoney() {
-        io.print("Here's your money back.");
-        getHitEnter();
-    }
-    
     public String getCandyNumberChoice() {
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
         String stringChoice = String.valueOf(choice);
         return stringChoice;
     }
     
+    public void displayOutOfStock(Candy candy) {
+        io.print("Sorry, we're out of stock of " + candy.getCandyName() + ".");
+    }
+    
+    public void displayNoFunds() {
+        io.print ("Insufficient funds.");
+    }
+    
+    public void candyCost(Candy candy) {
+        io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
+    }
+    // here's your change?
+    public void returnMoney() {
+        io.print("Here's your money back.");
+        getHitEnter();
+    }
+    
+    public void displayCandySuccess(Candy candy) {
+        io.print("Thank you for your purchase of " + candy.getCandyName() + "!");
+        io.print("Here's your change: ");
+        getHitEnter();
+    }
     
     public void displayChange(String change){
         io.print("Your change is " + change);
-    }
-    
-    public String displayThankYou() {
-        return io.readString("Thank you for your purchase!");
     }
    
     public void displayErrorMessage(String errorMsg){
