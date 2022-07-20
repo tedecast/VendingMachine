@@ -7,6 +7,7 @@ package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
+import com.sg.vendingmachine.dto.Coins;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -95,12 +96,13 @@ public class VendingMachineView {
     }
     
     public void displayCandySuccess(Candy candy) {
-        io.print("Thank you for your purchase " + candy.getCandyName() + "!");
-        io.print("Here's your change: " + Change.class);
+        io.print("Thank you for your purchase of" + candy.getCandyName());
+ 
         getHitEnter();
     }
-    
-    public void displayChange(String change){
+//    public void displayUserChange
+//                   io.print("Here's your change: " + change);
+    public void displayChange(Change change){
         io.print("Your change is " + change);
     }
 //    

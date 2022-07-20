@@ -9,6 +9,7 @@ import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachineDaoException;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.dto.Candy;
+import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
@@ -85,7 +86,8 @@ public class VendingMachineController {
         String userChoice = view.getCandyNumberChoice();
         Candy candy = dao.buyCandy(userChoice);
         int candyQuantity = candy.getCandyQuantity();
-        
+  
+                
         while (candyQuantity == 0) {
             view.displayOutOfStock(candy);
             view.displayCandyList(candyList);
@@ -99,8 +101,10 @@ public class VendingMachineController {
             view.returnMoney(money);
             
         } else {
+            candyQuantity--;
             candy.buyCandy();
             view.displayCandySuccess(candy);
+            //view.displayChange(change);
         }
     }
     
