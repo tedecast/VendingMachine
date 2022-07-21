@@ -98,7 +98,7 @@ public class VendingMachineController {
         } 
         
         if (money.compareTo(candy.getCandyPrice()) == -1) {
-            view.notEnoughMoney(money);
+            view.notEnoughMoney();
             
         } else {
             dao.buyCandy(userChoice);
