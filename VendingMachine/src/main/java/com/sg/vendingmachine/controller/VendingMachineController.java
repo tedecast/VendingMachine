@@ -104,6 +104,7 @@ public class VendingMachineController {
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
             change.addChange(balance);
+            change.toString();
 //            int[] changeArr = change.makeChange(money.subtract(candy.getCandyPrice()));
 //            String[] coinsArr = {"Quarters", "Dimes", "Nickels", "Pennies"};
 //            view.displayChangeBanner();
