@@ -81,9 +81,6 @@ public class VendingMachineView {
         return moneyBD;
     }
     
-//    public void moneyIn(BigDecimal money) {
-//        io.print("You put in: $" + money);
-//    }
     // Only one item can be vended at a time.
     public String getCandyNumberChoice(BigDecimal money) {
         io.print("You put in $" + money);
@@ -94,7 +91,10 @@ public class VendingMachineView {
     
     // If the machine runs out of an item, it should no longer be available as an option to the user
     public void displayOutOfStock(Candy candy) {
-        io.print("Sorry, we're out of stock of " + candy.getCandyName() + ".");
+        io.print("Sorry, we're out of stock of:"); //+ candy.getCandyName());
+        io.print("      " + candy.getCandyName());
+        io.print("Please choose a different Candy's Number to purchase.");
+        displayBuyCandyBanner();
     }
     
     // If the user selects an item that costs more than the amount the user put into the vending machine, 
