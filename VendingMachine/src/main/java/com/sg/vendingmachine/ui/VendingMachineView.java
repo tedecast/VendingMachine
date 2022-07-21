@@ -113,7 +113,7 @@ public class VendingMachineView {
     // Change must be displayed as the number of quarters, dimes, nickels, and pennies returned to the user.
     public void displayChange(Change change, BigDecimal money, Candy candy){
         io.print("* . * . Your change is: . * . *");
-        int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
+        int[] changeArr = change.makeChange(money.subtract(candy.getCandyPrice()));
         String[] coinsArr = {"Quarters", "Dimes", "Nickels", "Pennies"};
         for (int i = 0; i < coinsArr.length; i++) {
             io.print("          " + changeArr[i] + " " + coinsArr[i]);

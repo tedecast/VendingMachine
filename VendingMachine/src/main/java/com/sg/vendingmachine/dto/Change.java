@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.dto;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 /**
@@ -37,23 +38,28 @@ public class Change {
         this.pennies = penniesArr[numCoins].intValue();
     }
     
-    
-    public int[] makeChange(float change) {
+    // You must use BigDecimal for all monetary calculations where applicable.
+    public int[] makeChange(BigDecimal change) {
         
-        while(change > 0) {
+        while(balance.compareTo(change) == -1) {
             
-            if (change >= 0.25) {
-                change -= 0.25;
+            if (change.compareTo(Coins.QUARTER.value) >= 0) {
+                change.subtract(Coins.QUARTER.value);
                 quarters++;
-            } else if (change >= 0.10) {
-                change -= 0.10;
+                
+                
+            } else if (change.compareTo(Coins.DIME.value) == 0) {
+                change.subtract(Coins.DIME.value);
                 dimes++;
-            } else if (change >= 0.05) {
-                change -= 0.05;
+                
+            } else if (change.compareTo(Coins.NICKEL.value) == 0) {
+                change.subtract(Coins.NICKEL.value);
                 nickels++;
-            } else if (change >= 0.01) {
-                change -= 0.01;
+                
+            } else if (change.compareTo(Coins.PENNY.value) == 0) {
+                change.subtract(Coins.PENNY.value);
                 pennies++;
+                
             } else {
                 pennies++;
                 break;
