@@ -107,6 +107,7 @@ public class VendingMachineView {
     } 
     
     public void displayCandySuccess(Candy candy) {
+        io.print("");
         io.print("Thank you for your purchase of:");
         io.print("   " + candy.getCandyName() + " | " + "$" + candy.getCandyPrice());
         emptyLine();

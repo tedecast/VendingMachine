@@ -41,16 +41,16 @@ public class Change {
     // You must use BigDecimal for all monetary calculations where applicable.
     public int[] makeChange(BigDecimal change) {
         
-//        this.quarters = 0;
-//        this.dimes = 0;
-//        this.nickels = 0;
-//        this.pennies = 0;
+        this.quarters = 0;
+        this.dimes = 0;
+        this.nickels = 0;
+        this.pennies = 0;
         
         MathContext round = new MathContext(3);
         change = change.round(round);
         
         while(change.compareTo(BigDecimal.ZERO) == 1) {
-            System.out.println(change.toString());
+            // System.out.println(change.toString());
             if (change.compareTo(Coins.QUARTER.value) >= 0) {
                 change = change.subtract(Coins.QUARTER.value);
                 quarters++;

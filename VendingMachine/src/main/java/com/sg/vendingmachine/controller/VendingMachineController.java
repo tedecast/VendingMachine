@@ -80,6 +80,8 @@ public class VendingMachineController {
     
     private void buyCandy() throws VendingMachineDaoException {
         BigDecimal money = view.displayRequestUserMoney();
+        MathContext roundingUp = new MathContext(3);
+        money = money.round(roundingUp);
         view.displayBuyCandyBanner();
         view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
@@ -88,19 +90,14 @@ public class VendingMachineController {
         String userChoice = view.getCandyNumberChoice(money);
         Candy candy = dao.getOneCandy(userChoice);
         int candyQuantity = candy.getCandyQuantity();
-  
-        
+         
         while (candyQuantity == 0) {
             view.displayOutOfStock(candy);
             view.displayCandyList(candyList);
             userChoice = view.getCandyNumberChoice(money);
             candy = dao.getOneCandy(userChoice);
             candyQuantity = candy.getCandyQuantity();
-            
         } 
-        
-        MathContext roundingUp = new MathContext(3);
-        money = money.round(roundingUp);
         
         if (money.compareTo(candy.getCandyPrice()) == -1) {
             view.returnMoney(money);
