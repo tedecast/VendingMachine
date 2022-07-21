@@ -40,7 +40,7 @@ public class Change {
     }
     
     // You must use BigDecimal for all monetary calculations where applicable.
-      public void addChange(BigDecimal change) {
+    public void addChange(BigDecimal change) {
         this.balance = this.balance.add(change).setScale(2, RoundingMode.HALF_UP);
     }
     public void makePurchase(BigDecimal price) {

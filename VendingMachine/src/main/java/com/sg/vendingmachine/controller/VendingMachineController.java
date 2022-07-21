@@ -15,6 +15,7 @@ import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -31,7 +32,9 @@ public class VendingMachineController {
         this.dao = dao;
         this.view = view;
     }
-
+    // private UserIO io = new UserIOConsoleImpl();
+    
+    
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public void run() {
         
@@ -77,9 +80,9 @@ public class VendingMachineController {
     
     private void buyCandy() throws VendingMachineDaoException {
         BigDecimal money = view.displayRequestUserMoney();
-        System.out.println(money.toString().length());
-        MathContext roundingUp = new MathContext(money.toString().length());
+        MathContext roundingUp = new MathContext(3);
         money = money.round(roundingUp);
+        Change userChange = new Change(money);
         view.displayBuyCandyBanner();
         view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
@@ -97,24 +100,25 @@ public class VendingMachineController {
             candyQuantity = candy.getCandyQuantity();
         } 
         
-        if (money.compareTo(candy.getCandyPrice()) == -1) {
-            view.notEnoughMoney();
+        while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
             
-        } else {
+            // display a new banner that says Insufficient funds
+            view.notEnoughMoney(userChange.getBalance());
+            // prompt the user to input more money -- create in view
+            money = view.addMoreMoney();
+            // add the money inputed to the userChange object, using addChange balance
+            change.addChange(money);
+        } 
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
-            change.addChange(balance);
-            change.toString();
-//            int[] changeArr = change.makeChange(money.subtract(candy.getCandyPrice()));
-//            String[] coinsArr = {"Quarters", "Dimes", "Nickels", "Pennies"};
-//            view.displayChangeBanner();
-//            for (int i = 0; i < coinsArr.length; i++) {
-//                view.displayChange(coinsArr[i], changeArr[i]);
-            }
+            // modify this
+            userChange.makePurchase(candy.getCandyPrice());
+            view.displayChangeBanner();
+            userChange.toString();
             view.emptyLine();
             view.getHitEnter();
-        }
- 
+        
+    }
     
     private void unknownCommand() {
         view.displayUnknownCommandBanner();

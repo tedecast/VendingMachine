@@ -76,10 +76,27 @@ public class VendingMachineView {
     
     // The user must put in some amount of money before an item can be selected.
     public BigDecimal displayRequestUserMoney() {
-        Float money = io.readFloat("How much money do you have to spend?");
-        System.out.println(money.toString().length());
-        BigDecimal moneyBD = new BigDecimal(money);
-        return moneyBD;
+        // changed Float to BigDecimal from UserIO
+        BigDecimal money = io.readBigDecimal("How much money do you have to spend?");
+        //System.out.println(money.toString().length());
+        //BigDecimal moneyBD = new BigDecimal(money);
+        return money;
+    }
+    
+    
+    // tell the user they need to add more money... 
+    // If the user selects an item that costs more than the amount the user put into the vending machine, 
+    // the program should display a message indicating insufficient funds
+    // and then redisplay the amount the user had put into the machine.
+    public void notEnoughMoney(BigDecimal money) {
+        io.print("Insufficent funds. You only put in $" + money);
+//        emptyLine();
+//        getHitEnter();
+    } 
+    
+    public BigDecimal addMoreMoney() {
+        BigDecimal money = io.readBigDecimal("Please add in more money:");
+        return money;
     }
     
     // Only one item can be vended at a time.
@@ -98,15 +115,6 @@ public class VendingMachineView {
         displayBuyCandyBanner();
     }
     
-    // If the user selects an item that costs more than the amount the user put into the vending machine, 
-    // the program should display a message indicating insufficient funds
-    // and then redisplay the amount the user had put into the machine.
-    public void notEnoughMoney(String prompt, BigDecimal min, BigDecimal max) {
-        io.readBigDecimal(prompt);
-        io.print("Enter Amount Between $" + min + " And $" + max);
-//        emptyLine();
-//        getHitEnter();
-    } 
     
     public void displayCandySuccess(Candy candy) {
         io.print("");
