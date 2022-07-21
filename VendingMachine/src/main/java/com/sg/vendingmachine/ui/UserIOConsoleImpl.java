@@ -95,8 +95,7 @@ public class UserIOConsoleImpl implements UserIO {
         }
         return userLong;
     }
-    
-        //This implementation deals with money
+     //This implementation deals with money
     @Override
     public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max) {
         boolean isValid;
@@ -121,15 +120,20 @@ public class UserIOConsoleImpl implements UserIO {
         return result;
     }
 
-    
-    
-//    @Override
-//    public void printInt(int num) {
-//        System.out.println(num);
-//    }
-//
-//    @Override
-//    public void printBigDecimal(BigDecimal num) {
-//        System.out.println(num);
-//    }
+    @Override
+    public BigDecimal readBigDecimal(String prompt) {
+        boolean isValid;
+        BigDecimal result = null;
+        do {
+            isValid = true;
+            print(prompt);
+            try {
+                //result = new BigDecimal(scan.nextLine()).setScale(2, RoundingMode.HALF_UP);
+            } catch (NumberFormatException ex) {
+                //print("Please Enter Number:");
+                isValid = false;
+            }
+        } while (!isValid);
+        return result;
+    }
 }
