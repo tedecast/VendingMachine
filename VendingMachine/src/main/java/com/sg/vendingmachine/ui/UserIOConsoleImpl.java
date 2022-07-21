@@ -96,50 +96,33 @@ public class UserIOConsoleImpl implements UserIO {
         return userLong;
     }
     
-//        //This implementation deals with money
-//    @Override
-//    public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max) {
-//        boolean isValid;
-//        BigDecimal result = null;
-//        BigDecimal bdMin = (min).setScale(2, RoundingMode.HALF_UP);
-//        BigDecimal bdMax = (max).setScale(2, RoundingMode.HALF_UP);        
-//        
-//        do {
-//            isValid = true;
-//            print(prompt + " Between $" + bdMin + " And $" + bdMax);
-//            try {
-//                result = new BigDecimal(scan.nextLine()).setScale(2, RoundingMode.HALF_UP);
-//                if (result.compareTo(min) == -1 || result.compareTo(max) == 1) {
-//                    //print("Enter Amount Between $" + bdMin + " And $" + bdMax);
-//                    isValid = false;
-//                }
-//            } catch (NumberFormatException ex) {
-//                //print("Please Enter Number:");
-//                isValid = false;
-//            }
-//        } while (!isValid);
-//        return result;
-//    }
-//
-//    
-//    @Override
-//    public BigDecimal readBigDecimal(String prompt) {
-//        boolean isValid;
-//        BigDecimal result = null;
-//        do {
-//            isValid = true;
-//            print(prompt);
-//            try {
-//                result = new BigDecimal(scan.nextLine()).setScale(2, RoundingMode.HALF_UP);
-//            } catch (NumberFormatException ex) {
-//                //print("Please Enter Number:");
-//                isValid = false;
-//            }
-//        } while (!isValid);
-//        return result;
-   // }
+        //This implementation deals with money
+    @Override
+    public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max) {
+        boolean isValid;
+        BigDecimal result = null;
+        BigDecimal bdMin = (min).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal bdMax = (max).setScale(2, RoundingMode.HALF_UP);        
         
-        
+        do {
+            isValid = true;
+            print(prompt + " Between $" + bdMin + " And $" + bdMax);
+            try {
+                //result = new BigDecimal(scan.nextLine()).setScale(2, RoundingMode.HALF_UP);
+                if (result.compareTo(min) == -1 || result.compareTo(max) == 1) {
+                    //print("Enter Amount Between $" + bdMin + " And $" + bdMax);
+                    isValid = false;
+                }
+            } catch (NumberFormatException ex) {
+                //print("Please Enter Number:");
+                isValid = false;
+            }
+        } while (!isValid);
+        return result;
+    }
+
+    
+    
 //    @Override
 //    public void printInt(int num) {
 //        System.out.println(num);
