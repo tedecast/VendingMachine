@@ -10,12 +10,13 @@ import java.math.BigDecimal;
 /**
  *
  * @author Teresa
- */
+ */ 
+// Use enums to represent the values of different coins.
 public enum Coins {
-    QUARTER(new BigDecimal(".25")),
-    DIME(new BigDecimal(".10")),
-    NICKEL(new BigDecimal(".05")),
-    PENNY(new BigDecimal(".01"));
+    QUARTER(new BigDecimal("0.25")),
+    DIME(new BigDecimal("0.10")),
+    NICKEL(new BigDecimal("0.05")),
+    PENNY(new BigDecimal("0.01"));
     
     public final BigDecimal value;
     private Coins(BigDecimal value) {

@@ -13,7 +13,10 @@ import java.math.RoundingMode;
  * @author Teresa
  */
 public class Change {
-
+    // To make change, create a Change class that takes the amount of change due to the user (in pennies) 
+    // and then calculates the number of quarters, dimes, nickels, and pennies due back to the user. 
+    // This class should have accessors for each of the coin types.
+    
     Candy candy;
 
     private int quarters, dimes, nickels, pennies;
@@ -52,7 +55,7 @@ public class Change {
                 change -= 0.01;
                 pennies++;
             } else {
-                //pennies++;
+                pennies++;
                 break;
             }
             

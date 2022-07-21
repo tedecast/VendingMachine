@@ -47,10 +47,15 @@ public class VendingMachineView {
         getBanner();
     }
     
+    // The program must track the following properties for each item:
+    // Item Name, Item Cost, Number of Items in Inventory
     public void displaySelectionBanner() {
         io.print("|Number|     Name    |  Cost  |  QTY  |");
     }
     
+    // Vending machine items must be stored in a file.
+    // When an item is vended, the program must update the inventory level appropriately.
+    // However, the items that have an inventory level of zero must still be read
     public void displayCandyList(List<Candy> candyList) {
         for (Candy currentCandy : candyList) {
             io.print("|  " + currentCandy.getCandyNumber() + "   |"
@@ -76,29 +81,26 @@ public class VendingMachineView {
         return moneyBD;
     }
     
+    // Only one item can be vended at a time.
     public String getCandyNumberChoice() {
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
         String stringChoice = String.valueOf(choice);
         return stringChoice;
     }
     
+    // If the machine runs out of an item, it should no longer be available as an option to the user
     public void displayOutOfStock(Candy candy) {
         io.print("Sorry, we're out of stock of " + candy.getCandyName() + ".");
     }
     
-    public void displayNoFunds() {
-        io.print ("Insufficient funds.");
-    }
-    
-    public void candyCost(Candy candy) {
-        io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
-    }
-
+    // If the user selects an item that costs more than the amount the user put into the vending machine, 
+    // the program should display a message indicating insufficient funds
+    // and then redisplay the amount the user had put into the machine.
     public void returnMoney(BigDecimal money) {
         io.print("Insufficent funds. Here's your $" + money + " back.");
         emptyLine();
         getHitEnter();
-    }
+    } 
     
     public void displayCandySuccess(Candy candy) {
         io.print("Thank you for your purchase of:");
@@ -106,6 +108,9 @@ public class VendingMachineView {
         emptyLine();
     }
     
+    // If the user selects an item that costs equal to or less than the amount of money,
+    // the program should display the change returned to the user.
+    // Change must be displayed as the number of quarters, dimes, nickels, and pennies returned to the user.
     public void displayChange(Change change, BigDecimal money, Candy candy){
         io.print("* . * . Your change is: . * . *");
         int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
@@ -166,3 +171,9 @@ public class VendingMachineView {
 //        //return io.readInt("Please select from the above choices.", 1, 3);
 //    }
 }
+//    
+//    public void candyCost(Candy candy) {
+//        io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
+//    }
+//
+//  
