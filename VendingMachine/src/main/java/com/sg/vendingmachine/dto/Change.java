@@ -60,11 +60,12 @@ public class Change {
             } else if (change.compareTo(Coins.PENNY.value) >= 0) {
                 change = change.subtract(Coins.PENNY.value, round);
                 pennies++;
-                
-            } else {
-                pennies++;
-                break;
             }
+                
+//            } else {
+//                pennies++;
+//                break;
+//            }
             
         }
         int[] changeArr = {quarters, dimes, nickels, pennies};
