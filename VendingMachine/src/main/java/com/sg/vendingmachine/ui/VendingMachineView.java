@@ -31,15 +31,20 @@ public class VendingMachineView {
         
         return io.readInt("Please select from the above choices.", 1, 3);
     }
-    
-    public void displayCandyBanner() {
-        io.print(". * . * . * .  Candy  . * . * . * . * .");
+    public void getBanner() {
         io.print("- - - - - - - - - - - - - - - - - - - - ");
     }
     
+    public void displayCandyBanner() {
+        emptyLine();
+        io.print(". * . * . * .  Candy  . * . * . * . * .");   
+        getBanner();
+    }
+    
     public void displayBuyCandyBanner() {
+        emptyLine();
         io.print(". * . * . *  Buy Candy  * . * . * . * . ");
-        io.print("- - - - - - - - - - - - - - - - - - - - ");
+        getBanner();
     }
     
     public void displaySelectionBanner() {
@@ -96,17 +101,20 @@ public class VendingMachineView {
     }
     
     public void displayCandySuccess(Candy candy) {
-        io.print("Thank you for your purchase of" + candy.getCandyName());
+        io.print("Thank you for your purchase of:");
+        io.print("   " + candy.getCandyName() + " | " + "$" + candy.getCandyPrice());
+        emptyLine();
     }
     
     public void displayChange(Change change, BigDecimal money, Candy candy){
-        io.print("Your change is :" + change);
+        io.print("* . * . Your change is: . * . *");
         int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
-        String[] coinsArr = {"quarters", "dimes", "nickels", "pennies"};
+        String[] coinsArr = {"Quarters", "Dimes", "Nickels", "Pennies"};
         for (int i = 0; i < coinsArr.length; i++) {
-            System.out.println(coinsArr[i] + " :" + changeArr[i]);
+            io.print("          " + changeArr[i] + " " + coinsArr[i]);
         }
-
+        emptyLine();
+        getHitEnter();
     }
    
     public void displayErrorMessage(String errorMsg){

@@ -106,12 +106,6 @@ public class VendingMachineController {
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
             view.displayChange(change, money, candy);
-//            int[] changeArr = change.makeChange(money.floatValue() - candy.getCandyPrice().floatValue());
-//            String[] coinsArr = {"quarters", "dimes", "nickels", "pennies"};
-//            for(int i = 0 ; i < coinsArr.length ; i++){
-//                System.out.println(coinsArr[i] + " :" + changeArr[i]);
-//            }
-            //view.displayChange(change);
         }
     }
     
