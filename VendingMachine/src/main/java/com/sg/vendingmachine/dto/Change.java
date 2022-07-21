@@ -42,22 +42,23 @@ public class Change {
     public int[] makeChange(BigDecimal change) {
         
         MathContext round = new MathContext(2);
+        
         while(change.compareTo(BigDecimal.ZERO) == 1) {
             
-            if (change.compareTo(Coins.QUARTER.value) == 0) {
-                balance =change.subtract(Coins.QUARTER.value, round);
+            if (change.compareTo(Coins.QUARTER.value) >= 0) {
+                change = change.subtract(Coins.QUARTER.value, round);
                 quarters++;
                 
-            } else if (change.compareTo(Coins.DIME.value) == 0) {
-                change.subtract(Coins.DIME.value);
+            } else if (change.compareTo(Coins.DIME.value) >= 0) {
+                change = change.subtract(Coins.DIME.value, round);
                 dimes++;
                 
-            } else if (change.compareTo(Coins.NICKEL.value) == 0) {
-                change.subtract(Coins.NICKEL.value);
+            } else if (change.compareTo(Coins.NICKEL.value) >= 0) {
+                change = change.subtract(Coins.NICKEL.value, round);
                 nickels++;
                 
-            } else if (change.compareTo(Coins.PENNY.value) == 0) {
-                change.subtract(Coins.PENNY.value);
+            } else if (change.compareTo(Coins.PENNY.value) >= 0) {
+                change = change.subtract(Coins.PENNY.value, round);
                 pennies++;
                 
             } else {
