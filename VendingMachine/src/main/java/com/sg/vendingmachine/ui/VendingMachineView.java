@@ -81,6 +81,9 @@ public class VendingMachineView {
         return moneyBD;
     }
     
+    public void moneyIn(BigDecimal money) {
+        io.print("You put in: $" + money);
+    }
     // Only one item can be vended at a time.
     public String getCandyNumberChoice() {
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
@@ -111,15 +114,12 @@ public class VendingMachineView {
     // If the user selects an item that costs equal to or less than the amount of money,
     // the program should display the change returned to the user.
     // Change must be displayed as the number of quarters, dimes, nickels, and pennies returned to the user.
-    public void displayChange(Change change, BigDecimal money, Candy candy){
+    public void displayChangeBanner(){
         io.print("* . * . Your change is: . * . *");
-        int[] changeArr = change.makeChange(money.subtract(candy.getCandyPrice()));
-        String[] coinsArr = {"Quarters", "Dimes", "Nickels", "Pennies"};
-        for (int i = 0; i < coinsArr.length; i++) {
-            io.print("          " + changeArr[i] + " " + coinsArr[i]);
-        }
-        emptyLine();
-        getHitEnter();
+    }
+    
+    public void displayChange(String coinName, int coinAmount){
+        io.print("          " + coinAmount  + " " + coinName);
     }
    
     public void displayErrorMessage(String errorMsg){

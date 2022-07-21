@@ -96,6 +96,7 @@ public class VendingMachineController {
             userChoice = view.getCandyNumberChoice();
             candy = dao.getOneCandy(userChoice);
             candyQuantity = candy.getCandyQuantity();
+            
             //comparing less than
         } if (money.compareTo(candy.getCandyPrice()) == -1) {
             MathContext roundingUp = new MathContext(2);
@@ -103,9 +104,17 @@ public class VendingMachineController {
             view.returnMoney(money);
             
         } else {
+            view.moneyIn(money);
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
-            view.displayChange(change, money, candy);
+            int[] changeArr = change.makeChange(money.subtract(candy.getCandyPrice()));
+            String[] coinsArr = {"Quarters", "Dimes", "Nickels", "Pennies"};
+            view.displayChangeBanner();
+            for (int i = 0; i < coinsArr.length; i++) {
+                view.displayChange(coinsArr[i], changeArr[i]);
+            }
+            view.emptyLine();
+            view.getHitEnter();
         }
     }
     
