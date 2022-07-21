@@ -77,9 +77,13 @@ public class VendingMachineView {
     // The user must put in some amount of money before an item can be selected.
     public BigDecimal displayRequestUserMoney() {
         Float money = io.readFloat("How much money do you have to spend?");
+        System.out.println(money.toString().length());
         BigDecimal moneyBD = new BigDecimal(money);
         return moneyBD;
     }
+    
+    
+    // tell the user they need to add more money... 
     
     // Only one item can be vended at a time.
     public String getCandyNumberChoice(BigDecimal money) {

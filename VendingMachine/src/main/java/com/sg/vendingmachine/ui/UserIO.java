@@ -32,7 +32,10 @@ public interface UserIO {
     long readLong(String prompt, long min, long max);
 
     String readString(String prompt);
-    
+//    
+//    public BigDecimal readBigDecimal(String prompt, BigDecimal min, BigDecimal max);
+//    
+//    public BigDecimal readBigDecimal(String prompt);
 //    public void printInt(int num);
 //    
 //    public void printBigDecimal(BigDecimal num);
