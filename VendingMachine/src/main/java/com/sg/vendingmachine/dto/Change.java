@@ -41,7 +41,7 @@ public class Change {
     // You must use BigDecimal for all monetary calculations where applicable.
     public int[] makeChange(BigDecimal change) {
         
-        while(change.compareTo(BigDecimal.ZERO) == 1) {
+        while(BigDecimal.ZERO.compareTo(change) == -1) {
             
             if (change.compareTo(Coins.QUARTER.value) == 0) {
                 change.subtract(Coins.QUARTER.value);
