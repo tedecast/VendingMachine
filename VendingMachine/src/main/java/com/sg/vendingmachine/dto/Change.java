@@ -8,6 +8,7 @@ package com.sg.vendingmachine.dto;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 /**
  *
@@ -39,38 +40,88 @@ public class Change {
     }
     
     // You must use BigDecimal for all monetary calculations where applicable.
-    public int[] makeChange(BigDecimal change) {
-        
-        this.quarters = 0;
-        this.dimes = 0;
-        this.nickels = 0;
-        this.pennies = 0;
-        
-        MathContext round = new MathContext(change.toString().length());
-        change = change.round(round);
-        
-        while(change.compareTo(BigDecimal.ZERO) == 1) {
-            // System.out.println(change.toString());
-            if (change.compareTo(Coins.QUARTER.value) >= 0) {
-                change = change.subtract(Coins.QUARTER.value);
-                quarters++;
-                
-            } else if (change.compareTo(Coins.DIME.value) >= 0) {
-                change = change.subtract(Coins.DIME.value);
-                dimes++;
-                
-            } else if (change.compareTo(Coins.NICKEL.value) >= 0) {
-                change = change.subtract(Coins.NICKEL.value);
-                nickels++;
-                
-            } else if (change.compareTo(Coins.PENNY.value) >= 0) {
-                change = change.subtract(Coins.PENNY.value);
-                pennies++;
-                
-            }
-            
-        }
-        int[] changeArr = {quarters, dimes, nickels, pennies};
-        return changeArr;
+      public void addChange(BigDecimal change) {
+        this.balance = this.balance.add(change).setScale(2, RoundingMode.HALF_UP);
     }
+    public void makePurchase(BigDecimal price) {
+        this.balance = this.balance.subtract(price).setScale(2, RoundingMode.HALF_UP);
+    }
+    public BigDecimal getBalance() {
+        return balance.setScale(2, RoundingMode.HALF_UP);
+    }
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance.setScale(2, RoundingMode.HALF_UP);
+    }
+    public int getQuarters() {
+        return quarters;
+    }
+    public void setQuarters(int quarters) {
+        this.quarters = quarters;
+    }
+    public int getDimes() {
+        return dimes;
+    }
+    public void setDimes(int dimes) {
+        this.dimes = dimes;
+    }
+    public int getNickels() {
+        return nickels;
+    }
+    public void setNickels(int nickels) {
+        this.nickels = nickels;
+    }
+    public int getPennies() {
+        return pennies;
+    }
+    public void setPennies(int pennies) {
+        this.pennies = pennies;
+    }
+    @Override
+    public String toString() {
+        return "Your Change Due: $" + balance +
+                "\nQuarters: " + quarters + 
+                "\nDimes: " + dimes + 
+                "\nNickels: " + nickels + 
+                "\nPennies: " + pennies;
+    }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.quarters;
+        hash = 29 * hash + this.dimes;
+        hash = 29 * hash + this.nickels;
+        hash = 29 * hash + this.pennies;
+        hash = 29 * hash + Objects.hashCode(this.balance);
+        return hash;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Change other = (Change) obj;
+        if (this.quarters != other.quarters) {
+            return false;
+        }
+        if (this.dimes != other.dimes) {
+            return false;
+        }
+        if (this.nickels != other.nickels) {
+            return false;
+        }
+        if (this.pennies != other.pennies) {
+            return false;
+        }
+        if (!Objects.equals(this.balance, other.balance)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
