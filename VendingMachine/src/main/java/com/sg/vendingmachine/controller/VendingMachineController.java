@@ -77,7 +77,8 @@ public class VendingMachineController {
     
     private void buyCandy() throws VendingMachineDaoException {
         BigDecimal money = view.displayRequestUserMoney();
-        MathContext roundingUp = new MathContext(3);
+        System.out.println(money.toString().length());
+        MathContext roundingUp = new MathContext(money.toString().length());
         money = money.round(roundingUp);
         view.displayBuyCandyBanner();
         view.displaySelectionBanner();

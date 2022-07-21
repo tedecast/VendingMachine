@@ -46,7 +46,7 @@ public class Change {
         this.nickels = 0;
         this.pennies = 0;
         
-        MathContext round = new MathContext(3);
+        MathContext round = new MathContext(change.toString().length());
         change = change.round(round);
         
         while(change.compareTo(BigDecimal.ZERO) == 1) {
