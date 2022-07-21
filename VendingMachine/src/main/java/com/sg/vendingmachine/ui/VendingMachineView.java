@@ -138,17 +138,3 @@ public class VendingMachineView {
     }
 }
     
-
-//    public BigDecimal displayRequestDeposit() {
-//        Double cash = io.readDouble("Please deposit money.");
-//        BigDecimal bigDecimal = new BigDecimal(cash);
-//        return bigDecimal;
-//    }
-    
-    
-//    
-//    public void candyCost(Candy candy) {
-//        io.print("The cost for " + candy.getCandyName() + " is " + candy.getCandyPrice()); 
-//    }
-//
-//  

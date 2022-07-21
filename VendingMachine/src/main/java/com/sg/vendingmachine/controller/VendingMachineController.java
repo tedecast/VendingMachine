@@ -15,7 +15,6 @@ import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -32,7 +31,6 @@ public class VendingMachineController {
         this.dao = dao;
         this.view = view;
     }
-    // private UserIO io = new UserIOConsoleImpl();
     
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
@@ -122,8 +120,8 @@ public class VendingMachineController {
     
     private void exitMessage() {
         view.displayExitBanner();
-    }
-    
+    }    
+}
     // listing single candy information
 //    private void viewCandy() {
 //        view.displayCandyBanner();
@@ -133,12 +131,4 @@ public class VendingMachineController {
 //    }
 //    
     
-    
-    
-//    private BigDecimal requestDeposit() {
-//        BigDecimal deposit = view.displayRequestDeposit();
-//        view.displayDepositSuccessful();
-//        return deposit;
-//    }
-    
-}
+
