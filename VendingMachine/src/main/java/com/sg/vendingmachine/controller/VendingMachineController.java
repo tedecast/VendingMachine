@@ -31,8 +31,7 @@ public class VendingMachineController {
         this.dao = dao;
         this.view = view;
     }
-    
-    
+
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public void run() {
         
