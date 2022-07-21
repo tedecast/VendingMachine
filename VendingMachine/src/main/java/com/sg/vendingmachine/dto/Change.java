@@ -41,10 +41,10 @@ public class Change {
     // You must use BigDecimal for all monetary calculations where applicable.
     public int[] makeChange(BigDecimal change) {
         
-        this.quarters = 0;
-        this.dimes = 0;
-        this.nickels = 0;
-        this.pennies = 0;
+//        this.quarters = 0;
+//        this.dimes = 0;
+//        this.nickels = 0;
+//        this.pennies = 0;
         
         MathContext round = new MathContext(3);
         change = change.round(round);

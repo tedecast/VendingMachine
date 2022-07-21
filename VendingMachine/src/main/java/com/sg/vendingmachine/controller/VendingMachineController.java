@@ -85,7 +85,7 @@ public class VendingMachineController {
         List<Candy> candyList = dao.getAllCandy();
         view.displayCandyList(candyList);
         
-        String userChoice = view.getCandyNumberChoice();
+        String userChoice = view.getCandyNumberChoice(money);
         Candy candy = dao.getOneCandy(userChoice);
         int candyQuantity = candy.getCandyQuantity();
   
@@ -93,11 +93,10 @@ public class VendingMachineController {
         while (candyQuantity == 0) {
             view.displayOutOfStock(candy);
             view.displayCandyList(candyList);
-            userChoice = view.getCandyNumberChoice();
+            userChoice = view.getCandyNumberChoice(money);
             candy = dao.getOneCandy(userChoice);
             candyQuantity = candy.getCandyQuantity();
             
-            //comparing less than
         } 
         
         MathContext roundingUp = new MathContext(3);
@@ -107,7 +106,6 @@ public class VendingMachineController {
             view.returnMoney(money);
             
         } else {
-            view.moneyIn(money);
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
             int[] changeArr = change.makeChange(money.subtract(candy.getCandyPrice()));

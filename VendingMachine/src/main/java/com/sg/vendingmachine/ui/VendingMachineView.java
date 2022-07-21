@@ -81,11 +81,12 @@ public class VendingMachineView {
         return moneyBD;
     }
     
-    public void moneyIn(BigDecimal money) {
-        io.print("You put in: $" + money);
-    }
+//    public void moneyIn(BigDecimal money) {
+//        io.print("You put in: $" + money);
+//    }
     // Only one item can be vended at a time.
-    public String getCandyNumberChoice() {
+    public String getCandyNumberChoice(BigDecimal money) {
+        io.print("You put in $" + money);
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
         String stringChoice = String.valueOf(choice);
         return stringChoice;
