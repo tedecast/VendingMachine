@@ -101,12 +101,11 @@ public class VendingMachineView {
     // If the user selects an item that costs more than the amount the user put into the vending machine, 
     // the program should display a message indicating insufficient funds
     // and then redisplay the amount the user had put into the machine.
-    public void notEnoughMoney(BigDecimal money) {
-        io.print("Insufficent funds. You only put in $" + money);
-        io.print("Please add in more money.");
-        displayRequestUserMoney();
-        emptyLine();
-        getHitEnter();
+    public void notEnoughMoney(String prompt, BigDecimal min, BigDecimal max) {
+        io.readBigDecimal(prompt);
+        io.print("Enter Amount Between $" + min + " And $" + max);
+//        emptyLine();
+//        getHitEnter();
     } 
     
     public void displayCandySuccess(Candy candy) {
