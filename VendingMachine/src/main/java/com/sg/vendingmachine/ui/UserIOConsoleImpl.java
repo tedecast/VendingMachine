@@ -107,7 +107,7 @@ public class UserIOConsoleImpl implements UserIO {
             isValid = true;
             print(prompt + " Between $" + bdMin + " And $" + bdMax);
             try {
-                //result = new BigDecimal(scan.nextLine()).setScale(2, RoundingMode.HALF_UP);
+                result = new BigDecimal(userInput.nextLine()).setScale(2, RoundingMode.HALF_UP);
                 if (result.compareTo(min) == -1 || result.compareTo(max) == 1) {
                     //print("Enter Amount Between $" + bdMin + " And $" + bdMax);
                     isValid = false;
@@ -128,7 +128,7 @@ public class UserIOConsoleImpl implements UserIO {
             isValid = true;
             print(prompt);
             try {
-                //result = new BigDecimal(scan.nextLine()).setScale(2, RoundingMode.HALF_UP);
+                result = new BigDecimal(userInput.nextLine()).setScale(2, RoundingMode.HALF_UP);
             } catch (NumberFormatException ex) {
                 //print("Please Enter Number:");
                 isValid = false;

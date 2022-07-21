@@ -82,9 +82,6 @@ public class VendingMachineView {
         return moneyBD;
     }
     
-    
-    // tell the user they need to add more money... 
-    
     // Only one item can be vended at a time.
     public String getCandyNumberChoice(BigDecimal money) {
         io.print("You put in $" + money);
@@ -104,8 +101,10 @@ public class VendingMachineView {
     // If the user selects an item that costs more than the amount the user put into the vending machine, 
     // the program should display a message indicating insufficient funds
     // and then redisplay the amount the user had put into the machine.
-    public void returnMoney(BigDecimal money) {
-        io.print("Insufficent funds. Here's your $" + money + " back.");
+    public void notEnoughMoney(BigDecimal money) {
+        io.print("Insufficent funds. You only put in $" + money);
+        io.print("Please add in more money.");
+        displayRequestUserMoney();
         emptyLine();
         getHitEnter();
     } 
