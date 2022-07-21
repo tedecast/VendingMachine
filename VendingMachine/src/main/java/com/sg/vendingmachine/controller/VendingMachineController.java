@@ -89,7 +89,7 @@ public class VendingMachineController {
         Candy candy = dao.getOneCandy(userChoice);
         int candyQuantity = candy.getCandyQuantity();
   
-                
+        
         while (candyQuantity == 0) {
             view.displayOutOfStock(candy);
             view.displayCandyList(candyList);
@@ -98,9 +98,12 @@ public class VendingMachineController {
             candyQuantity = candy.getCandyQuantity();
             
             //comparing less than
-        } if (money.compareTo(candy.getCandyPrice()) == -1) {
-            MathContext roundingUp = new MathContext(2);
-            money = money.round(roundingUp);
+        } 
+        
+        MathContext roundingUp = new MathContext(3);
+        money = money.round(roundingUp);
+        
+        if (money.compareTo(candy.getCandyPrice()) == -1) {
             view.returnMoney(money);
             
         } else {

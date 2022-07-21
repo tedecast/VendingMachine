@@ -41,31 +41,33 @@ public class Change {
     // You must use BigDecimal for all monetary calculations where applicable.
     public int[] makeChange(BigDecimal change) {
         
-        MathContext round = new MathContext(2);
+        this.quarters = 0;
+        this.dimes = 0;
+        this.nickels = 0;
+        this.pennies = 0;
+        
+        MathContext round = new MathContext(3);
+        change = change.round(round);
         
         while(change.compareTo(BigDecimal.ZERO) == 1) {
-            
+            System.out.println(change.toString());
             if (change.compareTo(Coins.QUARTER.value) >= 0) {
-                change = change.subtract(Coins.QUARTER.value, round);
+                change = change.subtract(Coins.QUARTER.value);
                 quarters++;
                 
             } else if (change.compareTo(Coins.DIME.value) >= 0) {
-                change = change.subtract(Coins.DIME.value, round);
+                change = change.subtract(Coins.DIME.value);
                 dimes++;
                 
             } else if (change.compareTo(Coins.NICKEL.value) >= 0) {
-                change = change.subtract(Coins.NICKEL.value, round);
+                change = change.subtract(Coins.NICKEL.value);
                 nickels++;
                 
             } else if (change.compareTo(Coins.PENNY.value) >= 0) {
-                change = change.subtract(Coins.PENNY.value, round);
+                change = change.subtract(Coins.PENNY.value);
                 pennies++;
-            }
                 
-//            } else {
-//                pennies++;
-//                break;
-//            }
+            }
             
         }
         int[] changeArr = {quarters, dimes, nickels, pennies};
