@@ -55,19 +55,19 @@ public class VendingMachineController {
                 
                 switch (menuSelection) {
                     case 1: 
-                       //io.print("List All Candy");
                         displayCandySelection();
                         view.getHitEnter();
                         break;
                     case 2:
                         io.print("Add Money");
-                        buyCandy();
+                        addMoney();
                         break;
                     case 3:
                         io.print("Display Balance");
                         break;
                     case 4:
                         io.print("Buy Candy");
+                        buyCandy();
                         break;
                     case 5:
                         keepGoing = false;
@@ -93,6 +93,11 @@ public class VendingMachineController {
         view.displayCandyList(candyList);
     }
     
+    private void addMoney() throws VendingMachinePersistenceException {
+        view.displayAddMoneyBanner();
+        BigDecimal money = view.displayRequestUserMoney();
+        view.addedMoneySuccessBanner(money);
+    }
     // cal view to display enter selection id, get item id from user, change to int
     // call purchase, 
     // wrap try service.makePurchase (buy candy)}

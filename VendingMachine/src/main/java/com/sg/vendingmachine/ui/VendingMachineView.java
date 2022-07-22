@@ -76,15 +76,29 @@ public class VendingMachineView {
         io.readString("Please hit enter to continue.");
     }
     
+    public void displayAddMoneyBanner() {
+        emptyLine();
+        io.print("* . * . * . Add Money . * . * . * ");
+    }
     // The user must put in some amount of money before an item can be selected.
     public BigDecimal displayRequestUserMoney() {
         // changed Float to BigDecimal from UserIO
-        BigDecimal money = io.readBigDecimal("How much money do you have to spend?");
+        BigDecimal money = io.readBigDecimal("How much money do you want to add?");
         //System.out.println(money.toString().length());
         //BigDecimal moneyBD = new BigDecimal(money);
         return money;
     }
     
+    public void addedMoneySuccessBanner(BigDecimal money) {
+        io.print("You've successfully added $" + money);
+        emptyLine();
+        getHitEnter();
+    }
+    
+    public BigDecimal addMoreMoney() {
+        BigDecimal money = io.readBigDecimal("Please add in more money:");
+        return money;
+    }
     
     // tell the user they need to add more money... 
     // If the user selects an item that costs more than the amount the user put into the vending machine, 
@@ -96,10 +110,6 @@ public class VendingMachineView {
 //        getHitEnter();
     } 
     
-    public BigDecimal addMoreMoney() {
-        BigDecimal money = io.readBigDecimal("Please add in more money:");
-        return money;
-    }
     
     // Only one item can be vended at a time.
     public String getCandyNumberChoice(BigDecimal money) {
