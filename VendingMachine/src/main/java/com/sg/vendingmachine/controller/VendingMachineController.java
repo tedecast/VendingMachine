@@ -81,36 +81,39 @@ public class VendingMachineController {
     }
     
     private void buyCandy() throws VendingMachinePersistenceException {
-        BigDecimal money = view.displayRequestUserMoney();
-        MathContext roundingUp = new MathContext(money.toString().length());
-        money = money.round(roundingUp);
-        Change userChange = new Change(money);
-        view.displayBuyCandyBanner();
-        view.displaySelectionBanner();
-        List<Candy> candyList = service.getAllCandy();
-        view.displayCandyList(candyList);
-        
-        String userChoice = view.getCandyNumberChoice(money);
-        Candy candy = dao.getOneCandy(userChoice);
-        int candyQuantity = candy.getCandyQuantity();
-         
-        while (candyQuantity == 0) {
-            view.displayOutOfStock(candy);
+        boolean hasErrors = false;
+        do {
+            BigDecimal money = view.displayRequestUserMoney();
+            MathContext roundingUp = new MathContext(money.toString().length());
+            money = money.round(roundingUp);
+            Change userChange = new Change(money);
+            view.displayBuyCandyBanner();
+            view.displaySelectionBanner();
+            List<Candy> candyList = service.getAllCandy();
             view.displayCandyList(candyList);
-            userChoice = view.getCandyNumberChoice(money);
-            candy = dao.getOneCandy(userChoice);
-            candyQuantity = candy.getCandyQuantity();
-        } 
-        
-        while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
-            
-            // display a new banner that says Insufficient funds
-            view.notEnoughMoney(userChange.getBalance());
-            // prompt the user to input more money -- create in view
-            money = view.addMoreMoney();
-            // add the money inputed to the userChange object, using addChange balance
-            userChange.addChange(money);
-        } 
+
+            String userChoice = view.getCandyNumberChoice(money);
+
+                    Candy candy = dao.getOneCandy(userChoice);
+            int candyQuantity = candy.getCandyQuantity();
+
+            while (candyQuantity == 0) {
+                view.displayOutOfStock(candy);
+                view.displayCandyList(candyList);
+                userChoice = view.getCandyNumberChoice(money);
+                candy = dao.getOneCandy(userChoice);
+                candyQuantity = candy.getCandyQuantity();
+            }
+
+            while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
+
+                // display a new banner that says Insufficient funds
+                view.notEnoughMoney(userChange.getBalance());
+                // prompt the user to input more money -- create in view
+                money = view.addMoreMoney();
+                // add the money inputed to the userChange object, using addChange balance
+                userChange.addChange(money);
+            }
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
             // modify this
@@ -120,6 +123,7 @@ public class VendingMachineController {
             System.out.println(userChange.toString());
             view.emptyLine();
             view.getHitEnter();
+        } while (hasErrors);
         
     }
     
