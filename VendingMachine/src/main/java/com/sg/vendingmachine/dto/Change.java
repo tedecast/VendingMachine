@@ -78,12 +78,12 @@ public class Change {
     }
     @Override
     public String toString() {
-        return  "|          " + quarters + " Quarters" + "         |" +
-                "\n|          " + dimes + " Dimes" + "            |" +
-                "\n|          " + nickels + " Nickels" + "          |" +
-                "\n|          " + pennies + " Pennies" + "          |" +
-                "\n|" + "                             |" +
-                "\n|         Total: $" + balance + "        |";
+        return  "          " + quarters + " Quarters" +
+                "\n          " + dimes + " Dimes" + 
+                "\n          " + nickels + " Nickels" +
+                "\n          " + pennies + " Pennies" + 
+                "\n" + 
+                "\n         Total: $" + balance;
     }
     @Override
     public int hashCode() {
