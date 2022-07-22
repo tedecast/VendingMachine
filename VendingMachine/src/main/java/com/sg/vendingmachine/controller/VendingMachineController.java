@@ -40,20 +40,24 @@ public class VendingMachineController {
     
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
+    
     public void run() {
-        
+       
         boolean keepGoing = true;
         int menuSelection = 0;
-        
         try {
             while (keepGoing){
-
+                
+                displayCandySelection();
+                view.emptyLine();
+                
                 menuSelection = getMenuSelection();
-
+                
                 switch (menuSelection) {
                     case 1: 
-                       io.print("List All Candy");
-                       displayCandySelection();
+                       //io.print("List All Candy");
+                        displayCandySelection();
+                        view.getHitEnter();
                         break;
                     case 2:
                         io.print("Add Money");
@@ -87,7 +91,6 @@ public class VendingMachineController {
         view.displaySelectionBanner();
         List<Candy> candyList = service.getAllCandy();
         view.displayCandyList(candyList);
-        view.getHitEnter();
     }
     
     // cal view to display enter selection id, get item id from user, change to int
