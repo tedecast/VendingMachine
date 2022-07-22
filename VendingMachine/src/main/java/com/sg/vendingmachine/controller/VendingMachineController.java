@@ -10,6 +10,7 @@ import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
+import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
@@ -24,12 +25,13 @@ import java.util.List;
  */
 public class VendingMachineController {
     
-    private VendingMachineView view; // = new VendingMachineView();
-    private VendingMachineDao dao; //= new VendingMachineDaoFileImpl();
-    private BigDecimal balance = new BigDecimal(0);
     //private Change change = new Change(balance);
-    public VendingMachineController(VendingMachineDao dao, VendingMachineView view) {
-        this.dao = dao;
+    private VendingMachineServiceLayer service;
+    private VendingMachineView view; // = new VendingMachineView();
+    private BigDecimal balance = new BigDecimal(0);
+    
+    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
+        this.service = service;
         this.view = view;
     }
     // private UserIO io = new UserIOConsoleImpl();
@@ -73,7 +75,7 @@ public class VendingMachineController {
     private void displayCandySelection() throws VendingMachinePersistenceException {
         view.displayCandyBanner();
         view.displaySelectionBanner();
-        List<Candy> candyList = dao.getAllCandy();
+        List<Candy> candyList = service.getAllCandy();
         view.displayCandyList(candyList);
         view.getHitEnter();
     }
@@ -85,7 +87,7 @@ public class VendingMachineController {
         Change userChange = new Change(money);
         view.displayBuyCandyBanner();
         view.displaySelectionBanner();
-        List<Candy> candyList = dao.getAllCandy();
+        List<Candy> candyList = service.getAllCandy();
         view.displayCandyList(candyList);
         
         String userChoice = view.getCandyNumberChoice(money);
