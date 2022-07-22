@@ -9,6 +9,7 @@ import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
+import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,19 +20,23 @@ import java.util.List;
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
     
     private VendingMachineDao dao;
+    //private VendingMachineView view;
     
-    public VendingMachineServiceLayerImpl(VendingMachineDao dao){
+    public VendingMachineServiceLayerImpl(VendingMachineDao dao) { //, VendingMachineView view){
         this.dao = dao;
+        //this.view = view;
     }
 
     @Override
     public void buyCandy(String candyNumber) throws VendingMachinePersistenceException, 
             NoItemInventoryException {
         Candy candy = dao.getOneCandy(candyNumber);
+        //List<Candy> candyList = dao.getAllCandy();
         while(candy.getCandyQuantity() == 0){
             throw new NoItemInventoryException("Sorry, we're out of stock of:" +
                     "\n       " + candy.getCandyName() +
-                    "\nPlease choose a different Candy's Number to purchase."); // print user input
+                    "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
+            
         }
         
 //        validateCandyData(candy);
@@ -59,7 +64,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return dao.getOneCandy(candy);
     }
     
-//    private void validateCandyData(Candy candy) throws NoItemInventoryException {
+//   private void validateCandyData(Candy candy) throws NoItemInventoryException {
 //        if(candy.getCandyNumber() == null || 
 //                //candy.getCandyNumber().trim().length() == 0 ||
 //                candy.getCandyNumber().isEmpty() ||
