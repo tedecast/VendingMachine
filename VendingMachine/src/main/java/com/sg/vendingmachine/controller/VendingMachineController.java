@@ -27,7 +27,7 @@ public class VendingMachineController {
     private VendingMachineView view; // = new VendingMachineView();
     private VendingMachineDao dao; //= new VendingMachineDaoFileImpl();
     private BigDecimal balance = new BigDecimal(0);
-    private Change change = new Change(balance);
+    //private Change change = new Change(balance);
     public VendingMachineController(VendingMachineDao dao, VendingMachineView view) {
         this.dao = dao;
         this.view = view;
@@ -105,7 +105,6 @@ public class VendingMachineController {
             // display a new banner that says Insufficient funds
             view.notEnoughMoney(userChange.getBalance());
             // prompt the user to input more money -- create in view
-
             money = view.addMoreMoney();
             // add the money inputed to the userChange object, using addChange balance
             userChange.addChange(money);
