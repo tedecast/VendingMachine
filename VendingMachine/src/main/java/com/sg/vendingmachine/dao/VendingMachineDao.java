@@ -22,5 +22,6 @@ public interface VendingMachineDao {
     
     Candy buyCandy(String candyNumber) throws VendingMachineDaoException;
     
-    //Candy candyPrice(BigDecimal candyPrice) throws VendingMachineDaoException;
+    // (i.e. InsufficientFundsException)
+    // (i.e. NoItemInventoryException)
 }
