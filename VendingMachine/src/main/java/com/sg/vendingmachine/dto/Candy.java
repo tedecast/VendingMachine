@@ -18,6 +18,8 @@ public class Candy {
     private BigDecimal candyPrice;
     private int candyQuantity;
     
+    // 
+    
     public Candy(String candyNumber) {
         this.candyNumber = candyNumber;
     }

@@ -26,7 +26,13 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         this.dao = dao;
         //this.view = view;
     }
-
+    // declare candy item (item number), and getOneCandy, get rid of it
+    // dao get BigDecimal balance, get change balance
+    // if balance candy cost 
+    // vending Machine 
+    // change up menu 
+    // call, purchase item and item ID , return once purchased
+    // aduit service
     @Override
     public void buyCandy(String candyNumber) throws VendingMachinePersistenceException, 
             NoItemInventoryException {

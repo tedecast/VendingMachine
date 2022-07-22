@@ -30,7 +30,10 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     private Change userChange;
     public static final String INVENTORY_FILE = "inventory.txt";
     public static final String DELIMITER = "::";
-
+    
+    // get change balance, using userChange 
+    // specify variable for BigDecimal balance = getbalance 
+    // throws InsufficientFundsException
      @Override
     public Candy candyPrice(BigDecimal candyPrice) throws VendingMachinePersistenceException {
         loadInventory();
@@ -57,6 +60,9 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     public Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
        Candy boughtCandy = getOneCandy(candyNumber);
+       // userChange.makepurchase
+       // hashMap.replace()
+       // write it back, and then purchase
        // added this? 
        boughtCandy.buyCandy();
        writeInventory();

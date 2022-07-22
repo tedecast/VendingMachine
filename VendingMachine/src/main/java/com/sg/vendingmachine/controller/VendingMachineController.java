@@ -36,7 +36,7 @@ public class VendingMachineController {
         this.service = service;
         this.view = view;
     }
-    // private UserIO io = new UserIOConsoleImpl();
+     private UserIO io = new UserIOConsoleImpl();
     
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
@@ -52,12 +52,20 @@ public class VendingMachineController {
 
                 switch (menuSelection) {
                     case 1: 
+                       io.print("List All Candy");
                        displayCandySelection();
                         break;
                     case 2:
+                        io.print("Add Money");
                         buyCandy();
                         break;
                     case 3:
+                        io.print("Display Balance");
+                        break;
+                    case 4:
+                        io.print("Buy Candy");
+                        break;
+                    case 5:
                         keepGoing = false;
                         break;
                     default:
@@ -89,82 +97,64 @@ public class VendingMachineController {
     // take id, using view select item
     // use BigBalance intialize at ;
     
-   private void buyCandy() throws VendingMachinePersistenceException {
+    private void buyCandy() throws VendingMachinePersistenceException {
             
-            BigDecimal money = view.displayRequestUserMoney();
-            MathContext roundingUp = new MathContext(money.toString().length());
-            money = money.round(roundingUp);
-            Change userChange = new Change(money);
+        BigDecimal money = view.displayRequestUserMoney();
+        MathContext roundingUp = new MathContext(money.toString().length());
+        money = money.round(roundingUp);
+        Change userChange = new Change(money);
             
-            view.displayBuyCandyBanner();
-            view.displaySelectionBanner();
-            List<Candy> candyList = service.getAllCandy();
-            view.displayCandyList(candyList);
+        view.displayBuyCandyBanner();
+        view.displaySelectionBanner();
+        List<Candy> candyList = service.getAllCandy();
+        view.displayCandyList(candyList);
             
-            //boolean hasErrors = false;
-            //do {
-                String userChoice = view.getCandyNumberChoice(money);
-                Candy candy = service.getOneCandy(userChoice);
-            try {
-                //dao.buyCandy(userChoice);
-                service.buyCandy(userChoice);
-                view.displayCandySuccess(candy);
-                // modify this
-                userChange.makePurchase(candy.getCandyPrice());
-                view.displayChangeBanner();
-                userChange = new Change(userChange.getBalance());
-                System.out.println(userChange.toString());
-                //hasErrors = false;
-                } catch (NoItemInventoryException e) {
-                    //hasErrors = true;
-                    view.displayErrorMessage(e.getMessage());
+        boolean hasErrors = false;
+        do {
+            String userChoice = view.getCandyNumberChoice(money);
+            Candy candy = service.getOneCandy(userChoice);
+        try {
+            //dao.buyCandy(userChoice);
+            service.buyCandy(userChoice);
+            view.displayCandySuccess(candy);
+            // modify this
+            userChange.makePurchase(candy.getCandyPrice());
+            view.displayChangeBanner();
+            userChange = new Change(userChange.getBalance());
+            System.out.println(userChange.toString());
+            hasErrors = false;
+            } catch (NoItemInventoryException e) {
+                hasErrors = true;
+                view.displayErrorMessage(e.getMessage());
                  // removed haserrors here
                 //int candyQuantity = candy.getCandyQuantity();
                // while (candyQuantity == 0) {
 //                    view.displayOutOfStock(candy);
-                    view.displayBuyCandyBanner();
-                    view.displayCandyList(candyList);
+                view.displayBuyCandyBanner();
+                view.displayCandyList(candyList);
                    // userChoice = view.getCandyNumberChoice(money);
                     //candy = service.getOneCandy(userChoice);
                     //candyQuantity = candy.getCandyQuantity();
                 //}
-                }//while(hasErrors);
                 
-                boolean isPurchased = false;
-                while(!isPurchased){
-                try {
-                    //service.buyCandy(userChoice);
-//                view.displayCandySuccess(candy);
-//                // modify this
-                    service.moneyIn(money, candy);
-                    userChange.makePurchase(candy.getCandyPrice());
-                    userChange.makePurchase(candy.getCandyPrice());
-                    view.displayChangeBanner();
-                    userChange = new Change(userChange.getBalance());
-                    System.out.println(userChange.toString());
-                    isPurchased = true;
-                } catch (InsufficientFundsException ex) {
-                    isPurchased = false;
-                    view.displayErrorMessage(ex.getMessage());
-                    
-               // while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
+            while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
                     // display a new banner that says Insufficient funds
-                    view.notEnoughMoney(userChange.getBalance()); // change to service layer
+                view.notEnoughMoney(userChange.getBalance()); // change to service layer
                     // prompt the user to input more money -- create in view
-                    money = view.addMoreMoney();
+                money = view.addMoreMoney();
                     // add the money inputed to the userChange object, using addChange balance
-                    userChange.addChange(money);
-                //}
+                userChange.addChange(money);
                 }
+                
 //                } catch (InsufficientFundsException e) {
 //                    hasErrors = true;
 //                    view.displayErrorMessage(e.getMessage());
 //                }
+                
+            } //while (hasErrors);
+            } while(hasErrors);
             view.emptyLine();
             view.getHitEnter();
-            } //while(!isPurchased);//while (hasErrors);
-             
-            //} while(hasErrors);
         }
             
     
