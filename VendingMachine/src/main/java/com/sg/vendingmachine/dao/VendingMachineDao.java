@@ -15,12 +15,12 @@ import java.util.List;
  */
 public interface VendingMachineDao {
     
-    List<Candy> getAllCandy() throws VendingMachineDaoException;
+    List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
     // id
-    Candy getOneCandy(String candyNumber) throws VendingMachineDaoException;
+    Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
     
-    Candy buyCandy(String candyNumber) throws VendingMachineDaoException;
+    Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException;
     
     // (i.e. InsufficientFundsException)
     // (i.e. NoItemInventoryException)

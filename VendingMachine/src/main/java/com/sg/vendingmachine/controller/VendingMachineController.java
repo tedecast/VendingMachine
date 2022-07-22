@@ -6,7 +6,7 @@
 package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendingMachineDao;
-import com.sg.vendingmachine.dao.VendingMachineDaoException;
+import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
@@ -61,7 +61,7 @@ public class VendingMachineController {
                 }
             }
         exitMessage();
-        } catch (VendingMachineDaoException e) {
+        } catch (VendingMachinePersistenceException e) {
             view.displayErrorMessage(e.getMessage());
         }
     }
@@ -70,7 +70,7 @@ public class VendingMachineController {
         return view.printMenuAndGetSelection();
     }
     
-    private void displayCandySelection() throws VendingMachineDaoException {
+    private void displayCandySelection() throws VendingMachinePersistenceException {
         view.displayCandyBanner();
         view.displaySelectionBanner();
         List<Candy> candyList = dao.getAllCandy();
@@ -78,7 +78,7 @@ public class VendingMachineController {
         view.getHitEnter();
     }
     
-    private void buyCandy() throws VendingMachineDaoException {
+    private void buyCandy() throws VendingMachinePersistenceException {
         BigDecimal money = view.displayRequestUserMoney();
         MathContext roundingUp = new MathContext(money.toString().length());
         money = money.round(roundingUp);

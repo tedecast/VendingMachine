@@ -30,19 +30,19 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     public static final String DELIMITER = "::";
 
     @Override
-    public List<Candy> getAllCandy() throws VendingMachineDaoException {
+    public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
         loadInventory();
         return new ArrayList<>(candies.values());
     }
 
     @Override
-    public Candy getOneCandy(String candyNumber) throws VendingMachineDaoException {
+    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException {
         loadInventory();
         return candies.get(candyNumber);
     }
 
     @Override
-    public Candy buyCandy(String candyNumber) throws VendingMachineDaoException {
+    public Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
        Candy boughtCandy = getOneCandy(candyNumber);
        // added this? 
@@ -69,7 +69,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         return candyFromFile;
     }
     
-    private void loadInventory() throws VendingMachineDaoException {
+    private void loadInventory() throws VendingMachinePersistenceException {
         
         Scanner scanner;
         
@@ -79,7 +79,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
                     new BufferedReader(
                             new FileReader(INVENTORY_FILE)));
         } catch (FileNotFoundException e) {
-            throw new VendingMachineDaoException(
+            throw new VendingMachinePersistenceException(
                     "-_- Could not load inventory into memory.", e);
         }
         
@@ -108,14 +108,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         return candyAsText;
     }
     
-    private void writeInventory() throws VendingMachineDaoException {
+    private void writeInventory() throws VendingMachinePersistenceException {
         
         PrintWriter out;
         
         try {
             out = new PrintWriter(new FileWriter(INVENTORY_FILE));
         } catch (IOException e) {
-            throw new VendingMachineDaoException (
+            throw new VendingMachinePersistenceException (
                     "Could not save candy data.", e);
         }
         

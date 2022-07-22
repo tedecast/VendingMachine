@@ -9,13 +9,13 @@ package com.sg.vendingmachine.dao;
  *
  * @author Teresa
  */
-public class VendingMachineDaoException extends Exception {
+public class VendingMachinePersistenceException extends Exception {
     
-    public VendingMachineDaoException(String message) {
+    public VendingMachinePersistenceException(String message) {
         super(message);
     }
     
-    public VendingMachineDaoException(String message, Throwable cause) {
+    public VendingMachinePersistenceException(String message, Throwable cause) {
         super(message, cause);
     }
 } 

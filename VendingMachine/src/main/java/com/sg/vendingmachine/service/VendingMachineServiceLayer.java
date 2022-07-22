@@ -5,6 +5,7 @@
  */
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
 import java.util.List;
 
@@ -14,12 +15,12 @@ import java.util.List;
  */
 public interface VendingMachineServiceLayer {
 
-    public Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException,
+    public Candy buyCandy(Candy candyNumber) throws VendingMachinePersistenceException,
             InsufficientFundsException,
             NoItemInventoryException;
 
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
+    public Candy getOneCandy(Candy candyNumber) throws VendingMachinePersistenceException;
     
 }
