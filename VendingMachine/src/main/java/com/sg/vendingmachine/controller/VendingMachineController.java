@@ -82,7 +82,14 @@ public class VendingMachineController {
         view.getHitEnter();
     }
     
-    private void buyCandy() throws VendingMachinePersistenceException {
+    // cal view to display enter selection id, get item id from user, change to int
+    // call purchase, 
+    // wrap try service.makePurchase (buy candy)}
+    // balance = service.getBalance display successfully purchased}
+    // take id, using view select item
+    // use BigBalance intialize at ;
+    
+   private void buyCandy() throws VendingMachinePersistenceException {
             
             BigDecimal money = view.displayRequestUserMoney();
             MathContext roundingUp = new MathContext(money.toString().length());
@@ -94,8 +101,8 @@ public class VendingMachineController {
             List<Candy> candyList = service.getAllCandy();
             view.displayCandyList(candyList);
             
-            boolean hasErrors = false;
-            do {
+            //boolean hasErrors = false;
+            //do {
                 String userChoice = view.getCandyNumberChoice(money);
                 Candy candy = service.getOneCandy(userChoice);
             try {
@@ -107,9 +114,9 @@ public class VendingMachineController {
                 view.displayChangeBanner();
                 userChange = new Change(userChange.getBalance());
                 System.out.println(userChange.toString());
-                hasErrors = false;
+                //hasErrors = false;
                 } catch (NoItemInventoryException e) {
-                    hasErrors = true;
+                    //hasErrors = true;
                     view.displayErrorMessage(e.getMessage());
                  // removed haserrors here
                 //int candyQuantity = candy.getCandyQuantity();
@@ -121,26 +128,45 @@ public class VendingMachineController {
                     //candy = service.getOneCandy(userChoice);
                     //candyQuantity = candy.getCandyQuantity();
                 //}
+                }//while(hasErrors);
                 
-                while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
+                boolean isPurchased = false;
+                while(!isPurchased){
+                try {
+                    //service.buyCandy(userChoice);
+//                view.displayCandySuccess(candy);
+//                // modify this
+                    service.moneyIn(money, candy);
+                    userChange.makePurchase(candy.getCandyPrice());
+                    userChange.makePurchase(candy.getCandyPrice());
+                    view.displayChangeBanner();
+                    userChange = new Change(userChange.getBalance());
+                    System.out.println(userChange.toString());
+                    isPurchased = true;
+                } catch (InsufficientFundsException ex) {
+                    isPurchased = false;
+                    view.displayErrorMessage(ex.getMessage());
+                    
+               // while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
                     // display a new banner that says Insufficient funds
                     view.notEnoughMoney(userChange.getBalance()); // change to service layer
                     // prompt the user to input more money -- create in view
                     money = view.addMoreMoney();
                     // add the money inputed to the userChange object, using addChange balance
                     userChange.addChange(money);
+                //}
                 }
-                
 //                } catch (InsufficientFundsException e) {
 //                    hasErrors = true;
 //                    view.displayErrorMessage(e.getMessage());
 //                }
-                
-            } //while (hasErrors);
-            } while(hasErrors);
             view.emptyLine();
             view.getHitEnter();
+            } //while(!isPurchased);//while (hasErrors);
+             
+            //} while(hasErrors);
         }
+            
     
     private void unknownCommand() {
         view.displayUnknownCommandBanner();

@@ -32,27 +32,29 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
             NoItemInventoryException {
         Candy candy = dao.getOneCandy(candyNumber);
         //List<Candy> candyList = dao.getAllCandy();
-        while(candy.getCandyQuantity() == 0){
+        while(candy.getCandyQuantity() <= 0){
             throw new NoItemInventoryException("Sorry, we're out of stock of:" +
                     "\n       " + candy.getCandyName() +
                     "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
             
+//        } if (userChange.compareTo(candy.getCandyPrice()) == -1) {
+//            throw new InsufficientFundsException("Insufficient Funds. You only put in $" + userChange);
         }
         
 //        validateCandyData(candy);
         //dao.buyCandy(candy.getCandyNumber());
     }
     
-//    @Override
-//    public void moneyIn(Change change) throws VendingMachinePersistenceException,
-//            InsufficientFundsException {
-//        if(change.getBalance() == null){
-//            throw new InsufficientFundsException("ERROR: " + change.getBalance() +
-//                                                " is not valid.");
-//        }
-//        validateFunds(change);
-//        change.getBalance();
-//    }
+   @Override
+    public void moneyIn(BigDecimal userChange, Candy candy) throws VendingMachinePersistenceException,
+            InsufficientFundsException {
+        
+        //Candy candyPrice = dao.candyPrice(candy.getCandyPrice());
+        while (userChange.compareTo(candy.getCandyPrice()) == -1){
+           throw new InsufficientFundsException("Insufficient funds. You only put in " +
+                                userChange);
+        }
+    }
 
     @Override
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {

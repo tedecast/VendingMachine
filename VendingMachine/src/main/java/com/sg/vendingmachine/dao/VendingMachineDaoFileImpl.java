@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Candy;
+import com.sg.vendingmachine.dto.Change;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -26,15 +27,26 @@ import java.util.Scanner;
 public class VendingMachineDaoFileImpl implements VendingMachineDao {
     
     private Map<String, Candy> candies = new HashMap<>();
+    private Change userChange;
     public static final String INVENTORY_FILE = "inventory.txt";
     public static final String DELIMITER = "::";
 
+     @Override
+    public Candy candyPrice(BigDecimal candyPrice) throws VendingMachinePersistenceException {
+        loadInventory();
+        Candy candyCost = candyPrice(candyPrice);
+        return candyCost;
+    }
+    
     @Override
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
         loadInventory();
         return new ArrayList<>(candies.values());
     }
-
+    
+    // rewrite and get from hashmap
+    // declare int (candy inventory) = bought candy . getInventory - one from it
+    // set bought candy (new bought)
     @Override
     public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException {
         loadInventory();
@@ -133,5 +145,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         // Clean up
         out.close();
     }
-    
+
+   
 }

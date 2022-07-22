@@ -24,7 +24,7 @@ public interface VendingMachineServiceLayer {
     
     public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
     
-    //public void moneyIn(Change money) throws VendingMachinePersistenceException,
-                        //InsufficientFundsException;
+    public void moneyIn(BigDecimal money, Candy candyPrice) throws VendingMachinePersistenceException,
+                        InsufficientFundsException;
     
 }
