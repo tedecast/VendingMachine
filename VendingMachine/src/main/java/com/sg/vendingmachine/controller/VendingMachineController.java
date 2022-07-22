@@ -83,7 +83,7 @@ public class VendingMachineController {
     }
     
     private void buyCandy() throws VendingMachinePersistenceException {
-
+            
             BigDecimal money = view.displayRequestUserMoney();
             MathContext roundingUp = new MathContext(money.toString().length());
             money = money.round(roundingUp);
@@ -113,7 +113,8 @@ public class VendingMachineController {
                     hasErrors = true;
                     view.displayErrorMessage(e.getMessage());
                 }
-            try {
+           
+//            try {
                 while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
                     // display a new banner that says Insufficient funds
                     view.notEnoughMoney(userChange.getBalance());
@@ -130,10 +131,10 @@ public class VendingMachineController {
                 userChange = new Change(userChange.getBalance());
                 System.out.println(userChange.toString());
                 hasErrors = false;
-                } catch (InsufficientFundsException e) {
-                    hasErrors = true;
-                    view.displayErrorMessage(e.getMessage());
-                }
+//                } catch (InsufficientFundsException e) {
+//                    hasErrors = true;
+//                    view.displayErrorMessage(e.getMessage());
+//                }
                 view.emptyLine();
                 view.getHitEnter();
             } while (hasErrors);
