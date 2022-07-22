@@ -17,8 +17,8 @@ import java.util.List;
  */
 public interface VendingMachineServiceLayer {
 // possibly changing to String candyNumber
-    public void buyCandy(Candy candyNumber) throws VendingMachinePersistenceException,
-            NoItemInventoryException;
+    public void buyCandy(Candy candyNumber, BigDecimal money) throws VendingMachinePersistenceException,
+            NoItemInventoryException, InsufficientFundsException;
 
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     

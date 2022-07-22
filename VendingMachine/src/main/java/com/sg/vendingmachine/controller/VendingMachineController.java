@@ -100,11 +100,6 @@ public class VendingMachineController {
                 Candy candy = service.getOneCandy(userChoice);
             try {
                 service.buyCandy(candy);
-                hasErrors = false;
-                } catch (NoItemInventoryException e) {
-                    hasErrors = true;
-                    view.displayErrorMessage(e.getMessage());
-                }
                 int candyQuantity = candy.getCandyQuantity();
                 while (candyQuantity == 0) {
                     view.displayOutOfStock(candy);
@@ -113,12 +108,14 @@ public class VendingMachineController {
                     candy = service.getOneCandy(userChoice);
                     candyQuantity = candy.getCandyQuantity();
                 }
-                
-           
-//            try {
+                hasErrors = false;
+                } catch (NoItemInventoryException e) {
+                    hasErrors = true;
+                    view.displayErrorMessage(e.getMessage());
+                }
                 while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
                     // display a new banner that says Insufficient funds
-                    view.notEnoughMoney(userChange.getBalance());
+                    view.notEnoughMoney(userChange.getBalance()); // change to service layer
                     // prompt the user to input more money -- create in view
                     money = view.addMoreMoney();
                     // add the money inputed to the userChange object, using addChange balance

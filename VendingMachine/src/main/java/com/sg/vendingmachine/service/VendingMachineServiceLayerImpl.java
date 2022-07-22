@@ -25,10 +25,16 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public void buyCandy(Candy candy) throws VendingMachinePersistenceException, 
-            NoItemInventoryException {
-        if(dao.buyCandy(candy.getCandyNumber()) == null){
-            throw new NoItemInventoryException("ERROR: Could not buy candy. Your choice does not exist."); // print user input
+    public void buyCandy(String candyNumber, BigDecimal money) throws VendingMachinePersistenceException, 
+            NoItemInventoryException,
+            InsufficientFundsException {
+        
+        Candy candy = dao.getOneCandy(candyNumber);
+        
+        if(candy.getCandyQuantity() <= 0){
+            throw new NoItemInventoryException("ERROR:" + "\n" + 
+                                               candy.getCandyName()
+                                               + " is out of stock."); // print user input
         }
         validateCandyData(candy);
         dao.buyCandy(candy.getCandyNumber());
@@ -57,7 +63,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     private void validateCandyData(Candy candy) throws NoItemInventoryException {
         if(candy.getCandyNumber() == null || 
-                candy.getCandyNumber().trim().length() == 0 ) {
+                //candy.getCandyNumber().trim().length() == 0 ||
+                candy.getCandyNumber().isEmpty() ||
+                candy.getCandyNumber() != candy.getCandyNumber()) {
             
             throw new NoItemInventoryException("ERROR: "); // does not exist
         }
