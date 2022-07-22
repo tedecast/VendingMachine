@@ -10,6 +10,8 @@ import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
+import com.sg.vendingmachine.service.InsufficientFundsException;
+import com.sg.vendingmachine.service.NoItemInventoryException;
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
@@ -81,51 +83,62 @@ public class VendingMachineController {
     }
     
     private void buyCandy() throws VendingMachinePersistenceException {
-        boolean hasErrors = false;
-        do {
+
             BigDecimal money = view.displayRequestUserMoney();
             MathContext roundingUp = new MathContext(money.toString().length());
             money = money.round(roundingUp);
             Change userChange = new Change(money);
+            
             view.displayBuyCandyBanner();
             view.displaySelectionBanner();
             List<Candy> candyList = service.getAllCandy();
             view.displayCandyList(candyList);
+            
+            boolean hasErrors = false;
+            do {
+                String userChoice = view.getCandyNumberChoice(money);
+                Candy candy = service.getOneCandy(userChoice);
+            try {
+                service.buyCandy(candy);
+                int candyQuantity = candy.getCandyQuantity();
 
-            String userChoice = view.getCandyNumberChoice(money);
+                while (candyQuantity == 0) {
+                    view.displayOutOfStock(candy);
+                    view.displayCandyList(candyList);
+                    userChoice = view.getCandyNumberChoice(money);
+                    candy = service.getOneCandy(userChoice);
+                    candyQuantity = candy.getCandyQuantity();
+                }
+                } catch (NoItemInventoryException e) {
+                    hasErrors = true;
+                    view.displayErrorMessage(e.getMessage());
+                }
+            try {
+                while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
+                    // display a new banner that says Insufficient funds
+                    view.notEnoughMoney(userChange.getBalance());
+                    // prompt the user to input more money -- create in view
+                    money = view.addMoreMoney();
+                    // add the money inputed to the userChange object, using addChange balance
+                    userChange.addChange(money);
+                }
+                //dao.buyCandy(userChoice);
+                view.displayCandySuccess(candy);
+                // modify this
+                userChange.makePurchase(candy.getCandyPrice());
+                view.displayChangeBanner();
+                userChange = new Change(userChange.getBalance());
+                System.out.println(userChange.toString());
+                hasErrors = false;
+                } catch (InsufficientFundsException e) {
+                    hasErrors = true;
+                    view.displayErrorMessage(e.getMessage());
+                }
+                view.emptyLine();
+                view.getHitEnter();
+            } while (hasErrors);
 
-                    Candy candy = dao.getOneCandy(userChoice);
-            int candyQuantity = candy.getCandyQuantity();
-
-            while (candyQuantity == 0) {
-                view.displayOutOfStock(candy);
-                view.displayCandyList(candyList);
-                userChoice = view.getCandyNumberChoice(money);
-                candy = dao.getOneCandy(userChoice);
-                candyQuantity = candy.getCandyQuantity();
-            }
-
-            while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
-
-                // display a new banner that says Insufficient funds
-                view.notEnoughMoney(userChange.getBalance());
-                // prompt the user to input more money -- create in view
-                money = view.addMoreMoney();
-                // add the money inputed to the userChange object, using addChange balance
-                userChange.addChange(money);
-            }
-            dao.buyCandy(userChoice);
-            view.displayCandySuccess(candy);
-            // modify this
-            userChange.makePurchase(candy.getCandyPrice());
-            view.displayChangeBanner();
-            userChange = new Change(userChange.getBalance());
-            System.out.println(userChange.toString());
-            view.emptyLine();
-            view.getHitEnter();
-        } while (hasErrors);
-        
-    }
+        }
     
     private void unknownCommand() {
         view.displayUnknownCommandBanner();

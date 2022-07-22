@@ -7,6 +7,8 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
+import com.sg.vendingmachine.dto.Change;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,13 +16,15 @@ import java.util.List;
  * @author Teresa
  */
 public interface VendingMachineServiceLayer {
-
-    public Candy buyCandy(Candy candyNumber) throws VendingMachinePersistenceException,
-            InsufficientFundsException,
+// possibly changing to String candyNumber
+    public void buyCandy(Candy candyNumber) throws VendingMachinePersistenceException,
             NoItemInventoryException;
 
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    public Candy getOneCandy(Candy candyNumber) throws VendingMachinePersistenceException;
+    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
+    
+    public void moneyIn(Change change) throws VendingMachinePersistenceException,
+                        InsufficientFundsException;
     
 }

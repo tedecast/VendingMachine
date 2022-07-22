@@ -8,6 +8,8 @@ package com.sg.vendingmachine.service;
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
+import com.sg.vendingmachine.dto.Change;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -24,12 +26,23 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     @Override
     public void buyCandy(Candy candy) throws VendingMachinePersistenceException, 
-            InsufficientFundsException, NoItemInventoryException {
+            NoItemInventoryException {
         if(dao.buyCandy(candy.getCandyNumber()) == null){
-            throw new NoItemInventoryException("ERROR: Could not buy candy. Candy does not exist"); // print user input
+            throw new NoItemInventoryException("ERROR: Could not buy candy. Your choice does not exist."); // print user input
         }
         validateCandyData(candy);
         dao.buyCandy(candy.getCandyNumber());
+    }
+    
+    @Override
+    public void moneyIn(Change change) throws VendingMachinePersistenceException,
+            InsufficientFundsException {
+        if(change.getBalance() == null){
+            throw new InsufficientFundsException("ERROR: " + change.getBalance() +
+                                                " is not valid.");
+        }
+        validateFunds(change);
+        change.getBalance();
     }
 
     @Override
@@ -47,5 +60,14 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
             throw new NoItemInventoryException("ERROR: "); // does not exist
         }
     }
+    
+    private void validateFunds(Change userChange) throws InsufficientFundsException {
+        if(userChange.getBalance() == null || 
+            userChange.getBalance().toString().length() == 0) {
+                throw new InsufficientFundsException("ERROR: Please enter a valid amount of money."); // enter user input
+        }
+    }
+
+   
     
 }
