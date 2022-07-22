@@ -100,8 +100,12 @@ public class VendingMachineController {
                 Candy candy = service.getOneCandy(userChoice);
             try {
                 service.buyCandy(candy);
+                hasErrors = false;
+                } catch (NoItemInventoryException e) {
+                    hasErrors = true;
+                    view.displayErrorMessage(e.getMessage());
+                }
                 int candyQuantity = candy.getCandyQuantity();
-
                 while (candyQuantity == 0) {
                     view.displayOutOfStock(candy);
                     view.displayCandyList(candyList);
@@ -109,10 +113,7 @@ public class VendingMachineController {
                     candy = service.getOneCandy(userChoice);
                     candyQuantity = candy.getCandyQuantity();
                 }
-                } catch (NoItemInventoryException e) {
-                    hasErrors = true;
-                    view.displayErrorMessage(e.getMessage());
-                }
+                
            
 //            try {
                 while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {

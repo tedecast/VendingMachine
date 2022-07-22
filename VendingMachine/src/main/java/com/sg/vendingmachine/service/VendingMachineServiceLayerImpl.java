@@ -56,7 +56,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
     
     private void validateCandyData(Candy candy) throws NoItemInventoryException {
-        if(candy.getCandyNumber() == null || candy.getCandyNumber().trim().length() == 0) {
+        if(candy.getCandyNumber() == null || 
+                candy.getCandyNumber().trim().length() == 0 ) {
+            
             throw new NoItemInventoryException("ERROR: "); // does not exist
         }
     }
