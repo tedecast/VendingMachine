@@ -99,7 +99,7 @@ public class VendingMachineController {
                 String userChoice = view.getCandyNumberChoice(money);
                 Candy candy = service.getOneCandy(userChoice);
             try {
-                service.buyCandy(candy);
+                service.buyCandy(userChoice);
                 int candyQuantity = candy.getCandyQuantity();
                 while (candyQuantity == 0) {
                     view.displayOutOfStock(candy);

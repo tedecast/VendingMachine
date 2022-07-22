@@ -136,7 +136,7 @@ public class VendingMachineView {
     }
    
     public void displayErrorMessage(String errorMsg){
-        io.print("=== ERROR ===");
+        io.print(". * . * .   ERROR   . * . * . ");
         io.print(errorMsg);
     }
     
