@@ -78,7 +78,7 @@ public class Change {
     }
     @Override
     public String toString() {
-        return "Your Change Due: $" + balance +
+        return "    Total: $" + balance +
                 "\nQuarters: " + quarters + 
                 "\nDimes: " + dimes + 
                 "\nNickels: " + nickels + 

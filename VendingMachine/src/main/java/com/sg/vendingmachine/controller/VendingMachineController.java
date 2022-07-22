@@ -80,7 +80,7 @@ public class VendingMachineController {
     
     private void buyCandy() throws VendingMachineDaoException {
         BigDecimal money = view.displayRequestUserMoney();
-        MathContext roundingUp = new MathContext(3);
+        MathContext roundingUp = new MathContext(money.toString().length());
         money = money.round(roundingUp);
         Change userChange = new Change(money);
         view.displayBuyCandyBanner();
@@ -105,16 +105,18 @@ public class VendingMachineController {
             // display a new banner that says Insufficient funds
             view.notEnoughMoney(userChange.getBalance());
             // prompt the user to input more money -- create in view
+
             money = view.addMoreMoney();
             // add the money inputed to the userChange object, using addChange balance
-            change.addChange(money);
+            userChange.addChange(money);
         } 
             dao.buyCandy(userChoice);
             view.displayCandySuccess(candy);
             // modify this
             userChange.makePurchase(candy.getCandyPrice());
             view.displayChangeBanner();
-            userChange.toString();
+            userChange = new Change(userChange.getBalance());
+            System.out.println(userChange.toString());
             view.emptyLine();
             view.getHitEnter();
         
