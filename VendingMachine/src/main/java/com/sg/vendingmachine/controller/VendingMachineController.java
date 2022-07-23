@@ -64,6 +64,7 @@ public class VendingMachineController {
                     case 3:
                         io.print("Display Balance");
                         displayBalance();
+                        view.getHitEnter();
                         break;
                     case 4:
                         io.print("Buy Candy");

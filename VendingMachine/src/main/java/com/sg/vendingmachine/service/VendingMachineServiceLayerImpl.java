@@ -34,21 +34,23 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     // call, purchase item and item ID , return once purchased
     // aduit service
     @Override
-    public void buyCandy(String candyNumber) throws VendingMachinePersistenceException, 
-            NoItemInventoryException {
-            Candy candy = dao.getOneCandy(candyNumber);
-        //List<Candy> candyList = dao.getAllCandy();
-        while(candy.getCandyQuantity() <= 0){
-            throw new NoItemInventoryException("Sorry, we're out of stock of:" +
-                    "\n       " + candy.getCandyName() +
-                    "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
-            
-//        } if (userChange.compareTo(candy.getCandyPrice()) == -1) {
-//            throw new InsufficientFundsException("Insufficient Funds. You only put in $" + userChange);
+    public void buyCandy(int candyNumber, BigDecimal balance) throws VendingMachinePersistenceException,
+            NoItemInventoryException, InsufficientFundsException {
+        Candy candy = dao.buyCandy(candyNumber);
+        balance = dao.getChangeBalance();
+
+        if (candy.getCandyQuantity() == 0) {
+            throw new NoItemInventoryException(
+                    "\n       " + candy.getCandyName()
+                    + "\n       is unavailable for purchase."
+                    + "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
+
         }
-        
-//        validateCandyData(candy);
-        //dao.buyCandy(candy.getCandyNumber());
+        if (balance.compareTo(candy.getCandyPrice()) == -1) {
+            throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
+                    + "\nPlease add more money at the Main Menu."); // print user input;
+        }
+
     }
 
 
@@ -56,29 +58,5 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
         return dao.getAllCandy();
     }
-
-//    @Override
-//    public Candy getOneCandy(String candy) throws VendingMachinePersistenceException {
-//        return dao.getOneCandy(candy);
-//    }
-    
-//   private void validateCandyData(Candy candy) throws NoItemInventoryException {
-//        if(candy.getCandyNumber() == null || 
-//                //candy.getCandyNumber().trim().length() == 0 ||
-//                candy.getCandyNumber().isEmpty() ||
-//                candy.getCandyNumber() != candy.getCandyNumber()) {
-//            
-//            throw new NoItemInventoryException("ERROR: "); // does not exist
-//        }
-//    }
-    
-//    private void validateFunds(Change userChange) throws InsufficientFundsException {
-//        if(userChange.getBalance() == null || 
-//            userChange.getBalance().toString().length() == 0) {
-//                throw new InsufficientFundsException("ERROR: Please enter a valid amount of money."); // enter user input
-//        }
-//    }
-
-   
     
 }

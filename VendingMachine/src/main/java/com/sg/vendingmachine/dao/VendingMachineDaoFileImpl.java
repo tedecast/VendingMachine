@@ -114,7 +114,8 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
             currentCandy = unmarshallCandy(currentLine);
             
             // converted to int
-            candies.put(Integer.parseInt((currentCandy.getCandyNumber())), currentCandy);
+            // convert int to string
+            candies.put(String.valueOf(currentCandy.getCandyNumber()), currentCandy);
         }
         scanner.close();
     }
