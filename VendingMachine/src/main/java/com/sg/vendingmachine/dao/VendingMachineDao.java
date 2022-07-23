@@ -18,14 +18,9 @@ public interface VendingMachineDao {
     
     List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    // id
-//    Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
-    
     Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
     
-    BigDecimal getChangeBalance() throws VendingMachinePersistenceException;
-    //Candy candyPrice (BigDecimal candyPrice) throws VendingMachinePersistenceException;
-    
+    BigDecimal getChangeBalance(Change balance) throws VendingMachinePersistenceException;    
     
     
     // (i.e. InsufficientFundsException)

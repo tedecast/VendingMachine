@@ -45,13 +45,14 @@ public class VendingMachineView {
     
     public void displayBuyCandyBanner() {
         emptyLine();
-        io.print(". * . * . *  Buy Candy  * . * . * . * . ");
+        io.print("\n. * . * . *  Buy Candy  * . * . * . * . ");
         getBanner();
     }
     
     // The program must track the following properties for each item:
     // Item Name, Item Cost, Number of Items in Inventory
     public void displaySelectionBanner() {
+        io.print("- - - - - - - - - - - - - - - - - - - - ");
         io.print("|Number|     Name    |  Cost  |  QTY  |");
     }
     
@@ -84,8 +85,6 @@ public class VendingMachineView {
     public BigDecimal displayRequestUserMoney() {
         // changed Float to BigDecimal from UserIO
         BigDecimal money = io.readBigDecimal("How much money do you want to add?");
-        //System.out.println(money.toString().length());
-        //BigDecimal moneyBD = new BigDecimal(money);
         return money;
     }
     
@@ -114,17 +113,15 @@ public class VendingMachineView {
     // and then redisplay the amount the user had put into the machine.
     public void notEnoughMoney(BigDecimal money) {
         io.print("Insufficent funds. You only put in $" + money);
-//        emptyLine();
-//        getHitEnter();
     } 
     
     
     // Only one item can be vended at a time.
-    public String getCandyNumberChoice(BigDecimal money) {
-        io.print("You put in $" + money);
+    public int getCandyNumberChoice(BigDecimal money) {
+        io.print("\n Your balance is $" + money);
         int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
-        String stringChoice = String.valueOf(choice);
-        return stringChoice;
+        //int stringChoice = String.valueOf(choice);
+        return choice;
     }
     
     // If the machine runs out of an item, it should no longer be available as an option to the user

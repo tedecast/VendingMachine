@@ -16,11 +16,14 @@ import java.util.List;
  * @author Teresa
  */
 public interface VendingMachineServiceLayer {
-// possibly changing to String to int candyNumber
-    public void buyCandy(int candyNumber, BigDecimal balance) throws VendingMachinePersistenceException,
-            NoItemInventoryException, InsufficientFundsException;
-
+    
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
+    
+    public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
+            NoItemInventoryException, InsufficientFundsException;
+    
+    BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
+
 
     
 }

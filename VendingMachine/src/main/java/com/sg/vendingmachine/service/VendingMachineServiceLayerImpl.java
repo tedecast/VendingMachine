@@ -33,11 +33,17 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     // change up menu 
     // call, purchase item and item ID , return once purchased
     // aduit service
+    
     @Override
-    public void buyCandy(int candyNumber, BigDecimal balance) throws VendingMachinePersistenceException,
+    public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
+        return dao.getAllCandy();
+    }
+    
+    @Override
+    public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
             NoItemInventoryException, InsufficientFundsException {
         Candy candy = dao.buyCandy(candyNumber);
-        balance = dao.getChangeBalance();
+        BigDecimal balance = dao.getChangeBalance();
 
         if (candy.getCandyQuantity() == 0) {
             throw new NoItemInventoryException(
@@ -52,11 +58,15 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
 
     }
-
-
+    
     @Override
-    public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
-        return dao.getAllCandy();
+    public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException {
+        BigDecimal balance = dao.getChangeBalance();
+//        if (finish == true) {
+//            auditDao.writeAuditEntry("$" + balance + " Was Returned");
+//        }
+        return balance;
     }
+
     
 }
