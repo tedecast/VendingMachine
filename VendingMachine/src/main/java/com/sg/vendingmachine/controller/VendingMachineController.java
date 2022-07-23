@@ -125,15 +125,17 @@ public class VendingMachineController {
         view.currentBalance(userMoney);
         
         int candyNumber = view.getCandyNumberChoice();
+        String candyName = candy.getCandyName();
         
         try {
             //view.currentBalance(userMoney);
             //int candyNumber = view.getCandyNumberChoice();
             //String candyName = candy.getCandyName();
             //candies.stream().filter((c) -> c.getCandyNumber() == candyNumber);
-            String candyName = candy.getCandyName();
+            // service.buyCandy(candyNumber);
             service.buyCandy(candyNumber);
-            view.displayCandySuccess(candyNumber);
+            service.getBalance(false);
+            view.displayCandySuccess(candy.getCandyName());
             view.displayChangeBanner();
             view.displayChange(candyName, candyNumber);
         } catch (NoItemInventoryException ex) {
