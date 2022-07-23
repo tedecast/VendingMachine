@@ -50,17 +50,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 //        validateCandyData(candy);
         //dao.buyCandy(candy.getCandyNumber());
     }
-    
-   @Override
-    public void moneyIn(BigDecimal userChange, Candy candy) throws VendingMachinePersistenceException,
-            InsufficientFundsException {
-        
-        //Candy candyPrice = dao.candyPrice(candy.getCandyPrice());
-        while (userChange.compareTo(candy.getCandyPrice()) == -1){
-           throw new InsufficientFundsException("Insufficient funds. You only put in " +
-                                userChange);
-        }
-    }
+
 
     @Override
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {

@@ -35,22 +35,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     // specify variable for BigDecimal balance = getbalance 
     // throws InsufficientFundsException
     
-    @Override
-    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException {
-        try {
-            BigDecimal balance = userChange.getBalance();
-            return balance;
-        } catch (NullPointerException ex) {
-        }
-        return new BigDecimal("0");
-    }
-//    
-//     @Override
-//    public Candy candyPrice(BigDecimal candyPrice) throws VendingMachinePersistenceException {
-//        loadInventory();
-//        Candy candyCost = candyPrice(candyPrice);
-//        return candyCost;
-//    }
     
     @Override
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
@@ -61,26 +45,35 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     // rewrite and get from hashmap
     // declare int (candy inventory) = bought candy . getInventory - one from it
     // set bought candy (new bought)
-//    @Override
-//    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException {
-//        loadInventory();
-//        return candies.get(candyNumber);
-//    }
+
 
     @Override
-    public Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException {
+    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
-       Candy boughtCandy = getOneCandy(candyNumber);
+       Candy boughtCandy = buyCandy(candyNumber);
+       boughtCandy.buyCandy();
+       int candyQuantity = boughtCandy.getCandyQuantity();
+       
        // userChange.makepurchase
        // hashMap.replace()
        // write it back, and then purchase
        // added this? 
-       boughtCandy.buyCandy();
+       
        writeInventory();
        return boughtCandy;
        //return boughtCandy;
     }
     
+    @Override
+    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException {
+        try {
+            BigDecimal balance = userChange.getBalance();
+            return balance;
+        } catch (NullPointerException ex) {
+        }
+        return new BigDecimal("0");
+    }
+        
     private Candy unmarshallCandy(String candyAsText) throws VendingMachinePersistenceException{
         
         String[] candyTokens = candyAsText.split(DELIMITER);
@@ -161,6 +154,4 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         // Clean up
         out.close();
     }
-
-   
 }
