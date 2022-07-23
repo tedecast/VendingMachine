@@ -119,12 +119,11 @@ public class VendingMachineController {
         view.displayBuyCandyBanner();
         displayCandySelection();
         
-//            int candyNumber = view.getCandyNumberChoice();
-//            String candyName = candy.getCandyName();
+        int candyNumber = view.getCandyNumberChoice();
         
         try {
             view.currentBalance(userMoney);
-            int candyNumber = view.getCandyNumberChoice();
+            //int candyNumber = view.getCandyNumberChoice();
             String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);
             view.displayCandySuccess(candyName);
