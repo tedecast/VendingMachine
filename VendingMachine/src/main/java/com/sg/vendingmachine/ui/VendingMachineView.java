@@ -33,9 +33,6 @@ public class VendingMachineView {
         
         return io.readInt("Please select from the above choices.", 1, 5);
     }
-//    public void getBanner() {
-//        io.print("- - - - - - - - - - - - - - - - - - - - ");
-//    }
     
     public void displayCandyBanner() {
         io.print("\n. * . * . * .  Candy  . * . * . * . * .");   
@@ -97,26 +94,15 @@ public class VendingMachineView {
     public void currentBalance(BigDecimal money) {
         io.print("Your current balance is $" + money );
     }
-//    public BigDecimal addMoreMoney() {
-//        BigDecimal money = io.readBigDecimal("Please add in more money:");
-//        return money;
-//    }
     
     // tell the user they need to add more money... 
     // If the user selects an item that costs more than the amount the user put into the vending machine, 
     // the program should display a message indicating insufficient funds
-    // and then redisplay the amount the user had put into the machine.
-//    public void notEnoughMoney(BigDecimal money) {
-//        io.print("Insufficent funds. You only put in $" + money);
-//    } 
-//    
+    // and then redisplay the amount the user had put into the machine. 
     
     // Only one item can be vended at a time.
     public int getCandyNumberChoice() {
-        //io.print("\n Your balance is $" + money);
         return io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
-        //int stringChoice = String.valueOf(choice);
-        //return choice;
     }
     
     // If the machine runs out of an item, it should no longer be available as an option to the user

@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class VendingMachineController {
     
-   // private Change balance = new Change(money);
     private VendingMachineServiceLayer service;
     private VendingMachineView view; // = new VendingMachineView();
     private BigDecimal userMoney = new BigDecimal(0);
@@ -101,15 +100,8 @@ public class VendingMachineController {
     }
     
     private void displayBalance() throws VendingMachinePersistenceException {
-//        try {
-            view.displayBalanceBanner();
-            view.currentBalance(userMoney);
-            //service.noBalance();
-            
-//        } catch (NoMoneyException ex){
-//            view.displayErrorMessage(ex.getMessage());
-////            //service.getBalance(true);
-//        } 
+        view.displayBalanceBanner();
+        view.currentBalance(userMoney);     
     }
     // call view to display enter selection id, get item id from user, change to int
     // call purchase, 
@@ -118,32 +110,26 @@ public class VendingMachineController {
     // take id, using view select item
     // use BigBalance intialize at ;
     
+    // tell the user they need to add more money... 
+    // If the user selects an item that costs more than the amount the user put into the vending machine, 
+    // the program should display a message indicating insufficient funds
+    // and then redisplay the amount the user had put into the machine. 
+    
     private void buyCandy() throws VendingMachinePersistenceException {
         view.displayBuyCandyBanner();
         displayCandySelection();
         
-//        try {
-//            service.noBalance();
-//            view.currentBalance(balance.getBalance());
-////        } catch (NoMoneyException ex){
-//            view.displayErrorMessage(ex.getMessage());
-//        } 
 //            int candyNumber = view.getCandyNumberChoice();
 //            String candyName = candy.getCandyName();
         
         try {
-            //service.noBalance();
             view.currentBalance(userMoney);
             int candyNumber = view.getCandyNumberChoice();
             String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);
-            //service.getBalance(true);
-            //balance = service.getBalance((false);
             view.displayCandySuccess(candyName);
             view.displayChangeBanner();
             view.displayChange(candyName, candyNumber);
-//        } catch (NoMoneyException ex){
-//            view.displayErrorMessage(ex.getMessage());    
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());
         } catch (InsufficientFundsException ex){
@@ -160,104 +146,6 @@ public class VendingMachineController {
     }    
 }   
     
-//        view.displayBuyCandyBanner();
-//        view.displaySelectionBanner();
-//        List<Candy> candyList = service.getAllCandy();
-//        view.displayCandyList(candyList);
-//        int candyNumber = view.getCandyNumberChoice(balance);
-//      
-//        try {
-//            Candy candyName = view.getCandyNumberChoice(candyNumber);
-//              //dao.buyCandy(userChoice);
-//            service.buyCandy(candyNumber);
-//            view.displayCandySuccess(candyName);
-////            // modify this
-////            userChange.makePurchase(candy.getCandyPrice());
-////            view.displayChangeBanner();
-////            userChange = new Change(userChange.getBalance());
-////            System.out.println(userChange.toString());
-////            hasErrors = false;
-//            balance = service.buyCandy(candyNumber);
-//            balance = service.getBalance(false);
-//            view.displaySuccessfulPurchase(itemName);
-//            view.displayBalance(balance);
-//        } catch (NoItemInventoryException ex) {
-//            view.displayErrorMessage(ex.getMessage());
-//        } catch (InsufficientFundsException ex){
-//            view.displayErrorMessage(ex.getMessage());
-//        }
-//        
-    //}
-    
-    
-            
-//        BigDecimal money = view.displayRequestUserMoney();
-//        MathContext roundingUp = new MathContext(money.toString().length());
-//        money = money.round(roundingUp);
-//        Change userChange = new Change(money);
-//            
-//        view.displayBuyCandyBanner();
-//        view.displaySelectionBanner();
-//        List<Candy> candyList = service.getAllCandy();
-//        view.displayCandyList(candyList);
-//            
-//        boolean hasErrors = false;
-//        do {
-//            String userChoice = view.getCandyNumberChoice(money);
-//            Candy candy = service.getOneCandy(userChoice);
-//        try {
-//            //dao.buyCandy(userChoice);
-//            service.buyCandy(userChoice);
-//            view.displayCandySuccess(candy);
-//            // modify this
-//            userChange.makePurchase(candy.getCandyPrice());
-//            view.displayChangeBanner();
-//            userChange = new Change(userChange.getBalance());
-//            System.out.println(userChange.toString());
-//            hasErrors = false;
-//            } catch (NoItemInventoryException e) {
-//                hasErrors = true;
-//                view.displayErrorMessage(e.getMessage());
-//                 // removed haserrors here
-//                //int candyQuantity = candy.getCandyQuantity();
-//               // while (candyQuantity == 0) {
-////                    view.displayOutOfStock(candy);
-//                view.displayBuyCandyBanner();
-//                view.displayCandyList(candyList);
-//                   // userChoice = view.getCandyNumberChoice(money);
-//                    //candy = service.getOneCandy(userChoice);
-//                    //candyQuantity = candy.getCandyQuantity();
-//                //}
-//                
-//            while (userChange.getBalance().compareTo(candy.getCandyPrice()) == -1) {
-//                    // display a new banner that says Insufficient funds
-//                view.notEnoughMoney(userChange.getBalance()); // change to service layer
-//                    // prompt the user to input more money -- create in view
-//                money = view.addMoreMoney();
-//                    // add the money inputed to the userChange object, using addChange balance
-//                userChange.addChange(money);
-//                }
-//                
-////                } catch (InsufficientFundsException e) {
-////                    hasErrors = true;
-////                    view.displayErrorMessage(e.getMessage());
-////                }
-//                
-//            } //while (hasErrors);
-//            } while(hasErrors);
-//            view.emptyLine();
-//            view.getHitEnter();
-        //}
-            
-    
-//    private void unknownCommand() {
-//        view.displayUnknownCommandBanner();
-//    }
-//    
-//    private void exitMessage() {
-//        view.displayExitBanner();
-//    }    
-//}
     // listing single candy information
 //    private void viewCandy() {
 //        view.displayCandyBanner();
