@@ -12,14 +12,11 @@ import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.service.InsufficientFundsException;
 import com.sg.vendingmachine.service.NoItemInventoryException;
-import com.sg.vendingmachine.service.NoMoneyException;
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -53,7 +50,6 @@ public class VendingMachineController {
                 view.displayCandyBanner();
                 displayCandySelection();
 
-                
                 menuSelection = getMenuSelection();
                 
                 switch (menuSelection) {
@@ -136,7 +132,7 @@ public class VendingMachineController {
 //            String candyName = candy.getCandyName();
         
         try {
-            service.noBalance();
+            //service.noBalance();
             view.currentBalance(userMoney);
             int candyNumber = view.getCandyNumberChoice();
             String candyName = candy.getCandyName();
@@ -146,13 +142,14 @@ public class VendingMachineController {
             view.displayCandySuccess(candyName);
             view.displayChangeBanner();
             view.displayChange(candyName, candyNumber);
-        } catch (NoMoneyException ex){
-            view.displayErrorMessage(ex.getMessage());    
+//        } catch (NoMoneyException ex){
+//            view.displayErrorMessage(ex.getMessage());    
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());
         } catch (InsufficientFundsException ex){
             view.displayErrorMessage(ex.getMessage());
         }
+        
     }
     private void unknownCommand() {
         view.displayUnknownCommandBanner();
