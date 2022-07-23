@@ -36,7 +36,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public void buyCandy(String candyNumber) throws VendingMachinePersistenceException, 
             NoItemInventoryException {
-        Candy candy = dao.getOneCandy(candyNumber);
+            Candy candy = dao.getOneCandy(candyNumber);
         //List<Candy> candyList = dao.getAllCandy();
         while(candy.getCandyQuantity() <= 0){
             throw new NoItemInventoryException("Sorry, we're out of stock of:" +
