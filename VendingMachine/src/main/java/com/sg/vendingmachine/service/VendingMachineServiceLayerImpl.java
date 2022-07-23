@@ -24,7 +24,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     private VendingMachineAuditDao auditDao; 
     
     public VendingMachineServiceLayerImpl(VendingMachineDao dao,
-            VendingMachineAuditDao auditDao) { //, VendingMachineView view){
+            VendingMachineAuditDao auditDao) {
         this.dao = dao;
         this.auditDao = auditDao;
     }
@@ -57,11 +57,11 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         
         if (candy.getCandyQuantity() == 0) {
             throw new NoItemInventoryException(
-                    "\n       " + candy.getCandyName()
-                    + "\n       is unavailable for purchase."
-                    + "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
+                    "\n                    ERROR:"
+                    + "\nPlease choose an existing Candy's Number to purchase."); // print user input
 
         }
+        //candy.getCandyName() 
         auditDao.writeAuditEntry("CANDY " + candy.getCandyName() + " PURCHASED.");
     }
     

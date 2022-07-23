@@ -17,7 +17,9 @@ import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -30,6 +32,7 @@ public class VendingMachineController {
     private BigDecimal userMoney = new BigDecimal(0);
     private Change balance = new Change(userMoney);
     private Candy candy;
+    //private Map<String, Candy> candies = new HashMap<>();
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
@@ -127,9 +130,10 @@ public class VendingMachineController {
             //view.currentBalance(userMoney);
             //int candyNumber = view.getCandyNumberChoice();
             //String candyName = candy.getCandyName();
+            //candies.stream().filter((c) -> c.getCandyNumber() == candyNumber);
             String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);
-            view.displayCandySuccess(candy.getCandyName());
+            view.displayCandySuccess(candyNumber);
             view.displayChangeBanner();
             view.displayChange(candyName, candyNumber);
         } catch (NoItemInventoryException ex) {

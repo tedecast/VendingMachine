@@ -27,10 +27,6 @@ public class Candy {
         this.candyQuantity = candyQuantity;
     }
     
-//    public Candy(String candyNumber) {
-//        this.candyNumber = candyNumber;
-//    }
-
     public int getCandyNumber() {
         return candyNumber;
     }
