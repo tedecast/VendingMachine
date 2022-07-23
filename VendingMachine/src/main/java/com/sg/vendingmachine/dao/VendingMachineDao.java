@@ -20,7 +20,7 @@ public interface VendingMachineDao {
     
     Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
     
-    BigDecimal getChangeBalance(Change balance) throws VendingMachinePersistenceException;    
+    BigDecimal getChangeBalance() throws VendingMachinePersistenceException;    
     
     
     // (i.e. InsufficientFundsException)

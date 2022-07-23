@@ -31,6 +31,7 @@ public class VendingMachineController {
     private VendingMachineServiceLayer service;
     private VendingMachineView view; // = new VendingMachineView();
     private BigDecimal money = new BigDecimal(0);
+    private Candy candy;
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
@@ -47,7 +48,7 @@ public class VendingMachineController {
         int menuSelection = 0;
         try {
             while (keepGoing){
-                
+                view.displayCandyBanner();
                 displayCandySelection();
                 view.emptyLine();
                 
@@ -55,6 +56,7 @@ public class VendingMachineController {
                 
                 switch (menuSelection) {
                     case 1: 
+                        view.displayCandyBanner();
                         displayCandySelection();
                         view.getHitEnter();
                         break;
@@ -62,7 +64,6 @@ public class VendingMachineController {
                         addMoney();
                         break;
                     case 3:
-                        io.print("Display Balance");
                         displayBalance();
                         view.getHitEnter();
                         break;
@@ -88,7 +89,7 @@ public class VendingMachineController {
     }
     
     private void displayCandySelection() throws VendingMachinePersistenceException {
-        view.displayCandyBanner();
+        //view.displayCandyBanner();
         view.displaySelectionBanner();
         List<Candy> candyList = service.getAllCandy();
         view.displayCandyList(candyList);
@@ -97,13 +98,26 @@ public class VendingMachineController {
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
         BigDecimal money = view.displayRequestUserMoney();
-        balance.addChange(money);
-        view.addedMoneySuccessBanner(money);
+        balance = new Change(money);
+        view.addedMoneySuccessBanner(balance.getBalance());
     }
     
     private void displayBalance() throws VendingMachinePersistenceException {
-        view.displayBalanceBanner();
-        view.currentBalance(balance.getBalance());
+        try {
+           service.getBalance(true);
+           view.displayBalanceBanner();
+           view.currentBalance(balance.getBalance());
+//            BigDecimal noMoney = new BigDecimal(0.00);
+//            String empty = "";
+//            
+//            if(balance.getBalance().toString().equals(empty)){
+//                view.displayBalanceBanner();
+//                view.currentBalance(noMoney);
+//            }
+        } catch (InsufficientFundsException ex){
+            view.displayErrorMessage(ex.getMessage());
+//            //service.getBalance(true);
+        } 
     }
     // call view to display enter selection id, get item id from user, change to int
     // call purchase, 
@@ -114,33 +128,64 @@ public class VendingMachineController {
     
     private void buyCandy() throws VendingMachinePersistenceException {
         view.displayBuyCandyBanner();
-        view.displaySelectionBanner();
-        List<Candy> candyList = service.getAllCandy();
-        view.displayCandyList(candyList);
-        int candyNumber = view.getCandyNumberChoice(balance);
-      
+        displayCandySelection();
+        
         try {
-            Candy candyName = view.getCandyNumberChoice(candyNumber);
-              //dao.buyCandy(userChoice);
+            service.getBalance(true);
+            view.currentBalance(balance.getBalance());
+        } catch (InsufficientFundsException ex){
+            view.displayErrorMessage(ex.getMessage());
+        } 
+//            int candyNumber = view.getCandyNumberChoice();
+//            String candyName = candy.getCandyName();
+        
+        try {
+            int candyNumber = view.getCandyNumberChoice();
+            String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);
+            //service.getBalance(true);
+            //balance = service.getBalance((false);
             view.displayCandySuccess(candyName);
-//            // modify this
-//            userChange.makePurchase(candy.getCandyPrice());
-//            view.displayChangeBanner();
-//            userChange = new Change(userChange.getBalance());
-//            System.out.println(userChange.toString());
-//            hasErrors = false;
-            balance = service.buyCandy(candyNumber);
-            balance = service.getBalance(false);
-            view.displaySuccessfulPurchase(itemName);
-            view.displayBalance(balance);
+            view.displayChangeBanner();
+            view.displayChange(candyName, candyNumber);
+            
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());
         } catch (InsufficientFundsException ex){
             view.displayErrorMessage(ex.getMessage());
         }
-        
     }
+    
+//        view.displayBuyCandyBanner();
+//        view.displaySelectionBanner();
+//        List<Candy> candyList = service.getAllCandy();
+//        view.displayCandyList(candyList);
+//        int candyNumber = view.getCandyNumberChoice(balance);
+//      
+//        try {
+//            Candy candyName = view.getCandyNumberChoice(candyNumber);
+//              //dao.buyCandy(userChoice);
+//            service.buyCandy(candyNumber);
+//            view.displayCandySuccess(candyName);
+////            // modify this
+////            userChange.makePurchase(candy.getCandyPrice());
+////            view.displayChangeBanner();
+////            userChange = new Change(userChange.getBalance());
+////            System.out.println(userChange.toString());
+////            hasErrors = false;
+//            balance = service.buyCandy(candyNumber);
+//            balance = service.getBalance(false);
+//            view.displaySuccessfulPurchase(itemName);
+//            view.displayBalance(balance);
+//        } catch (NoItemInventoryException ex) {
+//            view.displayErrorMessage(ex.getMessage());
+//        } catch (InsufficientFundsException ex){
+//            view.displayErrorMessage(ex.getMessage());
+//        }
+//        
+    //}
+    
+    
             
 //        BigDecimal money = view.displayRequestUserMoney();
 //        MathContext roundingUp = new MathContext(money.toString().length());

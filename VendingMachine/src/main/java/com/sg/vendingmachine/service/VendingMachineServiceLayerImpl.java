@@ -41,10 +41,16 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     @Override
     public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
-            NoItemInventoryException, InsufficientFundsException {
+        InsufficientFundsException, NoItemInventoryException {
         Candy candy = dao.buyCandy(candyNumber);
         BigDecimal balance = dao.getChangeBalance();
-
+        
+        if (balance.compareTo(candy.getCandyPrice()) == -1 ||
+                balance.compareTo(BigDecimal.ZERO) == 0) {
+            throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
+                    + "\nPlease add more money at the Main Menu."); // print user input;
+        }
+        
         if (candy.getCandyQuantity() == 0) {
             throw new NoItemInventoryException(
                     "\n       " + candy.getCandyName()
@@ -52,17 +58,24 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                     + "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
 
         }
-        if (balance.compareTo(candy.getCandyPrice()) == -1) {
-            throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
-                    + "\nPlease add more money at the Main Menu."); // print user input;
-        }
+//        if (balance.compareTo(candy.getCandyPrice()) == -1 ||
+//                balance.compareTo(BigDecimal.ZERO) == 0) {
+//            throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
+//                    + "\nPlease add more money at the Main Menu."); // print user input;
+//        }
 
     }
     
     @Override
-    public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException {
+    public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException,
+            InsufficientFundsException {
         BigDecimal balance = dao.getChangeBalance();
-//        if (finish == true) {
+        if (balance.compareTo(BigDecimal.ZERO) == 0) {
+            throw new InsufficientFundsException (
+            "      Your balance is $" + balance
+            + "\nPlease Add Money at the Main Menu.");  
+        }
+//       if (finish == true) {
 //            auditDao.writeAuditEntry("$" + balance + " Was Returned");
 //        }
         return balance;

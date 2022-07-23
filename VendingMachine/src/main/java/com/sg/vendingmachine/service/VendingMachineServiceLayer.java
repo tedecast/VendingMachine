@@ -22,7 +22,7 @@ public interface VendingMachineServiceLayer {
     public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
             NoItemInventoryException, InsufficientFundsException;
     
-    BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
+    BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException, InsufficientFundsException;
 
 
     

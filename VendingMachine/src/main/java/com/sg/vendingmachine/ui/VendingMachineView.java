@@ -33,20 +33,17 @@ public class VendingMachineView {
         
         return io.readInt("Please select from the above choices.", 1, 5);
     }
-    public void getBanner() {
-        io.print("- - - - - - - - - - - - - - - - - - - - ");
-    }
+//    public void getBanner() {
+//        io.print("- - - - - - - - - - - - - - - - - - - - ");
+//    }
     
     public void displayCandyBanner() {
-        emptyLine();
-        io.print(". * . * . * .  Candy  . * . * . * . * .");   
-        getBanner();
+        io.print("\n. * . * . * .  Candy  . * . * . * . * .");   
     }
     
     public void displayBuyCandyBanner() {
-        emptyLine();
         io.print("\n. * . * . *  Buy Candy  * . * . * . * . ");
-        getBanner();
+ 
     }
     
     // The program must track the following properties for each item:
@@ -66,7 +63,6 @@ public class VendingMachineView {
             + currentCandy.getCandyPrice() + "  |   " 
             + currentCandy.getCandyQuantity() + "   |");
         }
-        emptyLine();
     }
     
     public void emptyLine() {
@@ -74,7 +70,7 @@ public class VendingMachineView {
     }
     
     public void getHitEnter() {
-        io.readString("Please hit enter to continue.");
+        io.readString("\nPlease hit enter to continue.");
     }
     
     public void displayAddMoneyBanner() {
@@ -90,7 +86,6 @@ public class VendingMachineView {
     
     public void addedMoneySuccessBanner(BigDecimal money) {
         io.print("You've successfully added $" + money);
-        emptyLine();
         getHitEnter();
     }
     
@@ -100,7 +95,7 @@ public class VendingMachineView {
     }
     
     public void currentBalance(BigDecimal money) {
-        io.print("Your current balance is: " + money );
+        io.print("Your current balance is $" + money );
     }
     public BigDecimal addMoreMoney() {
         BigDecimal money = io.readBigDecimal("Please add in more money:");
@@ -117,11 +112,11 @@ public class VendingMachineView {
     
     
     // Only one item can be vended at a time.
-    public int getCandyNumberChoice(BigDecimal money) {
-        io.print("\n Your balance is $" + money);
-        int choice = io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
+    public int getCandyNumberChoice() {
+        //io.print("\n Your balance is $" + money);
+        return io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
         //int stringChoice = String.valueOf(choice);
-        return choice;
+        //return choice;
     }
     
     // If the machine runs out of an item, it should no longer be available as an option to the user
@@ -133,10 +128,10 @@ public class VendingMachineView {
     }
     
     
-    public void displayCandySuccess(Candy candy) {
+    public void displayCandySuccess(String candy) {
         io.print("");
         io.print("Thank you for your purchase of:");
-        io.print("        " + candy.getCandyName()); //+ " | " + "$" + candy.getCandyPrice());
+        io.print("        " + candy);// .getCandyName()); //+ " | " + "$" + candy.getCandyPrice());
         emptyLine();
     }
     
