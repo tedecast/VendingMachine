@@ -69,11 +69,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException {
         BigDecimal balance = dao.getChangeBalance();
-//        if (balance.compareTo(BigDecimal.ZERO) == 0) {
-//            throw new InsufficientFundsException (
-//            "      Your balance is $" + balance
-//            + "\nPlease Add Money at the Main Menu.");  
-//        }
+
 //       if (finish == true) {
 //            auditDao.writeAuditEntry("$" + balance + " Was Returned");
 //        }
@@ -83,13 +79,14 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public BigDecimal noBalance() throws VendingMachinePersistenceException,
             NoMoneyException {
-        BigDecimal balance = dao.getChangeBalance();
-        if (balance.compareTo(BigDecimal.ZERO) == 0) {
+        BigDecimal userMoney = dao.getChangeBalance();
+        Change balance = new Change(userMoney);
+        if (userMoney.compareTo(BigDecimal.ZERO) == 0) {
             throw new NoMoneyException (
             "      Your balance is $" + balance
             + "\nPlease Add Money at the Main Menu.");  
         }
-        return balance;
+        return userMoney;
         
     }
     

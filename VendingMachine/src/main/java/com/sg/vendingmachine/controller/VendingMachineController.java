@@ -31,8 +31,8 @@ public class VendingMachineController {
    // private Change balance = new Change(money);
     private VendingMachineServiceLayer service;
     private VendingMachineView view; // = new VendingMachineView();
-    private BigDecimal money = new BigDecimal(0);
-    private Change balance = new Change(money);
+    private BigDecimal userMoney = new BigDecimal(0);
+    private Change balance = new Change(userMoney);
     private Candy candy;
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
@@ -99,27 +99,21 @@ public class VendingMachineController {
     
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
-        money = view.displayRequestUserMoney();
-        balance.addChange(money);
-        view.addedMoneySuccessBanner(money);
+        userMoney = view.displayRequestUserMoney();
+        balance.addChange(userMoney);
+        view.addedMoneySuccessBanner(userMoney);
     }
     
     private void displayBalance() throws VendingMachinePersistenceException {
-        try {
-           service.noBalance();
-           view.displayBalanceBanner();
-           view.currentBalance(balance.getBalance());
-//            BigDecimal noMoney = new BigDecimal(0.00);
-//            String empty = "";
-//            
-//            if(balance.getBalance().toString().equals(empty)){
-//                view.displayBalanceBanner();
-//                view.currentBalance(noMoney);
-//            }
-        } catch (NoMoneyException ex){
-            view.displayErrorMessage(ex.getMessage());
-//            //service.getBalance(true);
-        } 
+//        try {
+            view.displayBalanceBanner();
+            view.currentBalance(userMoney);
+            //service.noBalance();
+            
+//        } catch (NoMoneyException ex){
+//            view.displayErrorMessage(ex.getMessage());
+////            //service.getBalance(true);
+//        } 
     }
     // call view to display enter selection id, get item id from user, change to int
     // call purchase, 
@@ -143,7 +137,7 @@ public class VendingMachineController {
         
         try {
             service.noBalance();
-            view.currentBalance(balance.getBalance());
+            view.currentBalance(userMoney);
             int candyNumber = view.getCandyNumberChoice();
             String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);

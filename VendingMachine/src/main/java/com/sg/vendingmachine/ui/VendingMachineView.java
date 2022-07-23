@@ -140,11 +140,10 @@ public class VendingMachineView {
     // Change must be displayed as the number of quarters, dimes, nickels, and pennies returned to the user.
     public void displayChangeBanner(){
         io.print("* . * . Your change is: . * . *");
-        emptyLine();
     }
     
     public void displayChange(String coinName, int coinAmount){
-        io.print("          " + coinAmount  + " " + coinName);
+        io.print("\n          " + coinAmount  + " " + coinName);
     }
    
     public void displayErrorMessage(String errorMsg){
