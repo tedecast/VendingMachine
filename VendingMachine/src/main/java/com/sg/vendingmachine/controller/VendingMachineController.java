@@ -28,10 +28,11 @@ import java.util.List;
  */
 public class VendingMachineController {
     
-    private Change balance;
+   // private Change balance = new Change(money);
     private VendingMachineServiceLayer service;
     private VendingMachineView view; // = new VendingMachineView();
     private BigDecimal money = new BigDecimal(0);
+    private Change balance = new Change(money);
     private Candy candy;
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
@@ -99,7 +100,7 @@ public class VendingMachineController {
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
         money = view.displayRequestUserMoney();
-        balance = new Change(money);
+        balance.addChange(money);
         view.addedMoneySuccessBanner(money);
     }
     
