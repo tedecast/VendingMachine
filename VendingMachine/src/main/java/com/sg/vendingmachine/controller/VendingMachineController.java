@@ -12,6 +12,7 @@ import com.sg.vendingmachine.dto.Candy;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.service.InsufficientFundsException;
 import com.sg.vendingmachine.service.NoItemInventoryException;
+import com.sg.vendingmachine.service.NoMoneyException;
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
@@ -50,7 +51,7 @@ public class VendingMachineController {
             while (keepGoing){
                 view.displayCandyBanner();
                 displayCandySelection();
-                view.emptyLine();
+
                 
                 menuSelection = getMenuSelection();
                 
@@ -97,14 +98,14 @@ public class VendingMachineController {
     
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
-        BigDecimal money = view.displayRequestUserMoney();
+        money = view.displayRequestUserMoney();
         balance = new Change(money);
-        view.addedMoneySuccessBanner(balance.getBalance());
+        view.addedMoneySuccessBanner(money);
     }
     
     private void displayBalance() throws VendingMachinePersistenceException {
         try {
-           service.getBalance(true);
+           service.noBalance();
            view.displayBalanceBanner();
            view.currentBalance(balance.getBalance());
 //            BigDecimal noMoney = new BigDecimal(0.00);
@@ -114,7 +115,7 @@ public class VendingMachineController {
 //                view.displayBalanceBanner();
 //                view.currentBalance(noMoney);
 //            }
-        } catch (InsufficientFundsException ex){
+        } catch (NoMoneyException ex){
             view.displayErrorMessage(ex.getMessage());
 //            //service.getBalance(true);
         } 
@@ -130,16 +131,18 @@ public class VendingMachineController {
         view.displayBuyCandyBanner();
         displayCandySelection();
         
-        try {
-            service.getBalance(true);
-            view.currentBalance(balance.getBalance());
-        } catch (InsufficientFundsException ex){
-            view.displayErrorMessage(ex.getMessage());
-        } 
+//        try {
+//            service.noBalance();
+//            view.currentBalance(balance.getBalance());
+////        } catch (NoMoneyException ex){
+//            view.displayErrorMessage(ex.getMessage());
+//        } 
 //            int candyNumber = view.getCandyNumberChoice();
 //            String candyName = candy.getCandyName();
         
         try {
+            service.noBalance();
+            view.currentBalance(balance.getBalance());
             int candyNumber = view.getCandyNumberChoice();
             String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);
@@ -148,13 +151,22 @@ public class VendingMachineController {
             view.displayCandySuccess(candyName);
             view.displayChangeBanner();
             view.displayChange(candyName, candyNumber);
-            
+        } catch (NoMoneyException ex){
+            view.displayErrorMessage(ex.getMessage());    
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());
         } catch (InsufficientFundsException ex){
             view.displayErrorMessage(ex.getMessage());
         }
     }
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+    
+    private void exitMessage() {
+        view.displayExitBanner();
+    }    
+}   
     
 //        view.displayBuyCandyBanner();
 //        view.displaySelectionBanner();
@@ -246,14 +258,14 @@ public class VendingMachineController {
         //}
             
     
-    private void unknownCommand() {
-        view.displayUnknownCommandBanner();
-    }
-    
-    private void exitMessage() {
-        view.displayExitBanner();
-    }    
-}
+//    private void unknownCommand() {
+//        view.displayUnknownCommandBanner();
+//    }
+//    
+//    private void exitMessage() {
+//        view.displayExitBanner();
+//    }    
+//}
     // listing single candy information
 //    private void viewCandy() {
 //        view.displayCandyBanner();

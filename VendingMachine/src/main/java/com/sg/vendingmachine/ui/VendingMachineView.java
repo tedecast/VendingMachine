@@ -24,7 +24,7 @@ public class VendingMachineView {
     
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public int printMenuAndGetSelection(){
-        io.print("======   Main Menu   ======");
+        io.print("\n======   Main Menu   ======");
         io.print("1. List Candy");
         io.print("2. Add Money");
         io.print("3. Display Balance");
@@ -148,7 +148,7 @@ public class VendingMachineView {
     }
    
     public void displayErrorMessage(String errorMsg){
-        io.print(". * . * .   ERROR   . * . * . ");
+        io.print("\n. * . * .   ERROR   . * . * . ");
         io.print(errorMsg);
     }
     
