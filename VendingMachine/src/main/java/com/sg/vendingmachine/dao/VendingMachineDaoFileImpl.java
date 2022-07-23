@@ -50,18 +50,21 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
-       Candy boughtCandy = buyCandy(candyNumber);
-       boughtCandy.buyCandy();
-       int candyQuantity = boughtCandy.getCandyQuantity();
+       int candyQuantity = candies.get(candyNumber).getCandyQuantity();
+       candies.get(candyNumber).setCandyQuantity(candyQuantity -1);
+       Candy boughtCandy = buyCandy(candyQuantity);
+       writeInventory();
+       return boughtCandy;
+//       Candy boughtCandy = buyCandy(candyNumber);
+//       boughtCandy.buyCandy();
+//       int candyQuantity = boughtCandy.getCandyQuantity();
        
        // userChange.makepurchase
        // hashMap.replace()
        // write it back, and then purchase
        // added this? 
        
-       writeInventory();
-       return boughtCandy;
-       //return boughtCandy;
+       
     }
     
     @Override
