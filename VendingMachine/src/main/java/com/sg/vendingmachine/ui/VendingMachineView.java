@@ -22,6 +22,19 @@ public class VendingMachineView {
         this.io = io;
     }
     
+    // Vending machine items must be stored in a file.
+    // When an item is vended, the program must update the inventory level appropriately.
+    // However, the items that have an inventory level of zero must still be read
+    // If the machine runs out of an item, it should no longer be available as an option to the user
+    public void displayCandyList(List<Candy> candyList) {
+        for (Candy currentCandy : candyList) {
+            io.print("|  " + currentCandy.getCandyNumber() + "   |"
+            + currentCandy.getCandyName() + "| $"
+            + currentCandy.getCandyPrice() + "  |   " 
+            + currentCandy.getCandyQuantity() + "   |");
+        }
+    }
+    
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public int printMenuAndGetSelection(){
         io.print("\n======   Main Menu   ======");
@@ -48,18 +61,6 @@ public class VendingMachineView {
     public void displaySelectionBanner() {
         io.print("- - - - - - - - - - - - - - - - - - - - ");
         io.print("|Number|     Name    |  Cost  |  QTY  |");
-    }
-    
-    // Vending machine items must be stored in a file.
-    // When an item is vended, the program must update the inventory level appropriately.
-    // However, the items that have an inventory level of zero must still be read
-    public void displayCandyList(List<Candy> candyList) {
-        for (Candy currentCandy : candyList) {
-            io.print("|  " + currentCandy.getCandyNumber() + "   |"
-            + currentCandy.getCandyName() + "| $"
-            + currentCandy.getCandyPrice() + "  |   " 
-            + currentCandy.getCandyQuantity() + "   |");
-        }
     }
     
     public void emptyLine() {
@@ -95,25 +96,11 @@ public class VendingMachineView {
         io.print("Your current balance is $" + money );
     }
     
-    // tell the user they need to add more money... 
-    // If the user selects an item that costs more than the amount the user put into the vending machine, 
-    // the program should display a message indicating insufficient funds
-    // and then redisplay the amount the user had put into the machine. 
-    
     // Only one item can be vended at a time.
     public int getCandyNumberChoice() {
         return io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
     }
-    
-    // If the machine runs out of an item, it should no longer be available as an option to the user
-    public void displayOutOfStock(Candy candy) {
-        io.print("Sorry, we're out of stock of:"); //+ candy.getCandyName());
-        io.print("      " + candy.getCandyName());
-        io.print("Please choose a different Candy's Number to purchase.");
-        displayBuyCandyBanner();
-    }
-    
-    
+        
     public void displayCandySuccess(String candy) {
         io.print("");
         io.print("Thank you for your purchase of:");
