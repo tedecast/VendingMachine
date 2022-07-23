@@ -5,6 +5,7 @@
  */
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
@@ -20,12 +21,14 @@ import java.util.List;
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
     
     private VendingMachineDao dao;
-    //private VendingMachineView view;
+    private VendingMachineAuditDao auditDao; 
     
-    public VendingMachineServiceLayerImpl(VendingMachineDao dao) { //, VendingMachineView view){
+    public VendingMachineServiceLayerImpl(VendingMachineDao dao,
+            VendingMachineAuditDao auditDao) { //, VendingMachineView view){
         this.dao = dao;
-        //this.view = view;
+        this.auditDao = auditDao;
     }
+    
     // declare candy item (item number), and getOneCandy, get rid of it
     // dao get BigDecimal balance, get change balance
     // if balance candy cost 
@@ -41,6 +44,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     
     @Override
     public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
+            
         InsufficientFundsException, NoItemInventoryException {
         Candy candy = dao.buyCandy(candyNumber);
         BigDecimal balance = dao.getChangeBalance();
@@ -58,17 +62,16 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                     + "\nPlease choose a different Candy's Number to purchase. SERVICE"); // print user input
 
         }
-
-
+        auditDao.writeAuditEntry("CANDY " + candy.getCandyName() + " PURCHASED.");
     }
     
     @Override
     public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException {
         BigDecimal balance = dao.getChangeBalance();
 
-//       if (finish == true) {
-//            auditDao.writeAuditEntry("$" + balance + " Was Returned");
-//        }
+        if (finish == true) {
+            auditDao.writeAuditEntry("$" + balance + " was returned.");
+        }
         return balance;
     }
     

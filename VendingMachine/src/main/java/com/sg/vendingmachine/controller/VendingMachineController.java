@@ -118,15 +118,18 @@ public class VendingMachineController {
     private void buyCandy() throws VendingMachinePersistenceException {
         view.displayBuyCandyBanner();
         displayCandySelection();
+        view.emptyLine();
+        view.currentBalance(userMoney);
         
         int candyNumber = view.getCandyNumberChoice();
         
         try {
-            view.currentBalance(userMoney);
+            //view.currentBalance(userMoney);
             //int candyNumber = view.getCandyNumberChoice();
+            //String candyName = candy.getCandyName();
             String candyName = candy.getCandyName();
             service.buyCandy(candyNumber);
-            view.displayCandySuccess(candyName);
+            view.displayCandySuccess(candy.getCandyName());
             view.displayChangeBanner();
             view.displayChange(candyName, candyNumber);
         } catch (NoItemInventoryException ex) {
