@@ -34,12 +34,23 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     // get change balance, using userChange 
     // specify variable for BigDecimal balance = getbalance 
     // throws InsufficientFundsException
-     @Override
-    public Candy candyPrice(BigDecimal candyPrice) throws VendingMachinePersistenceException {
-        loadInventory();
-        Candy candyCost = candyPrice(candyPrice);
-        return candyCost;
+    
+    @Override
+    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException {
+        try {
+            BigDecimal balance = userChange.getBalance();
+            return balance;
+        } catch (NullPointerException ex) {
+        }
+        return new BigDecimal("0");
     }
+//    
+//     @Override
+//    public Candy candyPrice(BigDecimal candyPrice) throws VendingMachinePersistenceException {
+//        loadInventory();
+//        Candy candyCost = candyPrice(candyPrice);
+//        return candyCost;
+//    }
     
     @Override
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
@@ -50,11 +61,11 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     // rewrite and get from hashmap
     // declare int (candy inventory) = bought candy . getInventory - one from it
     // set bought candy (new bought)
-    @Override
-    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException {
-        loadInventory();
-        return candies.get(candyNumber);
-    }
+//    @Override
+//    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException {
+//        loadInventory();
+//        return candies.get(candyNumber);
+//    }
 
     @Override
     public Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException {
@@ -70,19 +81,17 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
        //return boughtCandy;
     }
     
-    private Candy unmarshallCandy(String candyAsText){
+    private Candy unmarshallCandy(String candyAsText) throws VendingMachinePersistenceException{
         
         String[] candyTokens = candyAsText.split(DELIMITER);
         
-        String candyNumber = candyTokens[0];
+        // converted from string to int
+        int candyNumber = Integer.parseInt(candyTokens[0]); 
+        String candyName = candyTokens[1];
+        BigDecimal candyPrice = new BigDecimal (candyTokens[2]);
+        int candyQuantity = Integer.parseInt(candyTokens[3]);
         
-        Candy candyFromFile = new Candy(candyNumber);
-        
-        candyFromFile.setCandyName(candyTokens[1]);
-        
-        candyFromFile.setCandyPrice(new BigDecimal(candyTokens[2]));
-        
-        candyFromFile.setCandyQuantity(Integer.parseInt((candyTokens[3])));
+        Candy candyFromFile = new Candy(candyNumber, candyName, candyPrice, candyQuantity);
         
         return candyFromFile;
     }
@@ -108,7 +117,8 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
             currentLine = scanner.nextLine();
             currentCandy = unmarshallCandy(currentLine);
             
-            candies.put(currentCandy.getCandyNumber(), currentCandy);
+            // converted to int
+            candies.put(Integer.parseInt((currentCandy.getCandyNumber())), currentCandy);
         }
         scanner.close();
     }

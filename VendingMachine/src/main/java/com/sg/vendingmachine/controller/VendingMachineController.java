@@ -27,10 +27,10 @@ import java.util.List;
  */
 public class VendingMachineController {
     
-    //private Change change = new Change(balance);
+    private Change balance;
     private VendingMachineServiceLayer service;
     private VendingMachineView view; // = new VendingMachineView();
-    private BigDecimal balance = new BigDecimal(0);
+    //private BigDecimal balance = new BigDecimal(0);
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
@@ -59,11 +59,11 @@ public class VendingMachineController {
                         view.getHitEnter();
                         break;
                     case 2:
-                        io.print("Add Money");
                         addMoney();
                         break;
                     case 3:
                         io.print("Display Balance");
+                        displayBalance();
                         break;
                     case 4:
                         io.print("Buy Candy");
@@ -96,9 +96,15 @@ public class VendingMachineController {
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
         BigDecimal money = view.displayRequestUserMoney();
+        balance.addChange(money);
         view.addedMoneySuccessBanner(money);
     }
-    // cal view to display enter selection id, get item id from user, change to int
+    
+    private void displayBalance() throws VendingMachinePersistenceException {
+        view.displayBalanceBanner();
+        view.currentBalance(balance.getBalance());
+    }
+    // call view to display enter selection id, get item id from user, change to int
     // call purchase, 
     // wrap try service.makePurchase (buy candy)}
     // balance = service.getBalance display successfully purchased}

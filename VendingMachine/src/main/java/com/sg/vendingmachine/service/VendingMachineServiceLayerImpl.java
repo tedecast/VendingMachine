@@ -67,10 +67,10 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return dao.getAllCandy();
     }
 
-    @Override
-    public Candy getOneCandy(String candy) throws VendingMachinePersistenceException {
-        return dao.getOneCandy(candy);
-    }
+//    @Override
+//    public Candy getOneCandy(String candy) throws VendingMachinePersistenceException {
+//        return dao.getOneCandy(candy);
+//    }
     
 //   private void validateCandyData(Candy candy) throws NoItemInventoryException {
 //        if(candy.getCandyNumber() == null || 

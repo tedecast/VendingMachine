@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Candy;
+import com.sg.vendingmachine.dto.Change;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -22,7 +23,10 @@ public interface VendingMachineDao {
     
     Candy buyCandy(String candyNumber) throws VendingMachinePersistenceException;
     
-    Candy candyPrice (BigDecimal candyPrice) throws VendingMachinePersistenceException;
+    BigDecimal getChangeBalance() throws VendingMachinePersistenceException;
+    //Candy candyPrice (BigDecimal candyPrice) throws VendingMachinePersistenceException;
+    
+    
     
     // (i.e. InsufficientFundsException)
     // (i.e. NoItemInventoryException)

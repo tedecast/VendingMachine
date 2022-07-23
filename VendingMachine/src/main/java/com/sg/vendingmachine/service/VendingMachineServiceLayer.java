@@ -22,9 +22,9 @@ public interface VendingMachineServiceLayer {
 
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
+//    public Candy getOneCandy(String candyNumber) throws VendingMachinePersistenceException;
     
-    public void moneyIn(BigDecimal money, Candy candyPrice) throws VendingMachinePersistenceException,
-                        InsufficientFundsException;
+//    public void moneyIn(BigDecimal money, Candy candyPrice) throws VendingMachinePersistenceException,
+//                        InsufficientFundsException;
     
 }

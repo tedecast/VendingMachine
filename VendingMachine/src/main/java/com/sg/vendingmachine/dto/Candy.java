@@ -6,6 +6,7 @@
 package com.sg.vendingmachine.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 /**
@@ -13,22 +14,28 @@ import java.util.Objects;
  * @author Teresa
  */
 public class Candy {
-    private String candyNumber; // id
+    private int candyNumber; // id, changing to int
     private String candyName;
     private BigDecimal candyPrice;
     private int candyQuantity;
     
     // 
-    
-    public Candy(String candyNumber) {
+    public Candy(int candyNumber, String candyName, BigDecimal candyPrice, int candyQuantity) {
         this.candyNumber = candyNumber;
+        this.candyName = candyName;
+        this.candyPrice = candyPrice.setScale(2, RoundingMode.HALF_UP);
+        this.candyQuantity = candyQuantity;
     }
+    
+//    public Candy(String candyNumber) {
+//        this.candyNumber = candyNumber;
+//    }
 
-    public String getCandyNumber() {
+    public int getCandyNumber() {
         return candyNumber;
     }
 
-    public void setCandyNumber(String candyNumber) {
+    public void setCandyNumber(int candyNumber) {
         this.candyNumber = candyNumber;
     }
 

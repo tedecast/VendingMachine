@@ -95,6 +95,14 @@ public class VendingMachineView {
         getHitEnter();
     }
     
+    public void displayBalanceBanner() {
+        emptyLine();
+        io.print("* . * . * . Balance . * . * . * ");
+    }
+    
+    public void currentBalance(BigDecimal money) {
+        io.print("Your current balance is: " + money );
+    }
     public BigDecimal addMoreMoney() {
         BigDecimal money = io.readBigDecimal("Please add in more money:");
         return money;
