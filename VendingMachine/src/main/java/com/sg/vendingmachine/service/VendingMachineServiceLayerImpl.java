@@ -43,9 +43,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
     
     @Override
-    public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
-            
+    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException,
         InsufficientFundsException, NoItemInventoryException {
+        
         Candy candy = dao.buyCandy(candyNumber);
         BigDecimal balance = dao.getChangeBalance();
         

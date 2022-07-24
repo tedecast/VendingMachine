@@ -115,8 +115,9 @@ public class VendingMachineView {
         io.print("* . * . Your change is: . * . *");
     }
     
-    public void displayChange(String coinName, int coinAmount){
-        io.print("\n          " + coinAmount  + " " + coinName);
+    // balance = userChange
+    public void displayChange(Change balance){
+        io.print(balance.toString());
     }
    
     public void displayErrorMessage(String errorMsg){

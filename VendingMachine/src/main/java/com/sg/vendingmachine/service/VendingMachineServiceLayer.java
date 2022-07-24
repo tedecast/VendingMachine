@@ -19,10 +19,10 @@ public interface VendingMachineServiceLayer {
     
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    public void buyCandy(int candyNumber) throws VendingMachinePersistenceException,
+    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException,
             NoItemInventoryException, InsufficientFundsException;
     
-    BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
+    public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
     
     
 }

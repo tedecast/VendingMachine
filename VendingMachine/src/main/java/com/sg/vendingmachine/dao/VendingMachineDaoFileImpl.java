@@ -51,7 +51,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
        Candy candyChoice = candies.get(candyNumber);
-       
        int candyQuantity = candyChoice.getCandyQuantity();
        candyChoice.setCandyQuantity(candyQuantity -1);
        writeInventory();
@@ -60,8 +59,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
        // hashMap.replace()
        // write it back, and then purchase
        // added this? 
-       
-       
+
     }
     
     @Override
