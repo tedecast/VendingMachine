@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -50,11 +52,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
-       Candy candyChoice = candies.get(candyNumber);
+       List<Candy> filteredCandyList = getAllCandy().stream()
+               .filter((c) -> c.getCandyNumber() == candyNumber)
+               .collect(Collectors.toList());
+       Candy candyChoice = filteredCandyList.get(0);
        int candyQuantity = candyChoice.getCandyQuantity();
        candyChoice.setCandyQuantity(candyQuantity -1);
        writeInventory();
-       return candyChoice; 
+       return candyChoice;
        // userChange.makepurchase
        // hashMap.replace()
        // write it back, and then purchase
