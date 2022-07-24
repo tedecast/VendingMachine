@@ -132,7 +132,7 @@ public class VendingMachineController {
             //String candyName = candy.getCandyName();
             //candies.stream().filter((c) -> c.getCandyNumber() == candyNumber);
             // service.buyCandy(candyNumber);
-            String candyName = service.buyCandy(candyNumber);
+            Candy candyName = service.buyCandy(candyNumber);
             service.buyCandy(candyNumber);
             userMoney = service.getBalance(false);
             view.displayCandySuccess(candyName);

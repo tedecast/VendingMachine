@@ -101,10 +101,10 @@ public class VendingMachineView {
         return io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
     }
         
-    public void displayCandySuccess(String candy) {
+    public void displayCandySuccess(Candy candyName) {
         io.print("");
         io.print("Thank you for your purchase of:");
-        io.print("        " + candy);// .getCandyName()); //+ " | " + "$" + candy.getCandyPrice());
+        io.print("        " + candyName);// .getCandyName()); //+ " | " + "$" + candy.getCandyPrice());
         emptyLine();
     }
     

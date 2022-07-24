@@ -49,6 +49,10 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         Candy candy = dao.buyCandy(candyNumber);
         BigDecimal balance = dao.getChangeBalance();
         
+        if(candy.getCandyQuantity() != 0 && balance.compareTo(candy.getCandyPrice()) >= 1){
+            candy.setCandyQuantity(candy.getCandyQuantity() - 1);
+        }
+        
         if (balance.compareTo(candy.getCandyPrice()) == -1 ||
                 balance.compareTo(BigDecimal.ZERO) == 0) {
             throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
@@ -63,6 +67,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
         //candy.getCandyName() 
         auditDao.writeAuditEntry("CANDY " + candy.getCandyName() + " PURCHASED.");
+        return candy;
     }
     
     @Override
