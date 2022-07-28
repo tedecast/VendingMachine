@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 /**
@@ -30,20 +29,39 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     
     private Map<String, Candy> candies = new HashMap<>();
     private Change userChange = new Change(new BigDecimal(0));
-    public static final String INVENTORY_FILE = "inventory.txt";
-    public static final String DELIMITER = "::";
-    
-    // get change balance, using userChange 
-    // specify variable for BigDecimal balance = getbalance 
-    // throws InsufficientFundsException
-    
+    // public static final String INVENTORY_FILE = "inventory.txt";
+    private final String INVENTORY_FILE;
+    public VendingMachineDaoFileImpl() {
+        INVENTORY_FILE = "inventor.txt";
+    }
+    public VendingMachineDaoFileImpl(String inventoryTextFile){
+        INVENTORY_FILE = inventoryTextFile;
+    }
+    public static final String DELIMITER = "::"; 
     
     @Override
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
         loadInventory();
         return new ArrayList<>(candies.values());
     }
+    
+    @Override
+    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException{
+        if (money.compareTo(BigDecimal.ZERO) == 1) {
+            userChange.addChange(money);
+        }
+    }
 
+    @Override
+    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException {
+        try {
+            BigDecimal balance = userChange.getBalance();
+            return balance;
+        } catch (NullPointerException ex) {
+        }
+        return new BigDecimal("0");
+    }
+    
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
@@ -69,15 +87,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
        // write it back, and then purchase
     }
     
-    @Override
-    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException {
-        try {
-            BigDecimal balance = userChange.getBalance();
-            return balance;
-        } catch (NullPointerException ex) {
-        }
-        return new BigDecimal("0");
-    }
     
     @Override
     public String getBalanceInCoins() throws VendingMachinePersistenceException {
@@ -88,13 +97,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         } catch (NullPointerException ex) {
         }
         return "";
-    }
-    
-    @Override
-    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException{
-        if (money.compareTo(BigDecimal.ZERO) == 1) {
-            userChange.addChange(money);
-        }
     }
         
     private Candy unmarshallCandy(String candyAsText) throws VendingMachinePersistenceException{

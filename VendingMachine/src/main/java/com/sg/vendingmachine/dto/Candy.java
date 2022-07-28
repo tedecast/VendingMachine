@@ -66,10 +66,10 @@ public class Candy {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.candyNumber);
-        hash = 29 * hash + Objects.hashCode(this.candyName);
-        hash = 29 * hash + Objects.hashCode(this.candyPrice);
-        hash = 29 * hash + this.candyQuantity;
+        hash = 79 * hash + this.candyNumber;
+        hash = 79 * hash + Objects.hashCode(this.candyName);
+        hash = 79 * hash + Objects.hashCode(this.candyPrice);
+        hash = 79 * hash + this.candyQuantity;
         return hash;
     }
 
@@ -85,10 +85,10 @@ public class Candy {
             return false;
         }
         final Candy other = (Candy) obj;
-        if (this.candyQuantity != other.candyQuantity) {
+        if (this.candyNumber != other.candyNumber) {
             return false;
         }
-        if (!Objects.equals(this.candyNumber, other.candyNumber)) {
+        if (this.candyQuantity != other.candyQuantity) {
             return false;
         }
         if (!Objects.equals(this.candyName, other.candyName)) {
@@ -99,7 +99,6 @@ public class Candy {
         }
         return true;
     }
-    
     
     
     

@@ -44,6 +44,17 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public void addMoney(BigDecimal money) throws VendingMachinePersistenceException {
         dao.addMoney(money);
     }
+    
+    @Override
+    public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException {
+        BigDecimal balance = dao.getChangeBalance();
+
+        if (finish == true) {
+            auditDao.writeAuditEntry("$" + balance + " was returned.");
+        }
+        return balance;
+    }
+    
     // If the user selects an item that costs more than the amount the user put into the vending machine,
     // the program should display a message indicating insufficient funds 
     // and then redisplay the amount the user had put into the machine.
@@ -75,16 +86,6 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         //candy.getCandyName() 
         auditDao.writeAuditEntry("CANDY " + boughtCandy.getCandyName() + " WAS PURCHASED.");
         return boughtCandy;
-    }
-    
-    @Override
-    public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException {
-        BigDecimal balance = dao.getChangeBalance();
-
-        if (finish == true) {
-            auditDao.writeAuditEntry("$" + balance + " was returned.");
-        }
-        return balance;
     }
     
     @Override

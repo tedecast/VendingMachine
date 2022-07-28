@@ -18,13 +18,14 @@ public interface VendingMachineServiceLayer {
     
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException,
-            NoItemInventoryException, InsufficientFundsException;
+    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
     public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
     
-    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
+    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException,
+            NoItemInventoryException, InsufficientFundsException;
     
     public String getBalanceInCoins() throws VendingMachinePersistenceException;
+    
 
 }

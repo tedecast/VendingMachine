@@ -17,11 +17,12 @@ public interface VendingMachineDao {
     
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
-    
-    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException;    
-    
     public void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
-    public String getBalanceInCoins() throws VendingMachinePersistenceException;
+    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException;   
+    
+    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
+    
+    public String getBalanceInCoins() throws VendingMachinePersistenceException;  
+    
 }
