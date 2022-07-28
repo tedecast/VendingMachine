@@ -13,6 +13,7 @@ import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -41,33 +42,39 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public List<Candy> getAllCandy() throws VendingMachinePersistenceException {
         return dao.getAllCandy();
     }
+    //change to addMoney here and DAO
+    public void AddMoney(BigDecimal money) throws VendingMachinePersistenceException {
+        dao.AddMoney(money);
+    }
     
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException,
         InsufficientFundsException, NoItemInventoryException {
         
-        Candy candy = dao.buyCandy(candyNumber);
+        //Use a filter to filter to the single candy object being bought
+        List<Candy> selectedCandyList = dao.getAllCandy().stream()
+                .filter((sC) -> sC.getCandyNumber() == candyNumber)
+                .collect(Collectors.toList());
+        Candy selectedCandy = selectedCandyList.get(0);         
         BigDecimal balance = dao.getChangeBalance();
-        
-        if(candy.getCandyQuantity() != 0 && balance.compareTo(candy.getCandyPrice()) >= 1){
-            candy.setCandyQuantity(candy.getCandyQuantity() - 1);
-        }
-        
-        if (balance.compareTo(candy.getCandyPrice()) == -1 ||
-                balance.compareTo(BigDecimal.ZERO) == 0) {
+        System.out.println(balance + " - Balance");
+
+        if (balance.compareTo(selectedCandy.getCandyPrice()) == -1 ) {
             throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
                     + "\nPlease add more money at the Main Menu."); // print user input;
         }
         
-        if (candy.getCandyQuantity() == 0) {
+        if (selectedCandy.getCandyQuantity() <= 0) {
             throw new NoItemInventoryException(
                     "\n                    ERROR:"
                     + "\nPlease choose an existing Candy's Number to purchase."); // print user input
 
         }
+        //Only do this if no errors get thrown
+        Candy boughtCandy = dao.buyCandy(candyNumber);
         //candy.getCandyName() 
-        auditDao.writeAuditEntry("CANDY " + candy.getCandyName() + " PURCHASED.");
-        return candy;
+        auditDao.writeAuditEntry("CANDY " + boughtCandy.getCandyName() + " PURCHASED.");
+        return boughtCandy;
     }
     
     @Override
@@ -80,4 +87,8 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return balance;
     }
     
+    @Override
+    public String getBalanceInCoins() throws VendingMachinePersistenceException{
+        return dao.getBalanceInCoins();
+    }
 }

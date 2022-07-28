@@ -24,5 +24,8 @@ public interface VendingMachineServiceLayer {
     
     public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
     
+    public void AddMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
+    public String getBalanceInCoins() throws VendingMachinePersistenceException;
+
 }

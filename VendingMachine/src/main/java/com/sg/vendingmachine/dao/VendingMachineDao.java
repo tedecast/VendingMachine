@@ -20,5 +20,8 @@ public interface VendingMachineDao {
     Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
     
     BigDecimal getChangeBalance() throws VendingMachinePersistenceException;    
-  
+    
+    void AddMoney(BigDecimal money) throws VendingMachinePersistenceException;
+    
+    public String getBalanceInCoins() throws VendingMachinePersistenceException;
 }

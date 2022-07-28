@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
 /**
  *
  * @author Teresa
@@ -29,10 +29,6 @@ public class VendingMachineController {
     
     private VendingMachineServiceLayer service;
     private VendingMachineView view; // = new VendingMachineView();
-    private BigDecimal userMoney = new BigDecimal(0);
-    private Change balance = new Change(userMoney);
-    private Candy candy;
-    //private Map<String, Candy> candies = new HashMap<>();
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
@@ -91,20 +87,22 @@ public class VendingMachineController {
     private void displayCandySelection() throws VendingMachinePersistenceException {
         //view.displayCandyBanner();
         view.displaySelectionBanner();
-        List<Candy> candyList = service.getAllCandy();
-        view.displayCandyList(candyList);
+        List<Candy> filteredCandyList = service.getAllCandy().stream()
+               .filter((c) -> c.getCandyQuantity() > 0)
+               .collect(Collectors.toList());
+        view.displayCandyList(filteredCandyList);
     }
     
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
-        userMoney = view.displayRequestUserMoney();
-        balance.addChange(userMoney);
+        BigDecimal userMoney = view.displayRequestUserMoney();
+        service.AddMoney(userMoney);
         view.addedMoneySuccessBanner(userMoney);
     }
     
     private void displayBalance() throws VendingMachinePersistenceException {
         view.displayBalanceBanner();
-        view.currentBalance(userMoney);     
+        view.currentBalance(service.getBalance(false)); //Should this be true?
     }
     // call view to display enter selection id, get item id from user, change to int
     // call purchase, 
@@ -122,23 +120,17 @@ public class VendingMachineController {
         view.displayBuyCandyBanner();
         displayCandySelection();
         view.emptyLine();
-        view.currentBalance(userMoney);
+        view.currentBalance(service.getBalance(false));
         
-        int candyNumber = view.getCandyNumberChoice();
+         int candyNumber = view.getCandyNumberChoice();
         
         try {
-            //view.currentBalance(userMoney);
-            //int candyNumber = view.getCandyNumberChoice();
-            //String candyName = candy.getCandyName();
-            //candies.stream().filter((c) -> c.getCandyNumber() == candyNumber);
-            // service.buyCandy(candyNumber);
             Candy candyName = service.buyCandy(candyNumber);
-            service.buyCandy(candyNumber);
-            userMoney = service.getBalance(false);
-            view.displayCandySuccess(candyName);
+            view.displayCandySuccess(candyName.getCandyName());
             view.displayChangeBanner();
-            view.displayChange(balance);
-            //view.displayChange(candyName, candyNumber);
+            view.displayChange(service.getBalance(true));
+            //view.displayChangeAsCoins(service.getBalanceInCoins())
+            System.out.println(service.getBalanceInCoins());
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());
         } catch (InsufficientFundsException ex){

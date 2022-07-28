@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class VendingMachineDaoFileImpl implements VendingMachineDao {
     
     private Map<String, Candy> candies = new HashMap<>();
-    private Change userChange;
+    private Change userChange = new Change(new BigDecimal(0));
     public static final String INVENTORY_FILE = "inventory.txt";
     public static final String DELIMITER = "::";
     
@@ -52,14 +52,22 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
+               
+       try {   
        List<Candy> filteredCandyList = getAllCandy().stream()
                .filter((c) -> c.getCandyNumber() == candyNumber)
                .collect(Collectors.toList());
        Candy candyChoice = filteredCandyList.get(0);
        int candyQuantity = candyChoice.getCandyQuantity();
+       BigDecimal candyPrice = candyChoice.getCandyPrice();
+       userChange.makePurchase(candyPrice);
        candyChoice.setCandyQuantity(candyQuantity -1);
+       
        writeInventory();
        return candyChoice;
+       } catch (NullPointerException ex) {
+       }
+       return new Candy(1, "candyName", new BigDecimal(0), 2);
        // userChange.makepurchase
        // hashMap.replace()
        // write it back, and then purchase
@@ -75,6 +83,22 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         } catch (NullPointerException ex) {
         }
         return new BigDecimal("0");
+    }
+    
+    @Override
+    public String getBalanceInCoins() throws VendingMachinePersistenceException {
+        try {
+            BigDecimal userBal = userChange.getBalance();
+            String coinString = new Change(userBal).toString();
+            return coinString;
+        } catch (NullPointerException ex) {
+        }
+        return "";
+    }
+    
+    @Override
+    public void AddMoney(BigDecimal money){
+        userChange.addChange(money);
     }
         
     private Candy unmarshallCandy(String candyAsText) throws VendingMachinePersistenceException{

@@ -98,10 +98,10 @@ public class VendingMachineView {
     
     // Only one item can be vended at a time.
     public int getCandyNumberChoice() {
-        return io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5);
+        return io.readInt("Please enter the Candy's Number you'd like to purchase.", 1, 5); //change this to be dynamic (maxInt OR getAllCandy.length - 1
     }
         
-    public void displayCandySuccess(Candy candyName) {
+    public void displayCandySuccess(String candyName) {
         io.print("");
         io.print("Thank you for your purchase of:");
         io.print("        " + candyName);// .getCandyName()); //+ " | " + "$" + candy.getCandyPrice());
@@ -116,7 +116,7 @@ public class VendingMachineView {
     }
     
     // balance = userChange
-    public void displayChange(Change balance){
+    public void displayChange(BigDecimal balance){
         io.print(balance.toString());
     }
    
