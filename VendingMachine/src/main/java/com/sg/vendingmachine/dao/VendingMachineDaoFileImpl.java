@@ -32,7 +32,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     // public static final String INVENTORY_FILE = "inventory.txt";
     private final String INVENTORY_FILE;
     public VendingMachineDaoFileImpl() {
-        INVENTORY_FILE = "inventor.txt";
+        INVENTORY_FILE = "inventory.txt";
     }
     public VendingMachineDaoFileImpl(String inventoryTextFile){
         INVENTORY_FILE = inventoryTextFile;

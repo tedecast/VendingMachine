@@ -96,9 +96,7 @@ public class VendingMachineView {
     public void currentBalance(BigDecimal money) {
         if (money.compareTo(BigDecimal.ZERO) == 1){
             io.print("Your current balance is $" + money );
-        } else {
-            io.print("Please Add Money at the Main Menu to have a balance.");
-        }   
+        }
     }
     
     // Only one item can be vended at a time.
