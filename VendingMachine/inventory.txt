@@ -1,5 +1,5 @@
-1::  Toblerone  ::2.00::3::
+1::  Toblerone  ::2.00::2::
 2::   Reese's   ::1.75::0::
 3::   Kit-Kat   ::1.50::5::
-4:: Peach Rings ::1.25::1::
+4:: Peach Rings ::1.25::0::
 5:: Hot Tamales ::1.00::4::

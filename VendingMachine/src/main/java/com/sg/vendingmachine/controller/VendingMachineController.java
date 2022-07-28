@@ -27,8 +27,8 @@ public class VendingMachineController {
         this.service = service;
         this.view = view;
     }
-    // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     
+    // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     public void run() {
        
         boolean keepGoing = true;
@@ -82,6 +82,7 @@ public class VendingMachineController {
         view.displayCandyList(filteredCandyList);
     }
     
+    // The user must put in some amount of money before an item can be selected.
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
         BigDecimal userMoney = view.displayRequestUserMoney();
@@ -95,19 +96,9 @@ public class VendingMachineController {
         view.displayBalanceBanner();
         view.currentBalance(service.getBalance(false)); //Should this be true?
     }
-    
-    // call view to display enter selection id, get item id from user, change to int
-    // call purchase, 
-    // wrap try service.makePurchase (buy candy)}
-    // balance = service.getBalance display successfully purchased}
-    // take id, using view select item
-    // use BigBalance intialize at ;
-    
-    // tell the user they need to add more money... 
-    // If the user selects an item that costs more than the amount the user put into the vending machine, 
-    // the program should display a message indicating insufficient funds
-    // and then redisplay the amount the user had put into the machine. 
-    
+   
+    // If the user selects an item that costs equal to or less than the amount of money that the user put in the vending machine, 
+    // the program should display the change returned to the user. 
     private void buyCandy() throws VendingMachinePersistenceException {
         view.displayBuyCandyBanner();
         displayCandySelection();
@@ -121,6 +112,7 @@ public class VendingMachineController {
             view.displayCandySuccess(candyName.getCandyName());
             view.displayChangeBanner();
             service.getBalance(true);
+            // Change must be displayed as the number of quarters, dimes, nickels, and pennies returned to the user.
             System.out.println(service.getBalanceInCoins());
             view.getHitEnter();
         } catch (NoItemInventoryException ex) {
@@ -137,15 +129,6 @@ public class VendingMachineController {
     private void exitMessage() {
         view.displayExitBanner();
     }    
-}   
-    
-    // listing single candy information
-//    private void viewCandy() {
-//        view.displayCandyBanner();
-//        String candyNumber = view.getCandyNumberChoice();
-//        Candy candy = dao.getCandy(candyNumber);
-//        view.displayCandy(candy);
-//    }
-//    
+}  
     
 

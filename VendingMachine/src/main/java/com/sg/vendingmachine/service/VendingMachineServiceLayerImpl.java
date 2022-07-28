@@ -9,8 +9,6 @@ import com.sg.vendingmachine.dao.VendingMachineAuditDao;
 import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
-import com.sg.vendingmachine.dto.Change;
-import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +44,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public void addMoney(BigDecimal money) throws VendingMachinePersistenceException {
         dao.addMoney(money);
     }
-    
+    // If the user selects an item that costs more than the amount the user put into the vending machine,
+    // the program should display a message indicating insufficient funds 
+    // and then redisplay the amount the user had put into the machine.
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException,
         InsufficientFundsException, NoItemInventoryException {
@@ -60,7 +60,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
         if (balance.compareTo(selectedCandy.getCandyPrice()) == -1 ) {
             throw new InsufficientFundsException("ERROR: Insufficient Funds. "
-                    + "\nYou only have $" + balance 
+                    + "\nYou only put in $" + balance 
                     + "\nPlease Add Money at the Main Menu."); // print user input;
         }
         
@@ -73,7 +73,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         //Only do this if no errors get thrown
         Candy boughtCandy = dao.buyCandy(candyNumber);
         //candy.getCandyName() 
-        auditDao.writeAuditEntry("CANDY " + boughtCandy.getCandyName() + " PURCHASED.");
+        auditDao.writeAuditEntry("CANDY " + boughtCandy.getCandyName() + " WAS PURCHASED.");
         return boughtCandy;
     }
     

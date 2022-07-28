@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface VendingMachineDao {
     
-    List<Candy> getAllCandy() throws VendingMachinePersistenceException;
+    public List<Candy> getAllCandy() throws VendingMachinePersistenceException;
     
-    Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
+    public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
     
-    BigDecimal getChangeBalance() throws VendingMachinePersistenceException;    
+    public BigDecimal getChangeBalance() throws VendingMachinePersistenceException;    
     
-    void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
+    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
-    String getBalanceInCoins() throws VendingMachinePersistenceException;
+    public String getBalanceInCoins() throws VendingMachinePersistenceException;
 }

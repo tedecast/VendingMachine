@@ -43,16 +43,11 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         loadInventory();
         return new ArrayList<>(candies.values());
     }
-    
-    // rewrite and get from hashmap
-    // declare int (candy inventory) = bought candy . getInventory - one from it
-    // set bought candy (new bought)
-
 
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
        loadInventory();
-               
+        // You must include at least one lambda function in the solution.       
        try {   
        List<Candy> filteredCandyList = getAllCandy().stream()
                .filter((c) -> c.getCandyNumber() == candyNumber)
@@ -72,8 +67,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
        // userChange.makepurchase
        // hashMap.replace()
        // write it back, and then purchase
-       // added this? 
-
     }
     
     @Override
