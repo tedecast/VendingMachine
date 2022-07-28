@@ -5,21 +5,14 @@
  */
 package com.sg.vendingmachine.controller;
 
-import com.sg.vendingmachine.dao.VendingMachineDao;
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
-import com.sg.vendingmachine.dao.VendingMachineDaoFileImpl;
 import com.sg.vendingmachine.dto.Candy;
-import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.service.InsufficientFundsException;
 import com.sg.vendingmachine.service.NoItemInventoryException;
 import com.sg.vendingmachine.service.VendingMachineServiceLayer;
-import com.sg.vendingmachine.ui.UserIO;
-import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 /**
  *
@@ -28,15 +21,12 @@ import java.util.stream.Collectors;
 public class VendingMachineController {
     
     private VendingMachineServiceLayer service;
-    private VendingMachineView view; // = new VendingMachineView();
+    private VendingMachineView view; 
     
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;
     }
-    private UserIO io = new UserIOConsoleImpl();
-    
-    
     // The program should display all of the items and their respective prices when the program starts, along with an option to exit the program.
     
     public void run() {
@@ -64,7 +54,6 @@ public class VendingMachineController {
                         view.getHitEnter();
                         break;
                     case 4:
-                        io.print("Buy Candy");
                         buyCandy();
                         break;
                     case 5:
@@ -96,14 +85,18 @@ public class VendingMachineController {
     private void addMoney() throws VendingMachinePersistenceException {
         view.displayAddMoneyBanner();
         BigDecimal userMoney = view.displayRequestUserMoney();
-        service.AddMoney(userMoney);
+        service.addMoney(userMoney);
         view.addedMoneySuccessBanner(userMoney);
+        view.emptyLine();
+        view.currentBalance(service.getBalance(false));
+        view.getHitEnter();
     }
     
     private void displayBalance() throws VendingMachinePersistenceException {
         view.displayBalanceBanner();
         view.currentBalance(service.getBalance(false)); //Should this be true?
     }
+    
     // call view to display enter selection id, get item id from user, change to int
     // call purchase, 
     // wrap try service.makePurchase (buy candy)}
@@ -128,8 +121,7 @@ public class VendingMachineController {
             Candy candyName = service.buyCandy(candyNumber);
             view.displayCandySuccess(candyName.getCandyName());
             view.displayChangeBanner();
-            view.displayChange(service.getBalance(true));
-            //view.displayChangeAsCoins(service.getBalanceInCoins())
+            service.getBalance(true);
             System.out.println(service.getBalanceInCoins());
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());

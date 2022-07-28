@@ -43,8 +43,8 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return dao.getAllCandy();
     }
     //change to addMoney here and DAO
-    public void AddMoney(BigDecimal money) throws VendingMachinePersistenceException {
-        dao.AddMoney(money);
+    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException {
+        dao.addMoney(money);
     }
     
     @Override
@@ -57,17 +57,16 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                 .collect(Collectors.toList());
         Candy selectedCandy = selectedCandyList.get(0);         
         BigDecimal balance = dao.getChangeBalance();
-        System.out.println(balance + " - Balance");
 
         if (balance.compareTo(selectedCandy.getCandyPrice()) == -1 ) {
-            throw new InsufficientFundsException("Insufficient Funds. You only have $" + balance 
+            throw new InsufficientFundsException("ERROR: Insufficient Funds. You only have $" + balance 
                     + "\nPlease add more money at the Main Menu."); // print user input;
         }
         
         if (selectedCandy.getCandyQuantity() <= 0) {
             throw new NoItemInventoryException(
-                    "\n                    ERROR:"
-                    + "\nPlease choose an existing Candy's Number to purchase."); // print user input
+                    "ERROR: No such Candy Number exists." +
+                    "\nPlease try again at the Main Menu."); 
 
         }
         //Only do this if no errors get thrown

@@ -21,7 +21,7 @@ public interface VendingMachineDao {
     
     BigDecimal getChangeBalance() throws VendingMachinePersistenceException;    
     
-    void AddMoney(BigDecimal money) throws VendingMachinePersistenceException;
+    void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
-    public String getBalanceInCoins() throws VendingMachinePersistenceException;
+    String getBalanceInCoins() throws VendingMachinePersistenceException;
 }

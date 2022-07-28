@@ -97,7 +97,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     }
     
     @Override
-    public void AddMoney(BigDecimal money){
+    public void addMoney(BigDecimal money){
         userChange.addChange(money);
     }
         

@@ -7,7 +7,6 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
-import com.sg.vendingmachine.dto.Change;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public interface VendingMachineServiceLayer {
     
     public BigDecimal getBalance(boolean finish) throws VendingMachinePersistenceException;
     
-    public void AddMoney(BigDecimal money) throws VendingMachinePersistenceException;
+    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
     public String getBalanceInCoins() throws VendingMachinePersistenceException;
 

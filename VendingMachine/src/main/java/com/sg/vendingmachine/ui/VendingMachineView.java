@@ -84,7 +84,6 @@ public class VendingMachineView {
     
     public void addedMoneySuccessBanner(BigDecimal money) {
         io.print("You've successfully added $" + money);
-        getHitEnter();
     }
     
     public void displayBalanceBanner() {
@@ -114,14 +113,9 @@ public class VendingMachineView {
     public void displayChangeBanner(){
         io.print("* . * . Your change is: . * . *");
     }
-    
-    // balance = userChange
-    public void displayChange(BigDecimal balance){
-        io.print(balance.toString());
-    }
    
     public void displayErrorMessage(String errorMsg){
-        io.print("\n. * . * .   ERROR   . * . * . ");
+        io.print("\n. * . * . * . * .  ERROR   . * . * . * . * .");
         io.print(errorMsg);
     }
     
