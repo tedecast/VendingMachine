@@ -6,8 +6,6 @@
 package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.Candy;
-import com.sg.vendingmachine.dto.Change;
-import com.sg.vendingmachine.dto.Coins;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -83,7 +81,11 @@ public class VendingMachineView {
     }
     
     public void addedMoneySuccessBanner(BigDecimal money) {
-        io.print("You've successfully added $" + money);
+        if (money.compareTo(BigDecimal.ZERO) == 1) {
+            io.print("You've successfully added $" + money);
+        } else {
+            io.print("$" + money + " could not be added.");
+        }
     }
     
     public void displayBalanceBanner() {
@@ -92,7 +94,11 @@ public class VendingMachineView {
     }
     
     public void currentBalance(BigDecimal money) {
-        io.print("Your current balance is $" + money );
+        if (money.compareTo(BigDecimal.ZERO) == 1){
+            io.print("Your current balance is $" + money );
+        } else {
+            io.print("Please Add Money at the Main Menu to have a balance.");
+        }   
     }
     
     // Only one item can be vended at a time.
@@ -115,7 +121,7 @@ public class VendingMachineView {
     }
    
     public void displayErrorMessage(String errorMsg){
-        io.print("\n. * . * . * . * .  ERROR   . * . * . * . * .");
+        io.print("\n. * . * . * . * ERROR  * . * . * . * . ");
         io.print(errorMsg);
     }
     

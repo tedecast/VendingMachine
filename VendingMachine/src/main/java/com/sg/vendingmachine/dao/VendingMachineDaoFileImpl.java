@@ -62,8 +62,9 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
        BigDecimal candyPrice = candyChoice.getCandyPrice();
        userChange.makePurchase(candyPrice);
        candyChoice.setCandyQuantity(candyQuantity -1);
-       
+       if (candyQuantity > 0 ) {
        writeInventory();
+       }
        return candyChoice;
        } catch (NullPointerException ex) {
        }
@@ -97,8 +98,10 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     }
     
     @Override
-    public void addMoney(BigDecimal money){
-        userChange.addChange(money);
+    public void addMoney(BigDecimal money) throws VendingMachinePersistenceException{
+        if (money.compareTo(BigDecimal.ZERO) == 1) {
+            userChange.addChange(money);
+        }
     }
         
     private Candy unmarshallCandy(String candyAsText) throws VendingMachinePersistenceException{

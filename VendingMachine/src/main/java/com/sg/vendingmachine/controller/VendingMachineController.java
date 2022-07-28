@@ -87,7 +87,6 @@ public class VendingMachineController {
         BigDecimal userMoney = view.displayRequestUserMoney();
         service.addMoney(userMoney);
         view.addedMoneySuccessBanner(userMoney);
-        view.emptyLine();
         view.currentBalance(service.getBalance(false));
         view.getHitEnter();
     }
@@ -115,7 +114,7 @@ public class VendingMachineController {
         view.emptyLine();
         view.currentBalance(service.getBalance(false));
         
-         int candyNumber = view.getCandyNumberChoice();
+        int candyNumber = view.getCandyNumberChoice();
         
         try {
             Candy candyName = service.buyCandy(candyNumber);
@@ -123,6 +122,7 @@ public class VendingMachineController {
             view.displayChangeBanner();
             service.getBalance(true);
             System.out.println(service.getBalanceInCoins());
+            view.getHitEnter();
         } catch (NoItemInventoryException ex) {
             view.displayErrorMessage(ex.getMessage());
         } catch (InsufficientFundsException ex){

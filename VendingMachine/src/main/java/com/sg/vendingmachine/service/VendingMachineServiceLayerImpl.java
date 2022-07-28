@@ -59,8 +59,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         BigDecimal balance = dao.getChangeBalance();
 
         if (balance.compareTo(selectedCandy.getCandyPrice()) == -1 ) {
-            throw new InsufficientFundsException("ERROR: Insufficient Funds. You only have $" + balance 
-                    + "\nPlease add more money at the Main Menu."); // print user input;
+            throw new InsufficientFundsException("ERROR: Insufficient Funds. "
+                    + "\nYou only have $" + balance 
+                    + "\nPlease Add Money at the Main Menu."); // print user input;
         }
         
         if (selectedCandy.getCandyQuantity() <= 0) {
