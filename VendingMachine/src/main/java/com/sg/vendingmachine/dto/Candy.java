@@ -99,6 +99,11 @@ public class Candy {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Candy{" + "candyNumber=" + candyNumber + ", candyName=" + candyName + ", candyPrice=" + candyPrice + ", candyQuantity=" + candyQuantity + '}';
+    }
     
     
     
