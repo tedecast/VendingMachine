@@ -33,14 +33,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Teresa
  */
 public class VendingMachineDaoFileImplTest {
-    // Our VendingMachineDao has 5 methods we must test
-    // 1. List Candy - getAllCandy
-    // 2. Add Money - addMoney
-    // 3. Display Balance - getChangeBalance
-    // 4. Buy Candy - buyCandy
-    // 5. Change - getBalanceInCoins
-    
-    
         
     VendingMachineDao testDao;
     
@@ -53,6 +45,15 @@ public class VendingMachineDaoFileImplTest {
 
 
     }
+    
+    // Our VendingMachineDao has 5 methods we must test
+    // 1. List Candy - getAllCandy - DONE
+    // 2. Add Money - addMoney - DONE
+    // 3. Display Balance - getChangeBalance - DONE
+    // 4. Buy Candy - buyCandy - DONE
+    // 5. Change - getBalanceInCoins - DONE
+    
+    
     
     @BeforeEach
     public void setUp() throws Exception {
@@ -76,127 +77,59 @@ public class VendingMachineDaoFileImplTest {
         }
     }
     
-//    @Test
-//    public void testAddMoney(BigDecimal money) throws Exception {
-//        Change userChange = new Change(new BigDecimal(0));
-//        testDao.addMoney(money);
-////        if (money.compareTo(BigDecimal.ZERO) == 1) {
-////            userChange.addChange(money);
-////        }
-//    }
+    @Test 
+    public void testAddmoney() throws Exception {
+        try {
+            BigDecimal money = new BigDecimal (1.00);
+            testDao.addMoney(money);
+        } catch (NullPointerException ex){
+        }
+    }
     
-//    @Test 
-//    public BigDecimal testGetChangeBalance() throws Exception {
-//        try {
-//            testDao.getChangeBalance();
-//            BigDecimal balance = userChange.getBalance();
-//            return balance;
-//        } catch (NullPointerException ex) {
-//        }
-//        return new BigDecimal("0");
-//    }
+    @Test 
+    public void testGetChangeBalance() throws Exception {
+        try {
+            BigDecimal money = new BigDecimal (1.00);
+            testDao.addMoney(money);
+            testDao.getChangeBalance();
+        } catch (NullPointerException ex){
+        }
+         
+    }
+    
+    @Test
+    public void testBuyCandyAndGetCoins() throws Exception {
+        try {
+            // Create a list of candy for the inventory
+            List<Candy> candies = new ArrayList<>();
+            candies.add(0, new Candy (1, "Toblerone", new BigDecimal(2.00), 9));
+            candies.add(1, new Candy (2, "Reese's", new BigDecimal(1.75), 5));
+            candies.add(2, new Candy (3, "Kit-Kat", new BigDecimal(1.50), 5));
+            candies.add(3, new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
+            candies.add(4, new Candy(5, "Hot Tamales", new BigDecimal(1.00), 0));
+            candies = testDao.getAllCandy();
+            
+            // add money and display balance
+            BigDecimal money = new BigDecimal(2.79);
+            testDao.addMoney(money);
+            testDao.getChangeBalance();
+            
+            // check the general contents of the list
+            assertNotNull(candies, "The candy list must not null");
+            assertEquals(5, candies.size(), "The candy list should have 5 candy types");
+            
+            // testing out buy candy
+            candies = testDao.getAllCandy().stream()
+                    .filter((c) -> c.getCandyNumber() == 1) // buying Toblerone
+                    .collect(Collectors.toList());
+            Candy candyChoice = candies.get(0); 
+            int boughtCandy = candyChoice.getCandyNumber();
+            testDao.buyCandy(boughtCandy);
+            testDao.getBalanceInCoins();
+            
+        } catch (NullPointerException ex) {
+        }
 
-//    @Test
-//    public Candy testBuyCandy(int candyNumber) throws Exception {
-//        try {
-//            loadTestInventory();
-//            List<Candy> filteredCandyList = testGetAllCandy().stream()
-//                    .filter((c) -> c.getCandyNumber() == candyNumber)
-//                    .collect(Collectors.toList());
-//            Candy candyChoice = filteredCandyList.get(0);
-//            int candyQuantity = candyChoice.getCandyQuantity();
-//            BigDecimal candyPrice = candyChoice.getCandyPrice();
-//            userChange.makePurchase(candyPrice);
-//            candyChoice.setCandyQuantity(candyQuantity - 1);
-//            if (candyQuantity > 0) {
-//                testDao.writeInventory();
-//            }
-//            return candyChoice;
-//        } catch (NullPointerException ex) {
-//        }
-//        return new Candy(1, "candyName", new BigDecimal(0), 2);
-//    }
-//    
-//    
-//   private Candy unmarshallCandy(String candyAsText) throws Exception{
-//        
-//        String[] candyTokens = candyAsText.split(DELIMITER);
-//        
-//        // converted from string to int
-//        int candyNumber = Integer.parseInt(candyTokens[0]); 
-//        String candyName = candyTokens[1];
-//        BigDecimal candyPrice = new BigDecimal (candyTokens[2]);
-//        int candyQuantity = Integer.parseInt(candyTokens[3]);
-//        
-//        Candy candyFromFile = new Candy(candyNumber, candyName, candyPrice, candyQuantity);
-//        
-//        return candyFromFile;
-//    }
-//    
-//    private void loadTestInventory() throws Exception {
-//        
-//        Scanner scanner;
-//        
-//        try {
-//            // Create Scanner for reading the file
-//            scanner = new Scanner(
-//                    new BufferedReader(
-//                            new FileReader(INVENTORY_FILE)));
-//        } catch (FileNotFoundException e) {
-//            throw new VendingMachinePersistenceException(
-//                    "-_- Could not load inventory into memory.", e);
-//        }
-//        
-//        String currentLine;
-//        Candy currentCandy;
-//        
-//        while (scanner.hasNextLine()) {
-//            currentLine = scanner.nextLine();
-//            currentCandy = unmarshallCandy(currentLine);
-//            
-//            // converted to int
-//            // convert int to string
-//            candies.put(String.valueOf(currentCandy.getCandyNumber()), currentCandy);
-//        }
-//        scanner.close();
-//    }
-//    
-//    private String marshallCandy(Candy aCandy) {
-//        
-//        String candyAsText = aCandy.getCandyNumber() + DELIMITER;
-//        
-//        candyAsText += aCandy.getCandyName() + DELIMITER;
-//        
-//        candyAsText += aCandy.getCandyPrice() + DELIMITER;
-//        
-//        candyAsText += aCandy.getCandyQuantity() + DELIMITER;
-//        
-//        return candyAsText;
-//    }
-//    
-//    private void writeTestInventory() throws VendingMachinePersistenceException {
-//        
-//        PrintWriter out;
-//        
-//        try {
-//            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
-//        } catch (IOException e) {
-//            throw new VendingMachinePersistenceException (
-//                    "Could not save candy data.", e);
-//        }
-//        
-//        String candyAsText;
-//        List<Candy> candyList = this.getAllCandy();
-//        
-//        for (Candy currentCandy : candyList) {
-//            // turn a Candy into String
-//            candyAsText = marshallCandy(currentCandy);
-//            // write the Candy object to the file
-//            out.println(candyAsText);
-//            // for PrintWriter to write line to the file
-//            out.flush();
-//        }
-//        // Clean up
-//        out.close();
-//    }
+    }
+
 }

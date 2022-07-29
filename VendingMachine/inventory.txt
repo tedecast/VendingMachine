@@ -2,4 +2,4 @@
 2::   Reese's   ::1.75::3::
 3::   Kit-Kat   ::1.50::4::
 4:: Peach Rings ::1.25::1::
-5:: Hot Tamales ::1.00::9::
+5:: Hot Tamales ::1.00::8::
