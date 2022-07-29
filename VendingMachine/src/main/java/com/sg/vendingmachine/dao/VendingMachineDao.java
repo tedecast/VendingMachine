@@ -20,13 +20,18 @@ public interface VendingMachineDao {
     // Adds money in BigDecimal as long as the money being added is greater than 0 
     public void addMoney(BigDecimal money) throws VendingMachinePersistenceException;
     
-    // Returns the current balance in the Vending Machine
+    // Returns the current balance(userChange) from the Vending Machine
     public BigDecimal getChangeBalance() throws VendingMachinePersistenceException;   
     
-    // This method uses the money that hass been added with the addMoney method
+    // This method creates a List with Candy and filters out the only CandyNumber (id)
+    // that the user chooses to buy. 
+    // Then uses the current balance(userChange) to purchase the Candy
+    // subtracts 1 from the candy's quantity
+    // only writes back to the Inventory File if the candy's quantity is greater than 0
+    // returns the bought Candy
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException;
     
-    // Returns the change in coins - quarters, dimes, nickels, pennies, to the user
+    // Returns the change from userChange in coins - quarters, dimes, nickels, pennies,
     // along with the total.
     public String getBalanceInCoins() throws VendingMachinePersistenceException;  
     

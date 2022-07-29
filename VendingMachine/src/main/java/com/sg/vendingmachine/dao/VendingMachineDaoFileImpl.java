@@ -31,11 +31,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     private Change userChange = new Change(new BigDecimal(0));
     // public static final String INVENTORY_FILE = "inventory.txt";
     private final String INVENTORY_FILE;
+    
     public VendingMachineDaoFileImpl() {
         INVENTORY_FILE = "inventory.txt";
     }
-    public VendingMachineDaoFileImpl(String inventoryTextFile){
-        INVENTORY_FILE = inventoryTextFile;
+    
+    // supposed to be TestFile? Not TextFile?
+    public VendingMachineDaoFileImpl(String inventoryTestFile){
+        INVENTORY_FILE = inventoryTestFile;
     }
     public static final String DELIMITER = "::"; 
     
@@ -64,29 +67,28 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
-       loadInventory();
+        loadInventory();
         // You must include at least one lambda function in the solution.       
-       try {   
-       List<Candy> filteredCandyList = getAllCandy().stream()
-               .filter((c) -> c.getCandyNumber() == candyNumber)
-               .collect(Collectors.toList());
-       Candy candyChoice = filteredCandyList.get(0);
-       int candyQuantity = candyChoice.getCandyQuantity();
-       BigDecimal candyPrice = candyChoice.getCandyPrice();
-       userChange.makePurchase(candyPrice);
-       candyChoice.setCandyQuantity(candyQuantity -1);
-       if (candyQuantity > 0 ) {
-       writeInventory();
-       }
-       return candyChoice;
-       } catch (NullPointerException ex) {
-       }
-       return new Candy(1, "candyName", new BigDecimal(0), 2);
-       // userChange.makepurchase
-       // hashMap.replace()
-       // write it back, and then purchase
+        try {
+            List<Candy> filteredCandyList = getAllCandy().stream()
+                    .filter((c) -> c.getCandyNumber() == candyNumber)
+                    .collect(Collectors.toList());
+            Candy candyChoice = filteredCandyList.get(0);
+            int candyQuantity = candyChoice.getCandyQuantity();
+            BigDecimal candyPrice = candyChoice.getCandyPrice();
+            userChange.makePurchase(candyPrice);
+            candyChoice.setCandyQuantity(candyQuantity - 1);
+            if (candyQuantity > 0) {
+                writeInventory();
+            }
+            return candyChoice;
+        } catch (NullPointerException ex) {
+        }
+        return new Candy(1, "candyName", new BigDecimal(0), 2);
+        // hashMap.replace()
+        // write it back, and then purchase
     }
-    
+
     
     @Override
     public String getBalanceInCoins() throws VendingMachinePersistenceException {
