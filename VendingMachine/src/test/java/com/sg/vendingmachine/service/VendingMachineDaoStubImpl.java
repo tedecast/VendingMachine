@@ -19,7 +19,14 @@ import java.util.List;
  */
 public class VendingMachineDaoStubImpl implements VendingMachineDao {
     
-    public Candy onlyCandy = new Candy (1, "Toblerone", new BigDecimal(2.00), 9);
+    public Candy onlyCandy;
+    
+    public VendingMachineDaoStubImpl(){
+        onlyCandy.setCandyNumber(1);
+        onlyCandy.setCandyName("Toblerone");
+        onlyCandy.setCandyPrice(new BigDecimal (2.00));
+        onlyCandy.setCandyQuantity(6);
+    }
     
     public VendingMachineDaoStubImpl(Candy testCandy){
         this.onlyCandy = testCandy;
@@ -34,9 +41,7 @@ public class VendingMachineDaoStubImpl implements VendingMachineDao {
 
     @Override
     public void addMoney(BigDecimal money) throws VendingMachinePersistenceException {
-        if (money.compareTo(onlyCandy.getCandyPrice()) >= 0) {
-            onlyCandy.buyCandy();
-        }
+        money = new BigDecimal(0);
     }
 
     @Override
@@ -47,10 +52,11 @@ public class VendingMachineDaoStubImpl implements VendingMachineDao {
 
     @Override
     public Candy buyCandy(int candyNumber) throws VendingMachinePersistenceException {
-        List<Candy> candies = new ArrayList<>();
-        candies.add(onlyCandy);
-        onlyCandy.buyCandy();
-        return onlyCandy;
+        if(candyNumber == (onlyCandy.getCandyNumber())) {
+            return onlyCandy;
+        } else {
+            return null;
+        }
     }
 
     @Override
