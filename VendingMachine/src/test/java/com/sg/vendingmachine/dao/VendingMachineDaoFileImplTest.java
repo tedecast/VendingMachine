@@ -37,13 +37,6 @@ public class VendingMachineDaoFileImplTest {
     VendingMachineDao testDao;
     
     public VendingMachineDaoFileImplTest() { 
-//        candies.put("candyOne", new Candy (1, "Toblerone", new BigDecimal(2.00), 9));
-//        candies.put("candyTwo", new Candy (2, "Reese's", new BigDecimal(1.75), 5));
-//        candies.put("candyThree", new Candy (3, "Kit-Kat", new BigDecimal(1.50), 5));
-//        candies.put("candyFour", new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
-//        candies.put("candyFive", new Candy(5, "Hot Tamales", new BigDecimal(1.00), 0));
-
-
     }
     
     // Our VendingMachineDao has 5 methods we must test
@@ -73,6 +66,9 @@ public class VendingMachineDaoFileImplTest {
             candies.add(3, new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
             candies.add(4, new Candy(5, "Hot Tamales", new BigDecimal(1.00), 0));
             candies = testDao.getAllCandy();
+            // check the general contents of the list
+            assertNotNull(candies, "The candy list must not null");
+            assertEquals(5, candies.size(), "The candy list should have 5 candy types");
         } catch (NullPointerException ex){
         }
     }
