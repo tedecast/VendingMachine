@@ -34,37 +34,25 @@ public class VendingMachineServiceLayerImplTest {
         
         service = new VendingMachineServiceLayerImpl(dao, auditDao);
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
     @Test
     public void testGetAllCandy() {
         try {
             service.getAllCandy();
         } catch (VendingMachinePersistenceException e){
-        // ASSERT
             fail("List was valid. No exception should have been thrown.");
         }
     }
     
     @Test
-    public void testExceptions() {
+    public void testInsuffcientFundsExceptions() {
         try {
-            service.getAllCandy();
+            List<Candy> candies = new ArrayList<>();
+            candies.add(0, new Candy(1, "Toblerone", new BigDecimal(2.00), 9));
+            candies.add(1, new Candy(2, "Reese's", new BigDecimal(1.75), 5));
+            candies.add(2, new Candy(3, "Kit-Kat", new BigDecimal(1.50), 5));
+            candies.add(3, new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
+            candies.add(4, new Candy(5, "Hot Tamales", new BigDecimal(1.00), 0));
             service.addMoney(new BigDecimal(0));
             service.getBalance(true);
             List<Candy> filteredList = service.getAllCandy().stream()
@@ -74,13 +62,38 @@ public class VendingMachineServiceLayerImplTest {
             int boughtCandy = candyChoice.getCandyNumber();
             service.buyCandy(boughtCandy);
             service.getBalanceInCoins();
-            
-        } catch (VendingMachinePersistenceException 
-                | InsufficientFundsException 
-                | NoItemInventoryException e){
+
+        } catch (VendingMachinePersistenceException
+                | InsufficientFundsException
+                | NoItemInventoryException e) {
             return;
         }
-        
-}
 
     }
+
+    @Test
+    public void testNoItemInventoryException() {
+        try {
+            List<Candy> candies = new ArrayList<>();
+            candies.add(0, new Candy(1, "Toblerone", new BigDecimal(2.00), 0));
+            candies.add(1, new Candy(2, "Reese's", new BigDecimal(1.75), 5));
+            candies.add(2, new Candy(3, "Kit-Kat", new BigDecimal(1.50), 5));
+            candies.add(3, new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
+            candies.add(4, new Candy(5, "Hot Tamales", new BigDecimal(1.00), 7));
+            service.addMoney(new BigDecimal(2.00));
+            service.getBalance(true);
+            List<Candy> filteredList = service.getAllCandy().stream()
+                    .filter((c) -> c.getCandyNumber() == 1)
+                    .collect(Collectors.toList());
+            Candy candyChoice = filteredList.get(0);
+            int boughtCandy = candyChoice.getCandyNumber();
+            service.buyCandy(boughtCandy);
+            service.getBalanceInCoins();
+
+        } catch (VendingMachinePersistenceException
+                | InsufficientFundsException
+                | NoItemInventoryException e) {
+            return;
+        }
+    }
+}
