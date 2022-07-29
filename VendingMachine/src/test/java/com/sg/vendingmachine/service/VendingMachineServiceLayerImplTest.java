@@ -29,16 +29,38 @@ public class VendingMachineServiceLayerImplTest {
     private VendingMachineServiceLayer service;
     
     public VendingMachineServiceLayerImplTest() {
-        VendingMachineDao dao = new VendingMachineDaoStubImpl();
+        VendingMachineDao dao = new VendingMachineDaoStubImpl(new Candy(1, "Toblerone", new BigDecimal(2.00), 2));
         VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
         
         service = new VendingMachineServiceLayerImpl(dao, auditDao);
+    }
+    
+    @BeforeAll
+    public static void setUpClass() {
+    }
+    
+    @AfterAll
+    public static void tearDownClass() {
+    }
+    
+    @BeforeEach
+    public void setUp() {
+    }
+    
+    @AfterEach
+    public void tearDown() {
     }
 
     @Test
     public void testGetAllCandy() {
         try {
-            service.getAllCandy();
+             List<Candy> candies = new ArrayList<>();
+            candies.add(0, new Candy(1, "Toblerone", new BigDecimal(2.00), 9));
+            candies.add(1, new Candy(2, "Reese's", new BigDecimal(1.75), 5));
+            candies.add(2, new Candy(3, "Kit-Kat", new BigDecimal(1.50), 5));
+            candies.add(3, new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
+            candies.add(4, new Candy(5, "Hot Tamales", new BigDecimal(1.00), 0));
+            candies = service.getAllCandy();
         } catch (VendingMachinePersistenceException e){
             fail("List was valid. No exception should have been thrown.");
         }
@@ -53,6 +75,7 @@ public class VendingMachineServiceLayerImplTest {
             candies.add(2, new Candy(3, "Kit-Kat", new BigDecimal(1.50), 5));
             candies.add(3, new Candy(4, "Peach Rings", new BigDecimal(1.25), 3));
             candies.add(4, new Candy(5, "Hot Tamales", new BigDecimal(1.00), 0));
+            candies = service.getAllCandy();
             service.addMoney(new BigDecimal(0));
             service.getBalance(true);
             List<Candy> filteredList = service.getAllCandy().stream()
@@ -89,6 +112,7 @@ public class VendingMachineServiceLayerImplTest {
             int boughtCandy = candyChoice.getCandyNumber();
             service.buyCandy(boughtCandy);
             service.getBalanceInCoins();
+   
 
         } catch (VendingMachinePersistenceException
                 | InsufficientFundsException

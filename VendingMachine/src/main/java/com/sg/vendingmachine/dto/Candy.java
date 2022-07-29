@@ -19,7 +19,6 @@ public class Candy {
     private BigDecimal candyPrice;
     private int candyQuantity;
     
-    // 
     public Candy(int candyNumber, String candyName, BigDecimal candyPrice, int candyQuantity) {
         this.candyNumber = candyNumber;
         this.candyName = candyName;

@@ -29,7 +29,6 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
     
     private Map<String, Candy> candies = new HashMap<>();
     private Change userChange = new Change(new BigDecimal(0));
-    // public static final String INVENTORY_FILE = "inventory.txt";
     private final String INVENTORY_FILE;
     
     public VendingMachineDaoFileImpl() {
