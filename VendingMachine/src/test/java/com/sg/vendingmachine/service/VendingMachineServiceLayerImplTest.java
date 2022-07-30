@@ -19,6 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -29,10 +31,16 @@ public class VendingMachineServiceLayerImplTest {
     private VendingMachineServiceLayer service;
     
     public VendingMachineServiceLayerImplTest() {
-        VendingMachineDao dao = new VendingMachineDaoStubImpl(new Candy(1, "Toblerone", new BigDecimal(2.00), 2));
-        VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
+        // wire the Service Layer with stub implementations of the Dao and 
+        // Audit Dao
+//        VendingMachineDao dao = 
+//            new VendingMachineDaoStubImpl(new Candy(1, "Toblerone", new BigDecimal(2.00), 2));
+//        VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
+//        
+//        service = new VendingMachineServiceLayerImpl(dao, auditDao);
         
-        service = new VendingMachineServiceLayerImpl(dao, auditDao);
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        service = ctx.getBean("serviceLayer", VendingMachineServiceLayer.class);
     }
     
     @BeforeAll
