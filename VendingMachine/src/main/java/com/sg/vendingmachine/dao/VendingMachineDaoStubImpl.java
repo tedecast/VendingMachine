@@ -16,13 +16,13 @@ import java.util.List;
  */
 public class VendingMachineDaoStubImpl implements VendingMachineDao{
      
-    public Candy onlyCandy;
+    public Candy onlyCandy = new Candy(1, "Toblerone", new BigDecimal(2.00), 6);
     
     public VendingMachineDaoStubImpl(){
-        onlyCandy.setCandyNumber(1);
-        onlyCandy.setCandyName("Toblerone");
-        onlyCandy.setCandyPrice(new BigDecimal (2.00));
-        onlyCandy.setCandyQuantity(6);
+//        onlyCandy.setCandyNumber(1);
+//        onlyCandy.setCandyName("Toblerone");
+//        onlyCandy.setCandyPrice(new BigDecimal (2.00));
+//        onlyCandy.setCandyQuantity(6);
     }
     
     public VendingMachineDaoStubImpl(Candy testCandy){

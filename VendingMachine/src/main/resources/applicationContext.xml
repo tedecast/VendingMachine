@@ -18,7 +18,7 @@
     <!-- Bean definitions go here -->
     <bean id="userIO" class="com.sg.vendingmachine.ui.UserIOConsoleImpl"/>
     
-    <bean id="view" class="com.sg.vendingmachine.io.VendingMachineView">
+    <bean id="view" class="com.sg.vendingmachine.ui.VendingMachineView">
         <constructor-arg ref="userIO"/>
     </bean>
     
@@ -31,9 +31,9 @@
         <constructor-arg ref="auditDao"/>
     </bean>
     
-    <bean id="controller" class="com.sg.controller.VendingMachineController">
+    <bean id="controller" class="com.sg.vendingmachine.controller.VendingMachineController">
         <constructor-arg ref ="serviceLayer"/>
-        <constructor-arg ref="view">
+        <constructor-arg ref="view"/>
     </bean>
     
 </beans>
