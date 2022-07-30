@@ -40,7 +40,7 @@ public class VendingMachineServiceLayerImplTest {
 //        service = new VendingMachineServiceLayerImpl(dao, auditDao);
         
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-        service = ctx.getBean("serviceLayer", VendingMachineServiceLayer.class);
+        service = ctx.getBean("serviceLayer", VendingMachineServiceLayerImpl.class);
     }
     
     @BeforeAll

@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.vendingmachine.service;
+package com.sg.vendingmachine.dao;
 
-import com.sg.vendingmachine.dao.VendingMachineDao;
-import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Candy;
-import com.sg.vendingmachine.dto.Change;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +14,8 @@ import java.util.List;
  *
  * @author Teresa
  */
-public class VendingMachineDaoStubImpl implements VendingMachineDao {
-    
+public class VendingMachineDaoStubImpl implements VendingMachineDao{
+     
     public Candy onlyCandy;
     
     public VendingMachineDaoStubImpl(){

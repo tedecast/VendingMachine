@@ -18,7 +18,9 @@
     <!-- Bean definitions go here -->
    <bean id="vendingMachineDao" class ="com.sg.vendingmachine.dao.VendingMachineDaoFileImpl"/>
    
-   <bean id="vendingMachineDaoStubImpl" class="com.sg.vendingmachine.service.VendingMachineDaoStubImpl"/> 
+   <bean id="vendingMachineDaoStubImpl" class="com.sg.vendingmachine.dao.VendingMachineDaoStubImpl"/> 
+   
+   <bean id="auditDaoStub" class="com.sg.vendingMachine.dao.VendingMachineAuditDaoStubImpl"/>
    
    <bean id="serviceLayer" class="com.sg.vendingmachine.service.VendingMachineServiceLayerImpl">
        <constructor-arg ref="vendingMachineDaoStubImpl"/>
